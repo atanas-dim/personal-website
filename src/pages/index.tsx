@@ -10,7 +10,6 @@ const IndexPage = () => {
       <Hero />
       <Header />
       <div className="min-h-[200vh]">
-        {" "}
         <h1 className="text-3xl font-bold underline text-purple-500">
           Hello world!
         </h1>
