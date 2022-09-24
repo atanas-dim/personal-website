@@ -6,10 +6,11 @@ import Hero from "../components/hero/Hero";
 
 const IndexPage = () => {
   return (
-    <main className="w-full h-full overflow-y-auto bg-zinc-900">
+    <main className="w-full h-full overflow-y-auto">
       <Hero />
       <Header />
-      <div className="min-h-[200vh]">
+
+      <div className="min-h-[200vh] ">
         <h1 className="text-3xl font-bold underline text-purple-500">
           Hello world!
         </h1>

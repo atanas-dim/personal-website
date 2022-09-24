@@ -14,7 +14,7 @@ body,
 }
 
 body {
-  background-color: black;
+  background-color: theme("colors.zinc.900");
   color: white;
 }
 
@@ -166,4 +166,8 @@ select {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+.hero-mask {
+  mask-image: linear-gradient(to top, transparent 0px, black 20%);
 }
