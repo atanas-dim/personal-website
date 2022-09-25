@@ -14,7 +14,7 @@ body,
 }
 
 body {
-  background-color: theme("colors.zinc.900");
+  background-color: theme("colors.background");
   color: white;
 }
 

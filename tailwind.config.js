@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        background: "#111111",
+      },
       backgroundImage: {
         "hero-pattern": `radial-gradient( rgba(0, 0, 0, 0) 1px, ${colors.zinc["900"]} 1px )`,
         "radial-gradient-pink": `radial-gradient(circle, ${colors.pink["800"]} 0%, transparent 60% )`,

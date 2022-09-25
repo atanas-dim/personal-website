@@ -33,4 +33,9 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>Home Page</title>;
+export const Head: HeadFC = () => (
+  <>
+    <meta name="theme-color" content="#18181b" />
+    <title>Home Page</title>
+  </>
+);
