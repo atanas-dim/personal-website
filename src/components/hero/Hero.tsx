@@ -46,6 +46,7 @@ const Hero: FC = () => {
     <div className="w-full h-full relative flex justify-center items-center flex-col z-10">
       <div className="w-full absolute top-0 left-0 z-[-20] h-full overflow-hidden hero-mask flex justify-center items-center">
         <motion.div
+          initial={{ opacity: 0 }}
           animate={controls}
           onViewportEnter={() => setIsInView(true)}
           onViewportLeave={() => setIsInView(false)}
