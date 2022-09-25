@@ -12,11 +12,17 @@ const Hero: FC = () => {
   useEffect(() => {
     if (isInView)
       controls.start({
-        x: [0, -260, 40, -80, 30, -280, 120, -260, -100, 50, -50],
-        y: [0, -260, -40, 40, -120, -280, 340, -360, -100, 50, -50],
-        scale: [0.7, 1, 1.1, 1.3, 1.2, 0.9, 1.2, 1.1],
+        x: [
+          0, 100, -260, 40, -80, -290, -40, 30, 120, 100, -260, -100, 50, -50,
+        ],
+        y: [
+          0, 100, -220, -40, 40, -70, -180, 30, 340, 300, -360, -100, 50, -50,
+        ],
+        scale: [
+          0.7, 1.1, 1.3, 1.2, 1.1, 1.3, 0.9, 1.2, 0.9, 1.2, 1, 1.1, 0.9, 1.3,
+        ],
         transition: {
-          duration: 25,
+          duration: 40,
           repeat: Infinity,
           repeatType: "reverse",
         },
@@ -25,7 +31,7 @@ const Hero: FC = () => {
   }, [isInView]);
 
   return (
-    <div className="w-full h-full relative flex justify-center items-center flex-col">
+    <div className="w-full h-full relative flex justify-center items-center flex-col z-10">
       <div className="w-full absolute top-0 left-0 z-[-20] h-full overflow-hidden hero-mask flex justify-center items-center">
         <motion.div
           initial={{ opacity: 0 }}
