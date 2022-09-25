@@ -12,11 +12,11 @@ const Hero: FC = () => {
   useEffect(() => {
     if (isInView)
       controls.start({
-        x: [-260, 40, -80, 30, -280, -120, -260],
-        y: [-260, -40, 40, 20, -280, 0, -360],
-        scale: [1, 1.5, 1.7, 1.2, 0.9, 1.2, 1.5],
+        x: [0, -260, 40, -80, 30, -280, 120, -260, -100, 50, -50],
+        y: [0, -260, -40, 40, -120, -280, 340, -360, -100, 50, -50],
+        scale: [0.7, 1, 1.1, 1.3, 1.2, 0.9, 1.2, 1.1],
         transition: {
-          duration: 20,
+          duration: 25,
           repeat: Infinity,
           repeatType: "reverse",
         },
@@ -26,12 +26,14 @@ const Hero: FC = () => {
 
   return (
     <div className="w-full h-full relative flex justify-center items-center flex-col">
-      <div className="w-full absolute top-0 left-0 z-[-20] h-full overflow-hidden hero-mask ">
+      <div className="w-full absolute top-0 left-0 z-[-20] h-full overflow-hidden hero-mask flex justify-center items-center">
         <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           animate={controls}
           onViewportEnter={() => setIsInView(true)}
           onViewportLeave={() => setIsInView(false)}
-          className="absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] origin-center w-[100vmin] h-[100vmin] bg-radial-gradient-pink bg-no-repeat bg-center bg-100vmin "
+          className=" origin-center w-[100vmin] h-[100vmin] bg-radial-gradient-pink bg-no-repeat bg-center bg-100vmin "
         />
       </div>
       <div
