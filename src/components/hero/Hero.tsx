@@ -10,7 +10,12 @@ const Hero: FC = () => {
   const controls = useAnimationControls();
 
   useEffect(() => {
-    if (isInView)
+    if (isInView) {
+      controls.set({ opacity: 0 });
+      controls.start({
+        opacity: 1,
+        transition: { duration: 0.5, delay: 0.75 },
+      });
       controls.start({
         x: [
           0, 100, -260, 40, -80, -290, -40, 30, 120, 100, -260, -100, 50, -50,
@@ -31,16 +36,16 @@ const Hero: FC = () => {
           delay: 0.75,
         },
       });
-    else controls.stop();
+    } else {
+      controls.stop();
+      controls.set({ opacity: 0, x: 0, y: 0, scaleX: 0.7, scaleY: 0.7 });
+    }
   }, [isInView]);
 
   return (
     <div className="w-full h-full relative flex justify-center items-center flex-col z-10">
       <div className="w-full absolute top-0 left-0 z-[-20] h-full overflow-hidden hero-mask flex justify-center items-center">
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.75 }}
           animate={controls}
           onViewportEnter={() => setIsInView(true)}
           onViewportLeave={() => setIsInView(false)}
