@@ -15,7 +15,7 @@ module.exports = {
       },
       backgroundSize: {
         "4px": "4px 4px",
-        "100vh": "100vh",
+        "100vmin": "100vmin",
       },
     },
   },

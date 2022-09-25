@@ -3,6 +3,7 @@ import type { HeadFC } from "gatsby";
 
 import Header from "../components/header/Header";
 import Hero from "../components/hero/Hero";
+import IPhone14 from "../components/devices/IPhone14";
 
 const IndexPage = () => {
   return (
@@ -10,10 +11,13 @@ const IndexPage = () => {
       <Hero />
       <Header />
 
-      <div className="min-h-[200vh] ">
+      <div className="min-h-[200vh] p-6 ">
         <h1 className="text-3xl font-bold underline text-purple-500">
           Hello world!
         </h1>
+        <div style={{ width: 300, maxWidth: "100%" }}>
+          <IPhone14 width={300} />
+        </div>
       </div>
     </main>
   );
