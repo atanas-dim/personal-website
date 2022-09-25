@@ -11,11 +11,19 @@ const IndexPage = () => {
       <Hero />
       <Header />
 
-      <div className="min-h-[200vh] p-6 ">
-        <h1 className="text-3xl font-bold underline text-purple-500">
-          Hello world!
-        </h1>
-        <div style={{ width: 300, maxWidth: "100%" }}>
+      <div className="min-h-[200vh] px-4 md:px8">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingTop: 32,
+          }}
+        >
+          <h2 className="text-purple-500 text-4xl font-bold mb-8">Projects</h2>
+          <IPhone14 width={300} />
+          <IPhone14 width={300} />
           <IPhone14 width={300} />
         </div>
       </div>
