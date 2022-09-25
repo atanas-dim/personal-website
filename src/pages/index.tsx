@@ -7,11 +7,11 @@ import IPhone14 from "../components/devices/IPhone14";
 
 const IndexPage = () => {
   return (
-    <main className="w-full h-full overflow-y-auto">
+    <main className="w-full h-full overflow-y-auto snap-mandatory snap-y">
       <Hero />
       <Header />
 
-      <div className="min-h-[200vh] px-4 md:px8">
+      <div className="min-h-[200vh] px-4 md:px-8 snap-start scroll-mt-8">
         <div
           style={{
             display: "flex",
