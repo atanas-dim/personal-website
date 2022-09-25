@@ -28,6 +28,7 @@ const Hero: FC = () => {
           duration: 60,
           repeat: Infinity,
           repeatType: "reverse",
+          delay: 0.75,
         },
       });
     else controls.stop();
@@ -39,6 +40,7 @@ const Hero: FC = () => {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.75 }}
           animate={controls}
           onViewportEnter={() => setIsInView(true)}
           onViewportLeave={() => setIsInView(false)}
@@ -48,17 +50,50 @@ const Hero: FC = () => {
       <div
         className={`absolute z-[-10] top-0 left-0 w-full h-full ${PERFORATED_BG} bg-left-bottom`}
       />
-      <img
-        src={photo}
-        alt="Atanas' photo"
-        className="w-40 h-40 border-2 border-solid border-white rounded-full mb-4"
-      />
-      <h2 className="text-4xl md:text-6xl font-bold">
-        Hi, <span className="text-blue-400">I'm Atanas</span>
-      </h2>
-      <h2 className="text-3xl md:text-5xl font-bold">
-        <span className="text-cyan-400">React</span> Developer
-      </h2>
+      <motion.div
+        variants={{
+          hidden: { opacity: 0 },
+          show: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.25,
+              delayChildren: 0.5,
+              ease: "backOut",
+            },
+          },
+        }}
+        initial="hidden"
+        animate="show"
+        className=" flex justify-center items-center flex-col"
+      >
+        <motion.img
+          variants={{
+            hidden: { opacity: 0, scale: 0.7 },
+            show: { opacity: 1, scale: 1 },
+          }}
+          src={photo}
+          alt="Atanas' photo"
+          className="w-40 h-40 border-2 border-solid border-white rounded-full mb-4"
+        />
+        <motion.h2
+          variants={{
+            hidden: { opacity: 0 },
+            show: { opacity: 1 },
+          }}
+          className="text-4xl md:text-6xl font-bold"
+        >
+          Hi, <span className="text-blue-400">I'm Atanas</span>
+        </motion.h2>
+        <motion.h3
+          variants={{
+            hidden: { opacity: 0 },
+            show: { opacity: 1 },
+          }}
+          className="text-3xl md:text-5xl font-bold"
+        >
+          <span className="text-cyan-400">React</span> Developer
+        </motion.h3>
+      </motion.div>
     </div>
   );
 };
