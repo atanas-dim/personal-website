@@ -10,7 +10,7 @@ type Props = { scrollContainer: any; scrollYProgress: any; scrollY: any };
 const Projects: FC<Props> = ({ scrollY }) => {
   return (
     <>
-      <motion.section className="border-0 border-solid border-red-500 relative">
+      <motion.section className="border-0 border-solid border-red-500 relative h-full">
         {PROJECTS.map((project, index) => {
           return (
             <Project
@@ -68,7 +68,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
         style={{
           pointerEvents: "none",
         }}
-        className=" border-0 border-dashed border-blue-500 min-w-[100%] min-h-[calc(100vh_-_80px)] flex flex-col justify-center items-center p-4 md:p-8 snap-center snap-mt-8"
+        className=" border-0 border-dashed border-blue-500 min-w-[100%] min-h-full flex flex-col justify-center items-center p-4 md:p-8 snap-center snap-mt-8"
       >
         <motion.div
           style={{
@@ -76,7 +76,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
             translateY: "-50%",
             rotate,
           }}
-          className="origin-bottom border border-dashed border-purple-500 min-w-[100vw] min-h-[calc(100vh_-_80px)] fixed top-[50%] left-0 flex justify-center items-center"
+          className="origin-bottom border border-dashed border-purple-500 min-w-[100vw] min-h-full fixed top-[50%] left-0 flex justify-center items-center"
         >
           <IPhone14 width={260} />
         </motion.div>
