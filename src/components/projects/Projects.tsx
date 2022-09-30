@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect, FC, useRef } from "react";
 import { motion, useTransform, MotionValue } from "framer-motion";
 
 import IPhone14 from "../devices/IPhone14";
@@ -30,15 +30,17 @@ export default Projects;
 type ProjectProps = { index: number; scrollY: MotionValue<number> };
 
 const Project: FC<ProjectProps> = ({ index, scrollY }) => {
-  const [bodyHeight, setBodyHeight] = useState(0);
+  const target = useRef<HTMLDivElement>(null);
+  const [containerHeight, setContainerHeight] = useState(0);
+
   useEffect(() => {
-    setBodyHeight(document.body.offsetHeight);
+    setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
   }, []);
 
   const translateX = useTransform(
     scrollY,
     // Map from these values:
-    [bodyHeight * index, bodyHeight * (index + 2)],
+    [containerHeight * index, containerHeight * (index + 2)],
     // Into these values:
     ["-100%", "100%"]
   );
@@ -46,18 +48,27 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
   const rotate = useTransform(
     scrollY,
     // Map from these values:
-    [bodyHeight * index, bodyHeight * (index + 2)],
+    [containerHeight * index, containerHeight * (index + 2)],
     // Into these values:
     ["-45deg", "45deg"]
   );
 
+  // useEffect(() => {
+  //   scrollY.onChange((v) => console.log("HERE", v));
+  // }, [scrollY]);
+
+  // useEffect(() => {
+  //   if (index === 2) translateX.onChange((v) => console.log("HERE 2", v));
+  // }, [translateX]);
+
   return (
     <>
       <motion.div
+        ref={target}
         style={{
           pointerEvents: "none",
         }}
-        className=" border-0 border-dashed border-blue-500 min-w-[100vw] min-h-[100vh] flex flex-col justify-center items-center p-4 md:p-8 snap-center snap-mt-8"
+        className=" border-0 border-dashed border-blue-500 min-w-[100%] min-h-[calc(100vh_-_80px)] flex flex-col justify-center items-center p-4 md:p-8 snap-center snap-mt-8"
       >
         <motion.div
           style={{
@@ -65,7 +76,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
             translateY: "-50%",
             rotate,
           }}
-          className="origin-bottom border border-dashed border-purple-500 min-w-[100vw] min-h-[100vh] fixed top-[50%] left-0 flex justify-center items-center"
+          className="origin-bottom border border-dashed border-purple-500 min-w-[100vw] min-h-[calc(100vh_-_80px)] fixed top-[50%] left-0 flex justify-center items-center"
         >
           <IPhone14 width={260} />
         </motion.div>
