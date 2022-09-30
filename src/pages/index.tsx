@@ -1,36 +1,35 @@
-import * as React from "react";
+import React, { useRef, useEffect } from "react";
 import type { HeadFC } from "gatsby";
 
 import Header from "../components/header/Header";
 import Hero from "../components/hero/Hero";
-import IPhone14 from "../components/devices/IPhone14";
+import Projects from "../components/projects/Projects";
+
+import { useScroll } from "framer-motion";
 
 const IndexPage = () => {
+  const scrollContainer = useRef(null);
+
+  const { scrollYProgress, scrollY } = useScroll({
+    container: scrollContainer,
+  });
+
+  useEffect(() => {
+    // scrollYProgress.onChange((v) => console.log(v));
+  }, [scrollYProgress]);
+
   return (
-    <>
+    <div id="scroll-container" ref={scrollContainer}>
       <Hero />
       <Header />
-      <main className="w-full h-full ">
-        <section className="min-h-[200vh] px-4 md:px-8 snap-start scroll-mt-8">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              paddingTop: 32,
-            }}
-          >
-            <h2 className="text-purple-500 text-4xl font-bold mb-8">
-              Projects
-            </h2>
-            <IPhone14 width={300} />
-            <IPhone14 width={300} />
-            <IPhone14 width={300} />
-          </div>
-        </section>
+      <main className="w-full h-full">
+        <Projects
+          scrollContainer={scrollContainer}
+          scrollYProgress={scrollYProgress}
+          scrollY={scrollY}
+        />
       </main>
-    </>
+    </div>
   );
 };
 
