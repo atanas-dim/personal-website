@@ -14,10 +14,9 @@ const PROJECTS = [{}, {}, {}];
 
 type Props = {
   scrollY: MotionValue<number>;
-  setSectionName: Dispatch<SetStateAction<string>>;
 };
 
-const Projects: FC<Props> = ({ scrollY, setSectionName }) => {
+const Projects: FC<Props> = ({ scrollY }) => {
   const target = useRef<HTMLDivElement>(null);
 
   return (
@@ -25,12 +24,6 @@ const Projects: FC<Props> = ({ scrollY, setSectionName }) => {
       <motion.section
         id="projects"
         ref={target}
-        viewport={{
-          margin: `${
-            (typeof window !== "undefined" ? -window.screen.height : 0) / 3
-          }px 0px`,
-        }}
-        onViewportEnter={() => setSectionName("Projects")}
         className={`border-0 border-solid border-red-500 relative h-[${
           PROJECTS.length * 100
         }%] w-full`}

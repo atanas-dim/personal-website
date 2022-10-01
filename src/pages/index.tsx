@@ -19,7 +19,28 @@ const IndexPage = () => {
 
   useEffect(() => {
     scrollY.onChange((v) => {
+      console.log(document.getElementById("stack")?.getBoundingClientRect().y);
+
+      //TODO Refactor
       if (v < 100) setSectionName("");
+      if (
+        (document.getElementById("projects")?.getBoundingClientRect().y ?? 0) <=
+          300 &&
+        sectionName !== "Projects"
+      )
+        setSectionName("Projects");
+      if (
+        (document.getElementById("stack")?.getBoundingClientRect().y ?? 0) <=
+          300 &&
+        sectionName !== "Stack"
+      )
+        setSectionName("Stack");
+      if (
+        (document.getElementById("experience")?.getBoundingClientRect().y ??
+          0) <= 300 &&
+        sectionName !== "Experience"
+      )
+        setSectionName("Experience");
     });
   }, [scrollY]);
 
@@ -28,9 +49,9 @@ const IndexPage = () => {
       <Hero />
       <Header sectionName={sectionName} />
       <main className="w-full h-full">
-        <Projects scrollY={scrollY} setSectionName={setSectionName} />
-        <Stack scrollY={scrollY} setSectionName={setSectionName} />
-        <Experience scrollY={scrollY} setSectionName={setSectionName} />
+        <Projects scrollY={scrollY} />
+        <Stack scrollY={scrollY} />
+        <Experience scrollY={scrollY} />
       </main>
     </div>
   );

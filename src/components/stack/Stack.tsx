@@ -46,10 +46,9 @@ const ADDITIONAL_STACK: SkillDef[] = [
 
 type Props = {
   scrollY: MotionValue<number>;
-  setSectionName: Dispatch<SetStateAction<string>>;
 };
 
-const Stack: FC<Props> = ({ scrollY, setSectionName }) => {
+const Stack: FC<Props> = ({ scrollY }) => {
   const target = useRef<HTMLDivElement>(null);
 
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
@@ -65,12 +64,6 @@ const Stack: FC<Props> = ({ scrollY, setSectionName }) => {
     <motion.section
       id="stack"
       ref={target}
-      viewport={{
-        margin: `${
-          (typeof window !== "undefined" ? -window.screen.height : 0) / 3
-        }px 0px`,
-      }}
-      onViewportEnter={() => setSectionName("Stack")}
       className="relative h-full w-full snap-center "
     >
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">

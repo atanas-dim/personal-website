@@ -3,19 +3,12 @@ import { motion, MotionValue } from "framer-motion";
 
 type Props = {
   scrollY: MotionValue<number>;
-  setSectionName: Dispatch<SetStateAction<string>>;
 };
 
-const Experience: FC<Props> = ({ scrollY, setSectionName }) => {
+const Experience: FC<Props> = ({ scrollY }) => {
   return (
     <motion.section
       id="experience"
-      viewport={{
-        margin: `${
-          (typeof window !== "undefined" ? -window.screen.height : 0) / 3
-        }px 0px`,
-      }}
-      onViewportEnter={() => setSectionName("Experience")}
       className="h-screen snap-start pt-16 flex justify-center items-center"
     >
       Experience
