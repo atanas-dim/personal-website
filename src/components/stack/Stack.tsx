@@ -70,7 +70,7 @@ const Stack: FC<Props> = ({ scrollY, setSectionName }) => {
         }px 0px`,
       }}
       onViewportEnter={() => setSectionName("Stack")}
-      className="relative min-h-full h-full w-full snap-start "
+      className="relative min-h-full h-full w-full snap-start scroll-my-96"
     >
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
         <div className="flex flex-col justify-center items-center mb-16 w-full">
