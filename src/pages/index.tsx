@@ -19,8 +19,6 @@ const IndexPage = () => {
 
   useEffect(() => {
     scrollY.onChange((v) => {
-      console.log(document.getElementById("stack")?.getBoundingClientRect().y);
-
       //TODO Refactor
       if (v < 100) setSectionName("");
       if (
@@ -62,6 +60,6 @@ export default IndexPage;
 export const Head: HeadFC = () => (
   <>
     <meta name="theme-color" content="#18181b" />
-    <title>Home Page</title>
+    <title>Atanas Dimitrov - Portfolio</title>
   </>
 );

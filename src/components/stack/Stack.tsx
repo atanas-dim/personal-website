@@ -64,10 +64,10 @@ const Stack: FC<Props> = ({ scrollY }) => {
     <motion.section
       id="stack"
       ref={target}
-      className="relative h-full w-full snap-center "
+      className="relative h-full w-full snap-center"
     >
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
-        <div className="flex flex-col justify-center items-center mb-16 w-full">
+        <div className="flex flex-col justify-center items-center mb-16 w-full max-w-2xl">
           <div className="w-full flex justify-center items-center flex-wrap mb-4">
             {BASE_STACK.map((skill, index) => {
               return (
@@ -77,7 +77,7 @@ const Stack: FC<Props> = ({ scrollY }) => {
                   scrollY={scrollY}
                   containerHeight={containerHeight}
                   fullOpacityScrollTop={fullOpacityScrollTop}
-                  className="text-xl"
+                  className="text-xl md:text-2xl"
                 />
               );
             })}
@@ -91,13 +91,13 @@ const Stack: FC<Props> = ({ scrollY }) => {
                   scrollY={scrollY}
                   containerHeight={containerHeight}
                   fullOpacityScrollTop={fullOpacityScrollTop}
-                  className="text-2xl"
+                  className="text-2xl md:text-4xl"
                 />
               );
             })}
           </div>
         </div>
-        <div className="w-full flex justify-center items-center flex-wrap">
+        <div className="w-full flex justify-center items-center flex-wrap max-w-2xl">
           {ADDITIONAL_STACK.map((skill, index) => {
             return (
               <Skill
@@ -106,7 +106,7 @@ const Stack: FC<Props> = ({ scrollY }) => {
                 scrollY={scrollY}
                 containerHeight={containerHeight}
                 fullOpacityScrollTop={fullOpacityScrollTop}
-                className="text-base"
+                className="text-base md:text-xl"
               />
             );
           })}
@@ -153,9 +153,25 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
     [0, 1, 1, 1, 0]
   );
 
+  const translateY = useTransform(
+    scrollY,
+    // Map from these values:
+    [
+      fullOpacityScrollTop - difference,
+      fullOpacityScrollTop,
+      fullOpacityScrollTop + difference,
+    ],
+    // Into these values:
+    ["16px", "0px", "-16px"]
+  );
+
   return (
     <motion.h3
-      style={{ opacity }}
+      style={{
+        opacity,
+        perspective: "200px",
+        translateY,
+      }}
       className={`mx-2 align-center font-bold ${skill.style} ${className}`}
     >
       {skill.label}

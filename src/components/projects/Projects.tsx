@@ -26,7 +26,7 @@ const Projects: FC<Props> = ({ scrollY }) => {
         ref={target}
         className={`border-0 border-solid border-red-500 relative h-[${
           PROJECTS.length * 100
-        }%] w-full`}
+        }%] w-full mb-96`}
       >
         {PROJECTS.map((project, index) => {
           return (
@@ -73,7 +73,19 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
     // Map from these values:
     [enterScrollTop - containerHeight, enterScrollTop + containerHeight],
     // Into these values:
-    ["-45deg", "45deg"]
+    ["-75deg", "75deg"]
+  );
+
+  const opacity = useTransform(
+    scrollY,
+    // Map from these values:
+    [
+      enterScrollTop - containerHeight,
+      enterScrollTop,
+      enterScrollTop + containerHeight,
+    ],
+    // Into these values:
+    [0, 1, 0]
   );
 
   return (
@@ -83,15 +95,15 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
         style={{
           pointerEvents: "none",
         }}
-        className="w-full h-screen flex flex-col justify-center items-center p-4 md:p-8 snap-start snap-mt-8"
+        className="w-full h-screen flex flex-col justify-center items-center p-4 md:p-8 snap-start "
       >
         <motion.div
           style={{
-            translateX,
-            translateY: "-50%",
+            translateY: "50%",
             rotate,
+            opacity,
           }}
-          className="origin-bottom min-w-[100vw] min-h-screen fixed top-[50%] left-0 flex justify-center items-center -z-10 "
+          className="origin-bottom min-w-[100vw] min-h-screen fixed bottom-[50%] left-0 flex justify-center items-center -z-10 "
         >
           <IPhone14 width={containerWidth < 424 ? containerWidth * 0.6 : 300} />
         </motion.div>

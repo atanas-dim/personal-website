@@ -20,7 +20,7 @@ const IPhone14: FC<Props> = ({ width }) => {
           background: "#010101",
           border: "1px solid #101315",
           borderRadius: `min(15vw, ${0.15 * width}px)`, // 15% of width prop
-          boxShadow: " inset 0 0 0 2px #b0b8c0, inset 0 0 0 6px #272c31",
+          boxShadow: " inset 0 0 0 2px #b0b8c0, inset 0 0 0 5px #3b4147",
           height: "100%",
           padding: `min(4vw, ${0.04 * width}px)`, // 4% of width prop
           width: "100%",
