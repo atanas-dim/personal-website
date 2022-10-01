@@ -70,11 +70,41 @@ const Stack: FC<Props> = ({ scrollY, setSectionName }) => {
         }px 0px`,
       }}
       onViewportEnter={() => setSectionName("Stack")}
-      className=" relative min-h-full h-full w-full snap-start pt-16 px-4 md:px-8 pb-4 md:pb-8  flex flex-col justify-center items-center"
+      className="relative min-h-full h-full w-full snap-start "
     >
-      <div className="flex flex-col justify-center items-center mb-16 w-full">
-        <div className="w-full flex justify-center items-center flex-wrap mb-4">
-          {BASE_STACK.map((skill, index) => {
+      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
+        <div className="flex flex-col justify-center items-center mb-16 w-full">
+          <div className="w-full flex justify-center items-center flex-wrap mb-4">
+            {BASE_STACK.map((skill, index) => {
+              return (
+                <Skill
+                  key={"skill-" + index}
+                  skill={skill}
+                  scrollY={scrollY}
+                  containerHeight={containerHeight}
+                  fullOpacityScrollTop={fullOpacityScrollTop}
+                  className="text-xl"
+                />
+              );
+            })}
+          </div>
+          <div className="w-full flex justify-center items-center flex-wrap ">
+            {MAIN_STACK.map((skill, index) => {
+              return (
+                <Skill
+                  key={"skill-" + index}
+                  skill={skill}
+                  scrollY={scrollY}
+                  containerHeight={containerHeight}
+                  fullOpacityScrollTop={fullOpacityScrollTop}
+                  className="text-2xl"
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div className="w-full flex justify-center items-center flex-wrap">
+          {ADDITIONAL_STACK.map((skill, index) => {
             return (
               <Skill
                 key={"skill-" + index}
@@ -82,39 +112,11 @@ const Stack: FC<Props> = ({ scrollY, setSectionName }) => {
                 scrollY={scrollY}
                 containerHeight={containerHeight}
                 fullOpacityScrollTop={fullOpacityScrollTop}
-                className="text-xl"
+                className="text-base"
               />
             );
           })}
         </div>
-        <div className="w-full flex justify-center items-center flex-wrap ">
-          {MAIN_STACK.map((skill, index) => {
-            return (
-              <Skill
-                key={"skill-" + index}
-                skill={skill}
-                scrollY={scrollY}
-                containerHeight={containerHeight}
-                fullOpacityScrollTop={fullOpacityScrollTop}
-                className="text-2xl"
-              />
-            );
-          })}
-        </div>
-      </div>
-      <div className="w-full flex justify-center items-center flex-wrap">
-        {ADDITIONAL_STACK.map((skill, index) => {
-          return (
-            <Skill
-              key={"skill-" + index}
-              skill={skill}
-              scrollY={scrollY}
-              containerHeight={containerHeight}
-              fullOpacityScrollTop={fullOpacityScrollTop}
-              className="text-base"
-            />
-          );
-        })}
       </div>
     </motion.section>
   );
@@ -148,11 +150,13 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
     // Map from these values:
     [
       fullOpacityScrollTop - difference,
+      fullOpacityScrollTop - difference / 3,
       fullOpacityScrollTop,
+      fullOpacityScrollTop + difference / 3,
       fullOpacityScrollTop + difference,
     ],
     // Into these values:
-    [0, 1, 0]
+    [0, 1, 1, 1, 0]
   );
 
   return (
