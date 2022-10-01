@@ -57,10 +57,12 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
 
   const [enterScrollTop, setEnterScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
 
   useEffect(() => {
     // Need to set this on mount to fix blank sections
     setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
+    setContainerWidth(target.current?.getBoundingClientRect()?.width ?? 0);
     setEnterScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
   }, []);
 
@@ -105,13 +107,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
           }}
           className="origin-bottom min-w-[100vw] min-h-screen fixed top-[50%] left-0 flex justify-center items-center -z-10 "
         >
-          <IPhone14
-            width={
-              typeof window !== "undefined" && window.screen.width < 424
-                ? window.screen.width * 0.6
-                : 300
-            }
-          />
+          <IPhone14 width={containerWidth < 424 ? containerWidth * 0.6 : 300} />
         </motion.div>
       </div>
     </>
