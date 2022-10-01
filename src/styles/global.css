@@ -179,7 +179,7 @@ body {
 
 @media (hover: none) {
   #scroll-container {
-    @apply scroll-smooth snap-mandatory snap-y overflow-y-auto;
+    @apply scroll-smooth snap-mandatory snap-y;
   }
 }
 
