@@ -23,6 +23,7 @@ const Projects: FC<Props> = ({ scrollY, setSectionName }) => {
   return (
     <>
       <motion.section
+        id="projects"
         ref={target}
         viewport={{
           margin: `${
@@ -81,14 +82,6 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
     // Into these values:
     ["-45deg", "45deg"]
   );
-
-  // useEffect(() => {
-  //   translateX.onChange((v) => console.log("HERE", v));
-  // }, [translateX]);
-
-  // useEffect(() => {
-  //   if (index === 2) translateX.onChange((v) => console.log("HERE 2", v));
-  // }, [translateX]);
 
   return (
     <>

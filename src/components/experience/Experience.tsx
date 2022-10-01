@@ -9,6 +9,7 @@ type Props = {
 const Experience: FC<Props> = ({ scrollY, setSectionName }) => {
   return (
     <motion.section
+      id="experience"
       viewport={{
         margin: `${
           (typeof window !== "undefined" ? -window.screen.height : 0) / 3

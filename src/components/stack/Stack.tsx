@@ -63,6 +63,7 @@ const Stack: FC<Props> = ({ scrollY, setSectionName }) => {
 
   return (
     <motion.section
+      id="stack"
       ref={target}
       viewport={{
         margin: `${
@@ -70,7 +71,7 @@ const Stack: FC<Props> = ({ scrollY, setSectionName }) => {
         }px 0px`,
       }}
       onViewportEnter={() => setSectionName("Stack")}
-      className="relative min-h-full h-full w-full snap-start"
+      className="relative h-full w-full snap-center "
     >
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
         <div className="flex flex-col justify-center items-center mb-16 w-full">
@@ -138,8 +139,8 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   fullOpacityScrollTop,
   className,
 }) => {
-  const minDiff = containerHeight / 32;
-  const maxDiff = containerHeight / 3;
+  const minDiff = containerHeight * 0.2;
+  const maxDiff = containerHeight * 0.8;
   const difference = useMemo(
     () => Math.floor(Math.random() * (maxDiff - minDiff + 1) + minDiff),
     [maxDiff, minDiff]
@@ -150,9 +151,9 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
     // Map from these values:
     [
       fullOpacityScrollTop - difference,
-      fullOpacityScrollTop - difference / 3,
+      fullOpacityScrollTop - difference / 2,
       fullOpacityScrollTop,
-      fullOpacityScrollTop + difference / 3,
+      fullOpacityScrollTop + difference / 2,
       fullOpacityScrollTop + difference,
     ],
     // Into these values:
@@ -162,7 +163,7 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   return (
     <motion.h3
       style={{ opacity }}
-      className={`mr-4 font-bold ${skill.style} ${className}`}
+      className={`mx-2 align-center font-bold ${skill.style} ${className}`}
     >
       {skill.label}
     </motion.h3>

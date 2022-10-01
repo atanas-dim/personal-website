@@ -11,7 +11,7 @@ type Props = {
 const Header: FC<Props> = ({ sectionName }) => {
   return (
     <header
-      className={`sticky top-0 z-10 h-16 w-full flex justify-between items-center ${PERFORATED_BG} bg-left-top px-4 md:px-8 border-solid border-b border-zinc-800`}
+      className={`sticky top-0 z-50 h-16 w-full flex justify-between items-center ${PERFORATED_BG} bg-left-top px-4 md:px-8 border-solid border-b border-zinc-800`}
     >
       <AnimatePresence>
         {!!sectionName && (
@@ -38,7 +38,15 @@ const Header: FC<Props> = ({ sectionName }) => {
                 </motion.h2>
               </AnimatePresence>
             </div>
-            <div>Menu</div>
+            <div
+              onClick={() =>
+                document.getElementById("stack")?.scrollIntoView({
+                  behavior: "smooth",
+                })
+              }
+            >
+              Menu
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

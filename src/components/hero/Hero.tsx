@@ -43,8 +43,8 @@ const Hero: FC = () => {
   }, [isInView]);
 
   return (
-    <div className="w-full h-[calc(100%_-_64px)] relative flex justify-center items-center flex-col z-10 snap-start">
-      <div className="w-full absolute top-0 left-0 z-[-20] h-full overflow-hidden hero-mask flex justify-center items-center">
+    <div className="w-full h-[calc(100%_-_64px)] relative flex justify-center items-center flex-col z-50 snap-start">
+      <div className="w-full absolute top-0 left-0 -z-20 h-full overflow-hidden hero-mask flex justify-center items-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={controls}
@@ -54,7 +54,7 @@ const Hero: FC = () => {
         />
       </div>
       <div
-        className={`absolute z-[-10] top-0 left-0 w-full h-full ${PERFORATED_BG} bg-left-bottom`}
+        className={`absolute -z-10 top-0 left-0 w-full h-full ${PERFORATED_BG} bg-left-bottom`}
       />
       <motion.div
         variants={{
