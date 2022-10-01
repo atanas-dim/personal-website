@@ -138,8 +138,8 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   fullOpacityScrollTop,
   className,
 }) => {
-  const minDiff = containerHeight / 5;
-  const maxDiff = containerHeight / 1.5;
+  const minDiff = containerHeight / 32;
+  const maxDiff = containerHeight / 3;
   const difference = useMemo(
     () => Math.floor(Math.random() * (maxDiff - minDiff + 1) + minDiff),
     [maxDiff, minDiff]
