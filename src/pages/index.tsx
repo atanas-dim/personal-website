@@ -46,7 +46,7 @@ const IndexPage = () => {
     <div id="scroll-container" ref={scrollContainer}>
       <Hero />
       <Header sectionName={sectionName} />
-      <main className="w-full h-full">
+      <main className="w-full h-full ">
         <Projects scrollY={scrollY} />
         <Stack scrollY={scrollY} />
         <Experience scrollY={scrollY} />

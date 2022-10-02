@@ -54,11 +54,26 @@ const Stack: FC<Props> = ({ scrollY }) => {
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
+  const [show, setShow] = useState(false);
+
   useEffect(() => {
     // Need to set this on mount to fix blank sections
     setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
     setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
   }, []);
+
+  useEffect(() => {
+    scrollY.onChange((v) => {
+      if (!target.current) return;
+
+      if (
+        v >=
+        target.current?.offsetTop -
+          target.current?.getBoundingClientRect()?.height
+      )
+        setShow(true);
+    });
+  }, [scrollY]);
 
   return (
     <motion.section
@@ -66,10 +81,40 @@ const Stack: FC<Props> = ({ scrollY }) => {
       ref={target}
       className="relative h-full w-full snap-center"
     >
-      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
-        <div className="flex flex-col justify-center items-center mb-16 w-full max-w-2xl">
-          <div className="w-full flex justify-center items-center flex-wrap mb-4">
-            {BASE_STACK.map((skill, index) => {
+      {show && (
+        <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
+          <div className="flex flex-col justify-center items-center mb-4 w-full max-w-2xl">
+            <div className="w-full flex justify-center items-center flex-wrap mb-4">
+              {BASE_STACK.map((skill, index) => {
+                return (
+                  <Skill
+                    key={"skill-" + index}
+                    skill={skill}
+                    scrollY={scrollY}
+                    containerHeight={containerHeight}
+                    fullOpacityScrollTop={fullOpacityScrollTop}
+                    className="text-xl md:text-2xl"
+                  />
+                );
+              })}
+            </div>
+            <div className="w-full flex justify-center items-center flex-wrap ">
+              {MAIN_STACK.map((skill, index) => {
+                return (
+                  <Skill
+                    key={"skill-" + index}
+                    skill={skill}
+                    scrollY={scrollY}
+                    containerHeight={containerHeight}
+                    fullOpacityScrollTop={fullOpacityScrollTop}
+                    className="text-2xl md:text-4xl"
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <div className="w-full flex justify-center items-center flex-wrap  max-w-xs md:max-w-xl">
+            {ADDITIONAL_STACK.map((skill, index) => {
               return (
                 <Skill
                   key={"skill-" + index}
@@ -77,41 +122,13 @@ const Stack: FC<Props> = ({ scrollY }) => {
                   scrollY={scrollY}
                   containerHeight={containerHeight}
                   fullOpacityScrollTop={fullOpacityScrollTop}
-                  className="text-xl md:text-2xl"
-                />
-              );
-            })}
-          </div>
-          <div className="w-full flex justify-center items-center flex-wrap ">
-            {MAIN_STACK.map((skill, index) => {
-              return (
-                <Skill
-                  key={"skill-" + index}
-                  skill={skill}
-                  scrollY={scrollY}
-                  containerHeight={containerHeight}
-                  fullOpacityScrollTop={fullOpacityScrollTop}
-                  className="text-2xl md:text-4xl"
+                  className="text-base md:text-xl"
                 />
               );
             })}
           </div>
         </div>
-        <div className="w-full flex justify-center items-center flex-wrap max-w-2xl">
-          {ADDITIONAL_STACK.map((skill, index) => {
-            return (
-              <Skill
-                key={"skill-" + index}
-                skill={skill}
-                scrollY={scrollY}
-                containerHeight={containerHeight}
-                fullOpacityScrollTop={fullOpacityScrollTop}
-                className="text-base md:text-xl"
-              />
-            );
-          })}
-        </div>
-      </div>
+      )}
     </motion.section>
   );
 };
