@@ -39,11 +39,13 @@ const Header: FC<Props> = ({ sectionName }) => {
               </AnimatePresence>
             </div>
             <div
-              onClick={() =>
-                document.getElementById("stack")?.scrollIntoView({
-                  behavior: "smooth",
-                })
-              }
+              onClick={() => {
+                const section = document.getElementById("stack");
+                console.log(section?.offsetTop);
+                document
+                  .getElementById("scroll-container")
+                  ?.scroll({ top: section?.offsetTop, behavior: "smooth" });
+              }}
             >
               Menu
             </div>

@@ -1,7 +1,5 @@
 import React, {
   FC,
-  Dispatch,
-  SetStateAction,
   useRef,
   HTMLAttributes,
   useEffect,
@@ -9,7 +7,7 @@ import React, {
   useMemo,
 } from "react";
 
-import { motion, MotionValue, useTransform } from "framer-motion";
+import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 
 type SkillDef = {
   label: string;
@@ -156,14 +154,20 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
     [maxDiff, minDiff]
   );
 
+  const scrollSpring = useSpring(scrollY, {
+    damping: 5000,
+    mass: 220,
+    stiffness: 16000,
+  });
+
   const opacity = useTransform(
     scrollY,
     // Map from these values:
     [
       fullOpacityScrollTop - difference,
-      fullOpacityScrollTop - difference / 2,
+      fullOpacityScrollTop - difference / 1.5,
       fullOpacityScrollTop,
-      fullOpacityScrollTop + difference / 2,
+      fullOpacityScrollTop + difference / 1.5,
       fullOpacityScrollTop + difference,
     ],
     // Into these values:
@@ -171,22 +175,23 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   );
 
   const translateY = useTransform(
-    scrollY,
+    scrollSpring,
     // Map from these values:
     [
       fullOpacityScrollTop - difference,
+      fullOpacityScrollTop - difference / 3,
       fullOpacityScrollTop,
+      fullOpacityScrollTop + difference / 3,
       fullOpacityScrollTop + difference,
     ],
     // Into these values:
-    ["16px", "0px", "-16px"]
+    ["16px", "10px", "0px", "-10px", "-16px"]
   );
 
   return (
     <motion.h3
       style={{
         opacity,
-        perspective: "200px",
         translateY,
       }}
       className={`mx-2 align-center font-bold ${skill.style} ${className}`}

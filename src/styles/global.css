@@ -174,14 +174,15 @@ body {
 #scroll-container {
   width: 100%;
   height: 100%;
+
   @apply overflow-y-auto overflow-x-hidden;
 }
 
-@media (hover: none) {
+/*@media (hover: none) {
   #scroll-container {
-    @apply scroll-smooth snap-mandatory snap-y;
+     @apply scroll-smooth snap-mandatory snap-y;
   }
-}
+} */
 
 .hero-mask {
   mask-image: linear-gradient(to top, transparent 0px, black 20%);

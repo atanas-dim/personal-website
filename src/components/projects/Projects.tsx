@@ -1,12 +1,5 @@
-import React, {
-  FC,
-  useRef,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
-import { motion, useTransform, MotionValue } from "framer-motion";
+import React, { FC, useRef, useEffect, useState } from "react";
+import { motion, useTransform, useSpring, MotionValue } from "framer-motion";
 
 import IPhone14 from "../devices/IPhone14";
 
@@ -26,7 +19,7 @@ const Projects: FC<Props> = ({ scrollY }) => {
         ref={target}
         className={`border-0 border-solid border-red-500 relative h-[${
           PROJECTS.length * 100
-        }%] w-full mb-96`}
+        }%] w-full mb-[50vh]`}
       >
         {PROJECTS.map((project, index) => {
           return (
@@ -60,16 +53,14 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
     setEnterScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
   }, []);
 
-  const translateX = useTransform(
-    scrollY,
-    // Map from these values:
-    [enterScrollTop - containerHeight, enterScrollTop + containerHeight],
-    // Into these values:
-    ["-100%", "100%"]
-  );
+  const scrollSpring = useSpring(scrollY, {
+    damping: 1000,
+    mass: 80,
+    stiffness: 10000,
+  });
 
   const rotate = useTransform(
-    scrollY,
+    scrollSpring,
     // Map from these values:
     [enterScrollTop - containerHeight, enterScrollTop + containerHeight],
     // Into these values:
@@ -77,7 +68,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
   );
 
   const opacity = useTransform(
-    scrollY,
+    scrollSpring,
     // Map from these values:
     [
       enterScrollTop - containerHeight,
@@ -95,7 +86,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
         style={{
           pointerEvents: "none",
         }}
-        className="w-full h-screen flex flex-col justify-center items-center p-4 md:p-8 snap-start mb-[70vh]"
+        className="w-full h-screen flex flex-col justify-center items-center p-4 md:p-8 snap-start"
       >
         <motion.div
           style={{
