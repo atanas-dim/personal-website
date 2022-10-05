@@ -155,9 +155,9 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   );
 
   const scrollSpring = useSpring(scrollY, {
-    damping: 5000,
-    mass: 220,
-    stiffness: 16000,
+    damping: 60,
+    mass: 40,
+    stiffness: 1000,
   });
 
   const opacity = useTransform(

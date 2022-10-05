@@ -54,9 +54,9 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
   }, []);
 
   const scrollSpring = useSpring(scrollY, {
-    damping: 1000,
+    damping: 2000,
     mass: 80,
-    stiffness: 10000,
+    stiffness: 20000,
   });
 
   const rotate = useTransform(
@@ -86,7 +86,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
         style={{
           pointerEvents: "none",
         }}
-        className="w-full h-screen flex flex-col justify-center items-center p-4 md:p-8 snap-start"
+        className="w-full h-screen flex flex-col justify-center items-center p-4 md:p-8 snap-start mt-[25vh]"
       >
         <motion.div
           style={{
