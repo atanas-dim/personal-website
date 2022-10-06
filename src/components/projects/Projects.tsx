@@ -86,7 +86,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
         style={{
           pointerEvents: "none",
         }}
-        className="w-full h-screen flex flex-col justify-center items-center p-4 md:p-8 snap-start mt-[25vh]"
+        className="w-full h-[50vh] flex flex-col justify-center items-center p-4 md:p-8 snap-start mt-[25vh]"
       >
         <motion.div
           style={{
