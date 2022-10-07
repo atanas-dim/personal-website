@@ -77,7 +77,7 @@ const Stack: FC<Props> = ({ scrollY }) => {
     <motion.section
       id="stack"
       ref={target}
-      className="relative h-full w-full snap-center"
+      className="relative h-full md:mt-[80%] md:h-[200%] w-full snap-center"
     >
       {show && (
         <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
