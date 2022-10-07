@@ -19,7 +19,7 @@ const Projects: FC<Props> = ({ scrollY }) => {
         ref={target}
         className={`border-0 border-solid border-red-500 relative h-[${
           PROJECTS.length * 100
-        }%] w-full mb-[50vh]`}
+        }%] w-full mb-[50vh] z-10`}
       >
         {PROJECTS.map((project, index) => {
           return (
@@ -86,7 +86,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
         style={{
           pointerEvents: "none",
         }}
-        className="w-full h-[50vh] flex flex-col justify-center items-center p-4 md:p-8 snap-start mt-[25vh]"
+        className="w-full h-[50vh] flex flex-col justify-center items-center p-4 md:p-8 snap-start mt-[25vh] overflow-hidden"
       >
         <motion.div
           style={{
@@ -94,7 +94,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY }) => {
             rotate,
             opacity,
           }}
-          className="origin-bottom min-w-[100vw] min-h-screen fixed bottom-[50%] left-0 flex justify-center items-center -z-10 "
+          className="origin-bottom min-w-[100vw] min-h-screen fixed bottom-[50%] left-0 flex justify-center items-center -z-10"
         >
           <IPhone14 width={containerWidth < 424 ? containerWidth * 0.6 : 300} />
         </motion.div>

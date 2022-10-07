@@ -148,7 +148,7 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   className,
 }) => {
   const minDiff = containerHeight * 0.2;
-  const maxDiff = containerHeight * 0.8;
+  const maxDiff = containerHeight * 0.6;
   const difference = useMemo(
     () => Math.floor(Math.random() * (maxDiff - minDiff + 1) + minDiff),
     [maxDiff, minDiff]
