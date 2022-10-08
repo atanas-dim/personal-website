@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, FC } from "react";
 import type { HeadFC } from "gatsby";
 
 import Header from "../components/header/Header";
@@ -9,7 +9,10 @@ import Experience from "../components/experience/Experience";
 
 import { useScroll } from "framer-motion";
 
-const IndexPage = () => {
+type Props = {
+  //
+};
+const IndexPage: FC<Props> = ({}) => {
   const scrollContainer = useRef(null);
   const [sectionName, setSectionName] = useState("");
 
@@ -17,6 +20,7 @@ const IndexPage = () => {
     container: scrollContainer,
   });
 
+  //TODO Make enums with section names and ids
   useEffect(() => {
     scrollY.onChange((v) => {
       //TODO Refactor

@@ -41,7 +41,7 @@ const Header: FC<Props> = ({ sectionName }) => {
             <div
               onClick={() => {
                 const section = document.getElementById("stack");
-                console.log(section?.offsetTop);
+
                 document
                   .getElementById("scroll-container")
                   ?.scroll({ top: section?.offsetTop, behavior: "smooth" });
