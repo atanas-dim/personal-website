@@ -1,15 +1,25 @@
-import React, { FC, useRef, useEffect, useState } from "react";
+import React, {
+  FC,
+  useRef,
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { motion, useTransform, useSpring, MotionValue } from "framer-motion";
 
 import IPhone14 from "../devices/IPhone14";
 
 import { ProjectData, PROJECTS } from "../../resources/projects";
 
+import { BgIcon } from "../background/Background";
+
 type Props = {
   scrollY: MotionValue<number>;
+  setBgIcon: Dispatch<SetStateAction<BgIcon>>;
 };
 
-const Projects: FC<Props> = ({ scrollY }) => {
+const Projects: FC<Props> = ({ scrollY, setBgIcon }) => {
   const target = useRef<HTMLDivElement>(null);
 
   return (
@@ -28,6 +38,7 @@ const Projects: FC<Props> = ({ scrollY }) => {
               index={index}
               scrollY={scrollY}
               data={project}
+              setBgIcon={setBgIcon}
             />
           );
         })}
@@ -42,11 +53,13 @@ type ProjectProps = {
   index: number;
   scrollY: MotionValue<number>;
   data: ProjectData;
+  setBgIcon: Dispatch<SetStateAction<BgIcon>>;
 };
 
-const Project: FC<ProjectProps> = ({ index, scrollY, data }) => {
+const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
   const target = useRef<HTMLDivElement>(null);
 
+  const [show, setShow] = useState(false);
   const [enterScrollTop, setEnterScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -69,19 +82,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data }) => {
     // Map from these values:
     [enterScrollTop - containerHeight, enterScrollTop + containerHeight],
     // Into these values:
-    ["-75deg", "75deg"]
-  );
-
-  const opacity = useTransform(
-    scrollSpring,
-    // Map from these values:
-    [
-      enterScrollTop - containerHeight,
-      enterScrollTop,
-      enterScrollTop + containerHeight,
-    ],
-    // Into these values:
-    [0, 1, 0]
+    ["-180deg", "180deg"]
   );
 
   const textOpacity = useTransform(
@@ -89,9 +90,9 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data }) => {
     // Map from these values:
     [
       enterScrollTop - containerHeight,
-      enterScrollTop - containerHeight / 2,
+      enterScrollTop - containerHeight / 4,
       enterScrollTop,
-      enterScrollTop + containerHeight / 2,
+      enterScrollTop + containerHeight / 4,
       enterScrollTop + containerHeight,
     ],
     // Into these values:
@@ -103,9 +104,9 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data }) => {
     // Map from these values:
     [
       enterScrollTop - containerHeight,
-      enterScrollTop - containerHeight / 2,
+      enterScrollTop - containerHeight / 4,
       enterScrollTop,
-      enterScrollTop + containerHeight / 2,
+      enterScrollTop + containerHeight / 4,
       enterScrollTop + containerHeight,
     ],
     // Into these values:
@@ -117,9 +118,9 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data }) => {
     // Map from these values:
     [
       enterScrollTop - containerHeight,
-      enterScrollTop - containerHeight / 2,
+      enterScrollTop - containerHeight / 4,
       enterScrollTop,
-      enterScrollTop + containerHeight / 2,
+      enterScrollTop + containerHeight / 4,
       enterScrollTop + containerHeight,
     ],
     // Into these values:
@@ -127,15 +128,16 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data }) => {
   );
 
   return (
-    <div
+    <motion.div
+      id={"project-" + index}
       ref={target}
-      className="w-full h-[50vh] flex flex-col justify-center items-center p-4 md:p-8 snap-start mt-[25vh] overflow-hidden pointer-events-none"
+      onViewportEnter={() => setBgIcon(data.bgIcon)}
+      className="w-full h-screen flex flex-col justify-center items-center p-4 md:p-8 mt-[25vh] overflow-hidden pointer-events-none"
     >
       <motion.div
         style={{
           translateY: "50%",
           rotate,
-          opacity,
         }}
         className="origin-bottom min-w-[100vw] min-h-screen fixed bottom-[55%] left-0 flex justify-center items-center -z-10"
       >
@@ -180,6 +182,6 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data }) => {
           </div>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };

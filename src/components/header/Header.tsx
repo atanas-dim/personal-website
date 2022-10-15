@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PERFORATED_BG } from "../../styles/constants";
 
 type Props = {
-  sectionName: string;
+  sectionName?: string;
 };
 
 const Header: FC<Props> = ({ sectionName }) => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, FC } from "react";
 import type { HeadFC } from "gatsby";
 
+import Background, { BgIcon } from "../components/background/Background";
 import Header from "../components/header/Header";
 import Hero from "../components/hero/Hero";
 import Projects from "../components/projects/Projects";
@@ -9,53 +10,84 @@ import Experience from "../components/experience/Experience";
 
 import { useScroll } from "framer-motion";
 
+enum Section {
+  Projects,
+  Stack,
+  Experience,
+  Contact,
+}
+
+const SECTIONS = {
+  [Section.Projects]: {
+    title: "Projects",
+  },
+  [Section.Stack]: {
+    title: "Stack",
+  },
+  [Section.Experience]: {
+    title: "Experience",
+  },
+  [Section.Contact]: {
+    title: "Contact",
+  },
+};
+
 type Props = {
   //
 };
 const IndexPage: FC<Props> = ({}) => {
   const scrollContainer = useRef(null);
-  const [sectionName, setSectionName] = useState("");
+  const [activeSection, setActiveSection] = useState<Section>();
+  const [bgIcon, setBgIcon] = useState<BgIcon>(BgIcon.ArmFlex);
 
   const { scrollY } = useScroll({
     container: scrollContainer,
   });
 
-  //TODO Make enums with section names and ids
   useEffect(() => {
     scrollY.onChange((v) => {
-      //TODO Refactor
-      if (v < 100) setSectionName("");
+      //TODO Refactor. Set value from onViewportEnter on motion els
+      if (v < 100) setActiveSection(undefined);
       if (
         (document.getElementById("projects")?.getBoundingClientRect().y ?? 0) <=
           300 &&
-        sectionName !== "Projects"
+        activeSection !== Section.Projects
       )
-        setSectionName("Projects");
+        setActiveSection(Section.Projects);
       if (
         (document.getElementById("stack")?.getBoundingClientRect().y ?? 0) <=
           300 &&
-        sectionName !== "Stack"
+        activeSection !== Section.Stack
       )
-        setSectionName("Stack");
+        setActiveSection(Section.Stack);
       if (
         (document.getElementById("experience")?.getBoundingClientRect().y ??
           0) <= 300 &&
-        sectionName !== "Experience"
+        activeSection !== Section.Experience
       )
-        setSectionName("Experience");
+        setActiveSection(Section.Experience);
     });
   }, [scrollY]);
 
   return (
-    <div id="scroll-container" ref={scrollContainer}>
-      <Hero />
-      <Header sectionName={sectionName} />
-      <main className="w-full h-full ">
-        <Projects scrollY={scrollY} />
-        <Stack scrollY={scrollY} />
-        <Experience scrollY={scrollY} />
-      </main>
-    </div>
+    <>
+      <div id="scroll-container" ref={scrollContainer}>
+        <Background pathIndex={bgIcon} />
+        <Hero />
+        <Header
+          sectionName={
+            activeSection !== undefined
+              ? SECTIONS[activeSection].title
+              : undefined
+          }
+        />
+        <main className="w-full h-full ">
+          <Projects scrollY={scrollY} setBgIcon={setBgIcon} />
+          <Stack scrollY={scrollY} setBgIcon={setBgIcon} />
+          <Experience scrollY={scrollY} setBgIcon={setBgIcon} />
+        </main>
+      </div>
+    </>
   );
 };
 

@@ -5,9 +5,12 @@ import React, {
   useEffect,
   useState,
   useMemo,
+  Dispatch,
+  SetStateAction,
 } from "react";
 
 import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
+import { BgIcon } from "../background/Background";
 
 type SkillDef = {
   label: string;
@@ -44,9 +47,10 @@ const ADDITIONAL_STACK: SkillDef[] = [
 
 type Props = {
   scrollY: MotionValue<number>;
+  setBgIcon: Dispatch<SetStateAction<BgIcon>>;
 };
 
-const Stack: FC<Props> = ({ scrollY }) => {
+const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
   const target = useRef<HTMLDivElement>(null);
 
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
@@ -77,7 +81,8 @@ const Stack: FC<Props> = ({ scrollY }) => {
     <motion.section
       id="stack"
       ref={target}
-      className="relative h-full md:mt-[80%] md:h-[200%] w-full snap-center"
+      onViewportEnter={() => setBgIcon(BgIcon.Code)}
+      className="relative h-full md:mt-[80%] md:h-[200%] w-full snap-center mb-96"
     >
       {show && (
         <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
