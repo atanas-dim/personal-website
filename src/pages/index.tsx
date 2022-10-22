@@ -9,6 +9,7 @@ import Hero from "../components/hero/Hero";
 import Projects from "../components/projects/Projects";
 import Stack from "../components/stack/Stack";
 import Experience from "../components/experience/Experience";
+import Footer from "../components/footer/Footer";
 
 import { useScroll } from "framer-motion";
 
@@ -85,7 +86,7 @@ const IndexPage: FC<Props> = ({}) => {
             setActiveSection={setActiveSection}
           />
         </main>
-        <footer>2022</footer>
+        <Footer />
       </div>
     </>
   );

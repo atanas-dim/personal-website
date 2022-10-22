@@ -12,7 +12,7 @@ type Props = {
 const Header: FC<Props> = ({ sectionName }) => {
   return (
     <header
-      className={`sticky top-0 z-50 h-16 w-full  flex justify-between items-center ${PERFORATED_BG} bg-left-top px-4 md:px-8 border-solid border-b border-zinc-800`}
+      className={`sticky top-0 z-50 h-16 w-full flex justify-between items-center ${PERFORATED_BG} bg-left-top px-4 md:px-8 border-solid border-b border-zinc-800`}
     >
       <motion.div
         initial="hidden"

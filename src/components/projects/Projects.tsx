@@ -180,7 +180,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
           opacity,
           scale,
         }}
-        className="origin-center min-w-[100vw] min-h-[100vh] fixed bottom-0 left-0 flex justify-center items-center -z-10"
+        className="origin-center w-full h-full fixed bottom-0 left-0 flex justify-center items-center -z-10"
       >
         <IPhone14
           width={containerWidth < 424 ? containerWidth * 0.5 : 300}
