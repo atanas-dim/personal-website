@@ -71,7 +71,7 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       onViewportEnter={() => {
-        setBgIcon(BgIcon.Code);
+        setBgIcon(BgIcon.Stack);
         setActiveSection(Section.Stack);
       }}
       className="relative w-screen h-screen md:h-[200vh] mb-[100vh]"
@@ -92,7 +92,7 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
               );
             })}
           </div>
-          <div className="w-full flex justify-center items-center flex-wrap ">
+          <div className="w-full flex justify-center items-center flex-wrap">
             {MAIN_STACK.map((skill, index) => {
               return (
                 <Skill
@@ -189,7 +189,7 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
         opacity,
         translateY,
       }}
-      className={`mx-2 align-center font-bold ${skill.style} ${className}`}
+      className={`skill mx-2 align-center font-bold ${skill.style} ${className}`}
     >
       {skill.label}
     </motion.h3>

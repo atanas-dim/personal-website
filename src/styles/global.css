@@ -217,3 +217,10 @@ body {
     border-radius: 4px;
   }
 }
+
+.skill {
+  text-shadow: 0px 1px 0 theme("colors.zinc.400"),
+    0px 2px 0 theme("colors.zinc.500"), 0px 3px theme("colors.zinc.600"),
+    0px 4px 0 theme("colors.zinc.700"), 0px 5px 0 theme("colors.zinc.800"),
+    0px 6px 0 theme("colors.zinc.900"), 0px 7px 0 theme("colors.zinc.900");
+}

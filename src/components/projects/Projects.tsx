@@ -59,7 +59,7 @@ type ProjectProps = {
 
 const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
   const target = useRef<HTMLDivElement>(null);
-
+  const [isInView, setIsInView] = useState(false);
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -171,8 +171,14 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     <motion.div
       id={"project-" + index}
       ref={target}
-      onViewportEnter={() => setBgIcon(data.bgIcon)}
-      className="w-full h-screen md:h-[150vh] flex flex-col justify-center items-center p-4 md:p-8 mb-[100vh] md:mb-[150vh]  overflow-hidden pointer-events-none"
+      onViewportEnter={() => {
+        setIsInView(true);
+        setBgIcon(data.bgIcon);
+      }}
+      onViewportLeave={() => {
+        setIsInView(false);
+      }}
+      className="w-full h-screen md:h-[150vh] flex flex-col justify-center items-center p-4 md:p-8 mb-[100vh] md:mb-[150vh] overflow-hidden pointer-events-none"
     >
       <motion.div
         style={{
@@ -190,8 +196,9 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
       <div
         style={{
           perspective: "60rem",
+          position: isInView ? "fixed" : "unset",
         }}
-        className="fixed bottom-0 left-[50%] translate-x-[-50%] mb-[4vh] w-full max-w-[200px]"
+        className=" bottom-0 left-[50%] translate-x-[-50%]  mb-[4vh] w-full max-w-[200px]"
       >
         <motion.div
           className="p-4 flex flex-col justify-center items-center rounded-2xl bg-zinc-800 w-full opacity-0"

@@ -19,7 +19,7 @@ export enum BgIcon {
   ArmFlex,
   ShoppingBag,
   Comment,
-  Code,
+  Stack,
   Laptop,
 }
 
@@ -27,7 +27,10 @@ const ICONS: { [key in BgIcon]: { path: string; colour: string } } = {
   [BgIcon.ArmFlex]: { path: ARM_FLEX, colour: "#093d58" },
   [BgIcon.ShoppingBag]: { path: SHOPPING_BAG, colour: "#004240" },
   [BgIcon.Comment]: { path: COMMENT, colour: "#063d51" },
-  [BgIcon.Code]: { path: STACK, colour: "#393510" },
+  [BgIcon.Stack]: {
+    path: STACK,
+    colour: "#393510",
+  },
   [BgIcon.Laptop]: { path: LAPTOP, colour: "#224a56" },
 };
 
