@@ -66,9 +66,15 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
 
   useEffect(() => {
     // Need to set this on mount to fix blank sections
-    setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
-    setContainerWidth(target.current?.getBoundingClientRect()?.width ?? 0);
-    setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
+    const updateValuesFromContainerRect = () => {
+      setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
+      setContainerWidth(target.current?.getBoundingClientRect()?.width ?? 0);
+      setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
+    };
+    updateValuesFromContainerRect();
+    window.addEventListener("resize", updateValuesFromContainerRect);
+    return () =>
+      window.removeEventListener("resize", updateValuesFromContainerRect);
   }, []);
 
   const scrollSpring = useSpring(scrollY, {
@@ -144,7 +150,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
       fullOpacityScrollTop + containerHeight,
     ],
     // Into these values:
-    [60, 20, 1, -20, -60]
+    [60, 0, 0, 0, -60]
   );
 
   const textRotateX = useTransform(
@@ -158,7 +164,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
       fullOpacityScrollTop + containerHeight,
     ],
     // Into these values:
-    ["-90deg", "-30deg", "0deg", "30deg", "90deg"]
+    ["-90deg", "0deg", "0deg", "0deg", "90deg"]
   );
 
   return (
@@ -185,13 +191,12 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
         style={{
           perspective: "60rem",
         }}
-        className="fixed bottom-0 left-[50%] translate-x-[-50%] mb-[6vh] w-full max-w-[200px]"
+        className="fixed bottom-0 left-[50%] translate-x-[-50%] mb-[4vh] w-full max-w-[200px]"
       >
         <motion.div
           className="p-4 flex flex-col justify-center items-center rounded-2xl bg-zinc-800 w-full opacity-0"
           style={{
             opacity: textOpacity,
-
             translateY: textTranslateY,
             rotateX: textRotateX,
             transformStyle: "preserve-3d",
