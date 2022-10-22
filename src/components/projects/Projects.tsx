@@ -13,13 +13,15 @@ import IPhone14 from "../devices/IPhone14";
 import { ProjectData, PROJECTS } from "../../resources/projects";
 
 import { BgIcon } from "../background/Background";
+import { Section } from "../../pages";
 
 type Props = {
   scrollY: MotionValue<number>;
   setBgIcon: Dispatch<SetStateAction<BgIcon>>;
+  setActiveSection: Dispatch<SetStateAction<Section>>;
 };
 
-const Projects: FC<Props> = ({ scrollY, setBgIcon }) => {
+const Projects: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
   const target = useRef<HTMLDivElement>(null);
 
   return (
@@ -27,9 +29,8 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon }) => {
       <motion.section
         id="projects"
         ref={target}
-        className={`border-0 border-solid border-red-500 relative h-[${
-          PROJECTS.length * 100
-        }%] w-full mb-[50vh]`}
+        onViewportEnter={() => setActiveSection(Section.Projects)}
+        className="relative w-full mt-[50vh] mb-[100vh]"
       >
         {PROJECTS.map((project, index) => {
           return (
@@ -59,8 +60,7 @@ type ProjectProps = {
 const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
   const target = useRef<HTMLDivElement>(null);
 
-  const [show, setShow] = useState(false);
-  const [enterScrollTop, setEnterScrollTop] = useState(0);
+  const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
 
@@ -68,7 +68,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     // Need to set this on mount to fix blank sections
     setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
     setContainerWidth(target.current?.getBoundingClientRect()?.width ?? 0);
-    setEnterScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
+    setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
   }, []);
 
   const scrollSpring = useSpring(scrollY, {
@@ -77,23 +77,57 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     stiffness: 20000,
   });
 
-  const rotate = useTransform(
+  const scale = useTransform(
     scrollSpring,
     // Map from these values:
-    [enterScrollTop - containerHeight, enterScrollTop + containerHeight],
+    [
+      fullOpacityScrollTop - containerHeight,
+      fullOpacityScrollTop - containerHeight / 2,
+      fullOpacityScrollTop,
+      fullOpacityScrollTop + containerHeight / 2,
+      fullOpacityScrollTop + containerHeight,
+    ],
     // Into these values:
-    ["-180deg", "180deg"]
+    [0.9, 1, 1, 1, 1.1]
+  );
+
+  const translateY = useTransform(
+    scrollSpring,
+    // Map from these values:
+    [
+      fullOpacityScrollTop - containerHeight,
+      fullOpacityScrollTop - containerHeight / 4,
+      fullOpacityScrollTop,
+      fullOpacityScrollTop + containerHeight / 4,
+      fullOpacityScrollTop + containerHeight,
+    ],
+    // Into these values:
+    ["16px", "10px", "0px", "-10px", "-16px"]
+  );
+
+  const opacity = useTransform(
+    scrollSpring,
+    // Map from these values:
+    [
+      fullOpacityScrollTop - containerHeight,
+      fullOpacityScrollTop - containerHeight / 2,
+      fullOpacityScrollTop,
+      fullOpacityScrollTop + containerHeight / 2,
+      fullOpacityScrollTop + containerHeight,
+    ],
+    // Into these values:
+    [0, 0.8, 1, 0.8, 0]
   );
 
   const textOpacity = useTransform(
     scrollSpring,
     // Map from these values:
     [
-      enterScrollTop - containerHeight,
-      enterScrollTop - containerHeight / 4,
-      enterScrollTop,
-      enterScrollTop + containerHeight / 4,
-      enterScrollTop + containerHeight,
+      fullOpacityScrollTop - containerHeight,
+      fullOpacityScrollTop - containerHeight / 4,
+      fullOpacityScrollTop,
+      fullOpacityScrollTop + containerHeight / 4,
+      fullOpacityScrollTop + containerHeight,
     ],
     // Into these values:
     [0, 1, 1, 1, 0]
@@ -103,28 +137,28 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     scrollSpring,
     // Map from these values:
     [
-      enterScrollTop - containerHeight,
-      enterScrollTop - containerHeight / 4,
-      enterScrollTop,
-      enterScrollTop + containerHeight / 4,
-      enterScrollTop + containerHeight,
+      fullOpacityScrollTop - containerHeight,
+      fullOpacityScrollTop - containerHeight / 4,
+      fullOpacityScrollTop,
+      fullOpacityScrollTop + containerHeight / 4,
+      fullOpacityScrollTop + containerHeight,
     ],
     // Into these values:
-    [60, 1, 1, 1, -60]
+    [60, 20, 1, -20, -60]
   );
 
   const textRotateX = useTransform(
     scrollSpring,
     // Map from these values:
     [
-      enterScrollTop - containerHeight,
-      enterScrollTop - containerHeight / 4,
-      enterScrollTop,
-      enterScrollTop + containerHeight / 4,
-      enterScrollTop + containerHeight,
+      fullOpacityScrollTop - containerHeight,
+      fullOpacityScrollTop - containerHeight / 4,
+      fullOpacityScrollTop,
+      fullOpacityScrollTop + containerHeight / 4,
+      fullOpacityScrollTop + containerHeight,
     ],
     // Into these values:
-    ["-90deg", "0deg", "0deg", "0deg", "90deg"]
+    ["-90deg", "-30deg", "0deg", "30deg", "90deg"]
   );
 
   return (
@@ -132,14 +166,15 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
       id={"project-" + index}
       ref={target}
       onViewportEnter={() => setBgIcon(data.bgIcon)}
-      className="w-full h-screen flex flex-col justify-center items-center p-4 md:p-8 mt-[25vh] overflow-hidden pointer-events-none"
+      className="w-full h-screen md:h-[150vh] flex flex-col justify-center items-center p-4 md:p-8 mb-[100vh] md:mb-[150vh]  overflow-hidden pointer-events-none"
     >
       <motion.div
         style={{
-          translateY: "50%",
-          rotate,
+          translateY,
+          opacity,
+          scale,
         }}
-        className="origin-bottom min-w-[100vw] min-h-screen fixed bottom-[55%] left-0 flex justify-center items-center -z-10"
+        className="origin-center min-w-[100vw] min-h-[100vh] fixed bottom-0 left-0 flex justify-center items-center -z-10"
       >
         <IPhone14
           width={containerWidth < 424 ? containerWidth * 0.5 : 300}
@@ -153,9 +188,10 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
         className="fixed bottom-0 left-[50%] translate-x-[-50%] mb-[6vh] w-full max-w-[200px]"
       >
         <motion.div
-          className="p-4 flex flex-col justify-center items-center rounded-2xl bg-zinc-800 w-full"
+          className="p-4 flex flex-col justify-center items-center rounded-2xl bg-zinc-800 w-full opacity-0"
           style={{
             opacity: textOpacity,
+
             translateY: textTranslateY,
             rotateX: textRotateX,
             transformStyle: "preserve-3d",

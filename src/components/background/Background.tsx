@@ -41,6 +41,11 @@ const Background: FC<Props> = ({ pathIndex }) => {
     Object.keys(ICONS).map(getIndex),
     Object.keys(ICONS).map((key) => ICONS[+key as BgIcon].colour)
   );
+  const fill = useTransform(
+    progress,
+    Object.keys(ICONS).map(getIndex),
+    Object.keys(ICONS).map((key) => ICONS[+key as BgIcon].colour + "40")
+  );
   const path = useFlubber(
     progress,
     Object.keys(ICONS).map((key) => ICONS[+key as BgIcon].path)
@@ -54,8 +59,8 @@ const Background: FC<Props> = ({ pathIndex }) => {
     return () => animation.stop();
   }, [pathIndex, progress]);
 
-  const [svgWidth, setSvgWidth] = useState(100);
-  const [svgHeight, setSvgHeight] = useState(100);
+  const [svgWidth, setSvgWidth] = useState(0);
+  const [svgHeight, setSvgHeight] = useState(0);
 
   useEffect(() => {
     const updateSize = () => {
@@ -67,9 +72,14 @@ const Background: FC<Props> = ({ pathIndex }) => {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
+  if (!svgWidth || !svgHeight) return null;
+
   return (
     <>
-      <div className="w-screen h-screen bg-zinc-900 fixed -z-10 top-0 left-0">
+      <div
+        className="w-screen h-screen bg-zinc-900 fixed -z-10 top-0 left-0"
+        role="presentation"
+      >
         <svg
           width={"100vw"}
           height={"100vh"}
@@ -85,20 +95,19 @@ const Background: FC<Props> = ({ pathIndex }) => {
               >
                 <motion.path
                   stroke={stroke}
-                  fill="none"
+                  fill={fill}
                   d={path}
                   strokeLinecap="round"
                   strokeWidth="1"
                 />
                 <motion.path
-                  stroke="#000"
-                  fill="none"
+                  stroke={stroke}
+                  fill={fill}
                   d={path}
                   strokeLinecap="round"
                   strokeWidth="1"
-                  transform="
-                  translate(40 40)
-                 "
+                  transform="translate(40 40)"
+                  style={{ opacity: 0.5 }}
                 />
               </pattern>
             </defs>

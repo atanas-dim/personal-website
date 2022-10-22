@@ -40,7 +40,7 @@ const IPhone14: FC<Props> = ({ width, imageSrc }) => {
             overflow: "hidden",
           }}
         >
-          <img src={imageSrc} alt="" />
+          <img src={imageSrc} alt="" width="100%" height="100%" />
         </div>
       </div>
     </div>

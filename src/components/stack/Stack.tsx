@@ -11,6 +11,7 @@ import React, {
 
 import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { BgIcon } from "../background/Background";
+import { Section } from "../../pages";
 
 type SkillDef = {
   label: string;
@@ -48,15 +49,14 @@ const ADDITIONAL_STACK: SkillDef[] = [
 type Props = {
   scrollY: MotionValue<number>;
   setBgIcon: Dispatch<SetStateAction<BgIcon>>;
+  setActiveSection: Dispatch<SetStateAction<Section>>;
 };
 
-const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
+const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
   const target = useRef<HTMLDivElement>(null);
 
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
-
-  const [show, setShow] = useState(false);
 
   useEffect(() => {
     // Need to set this on mount to fix blank sections
@@ -64,60 +64,22 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
     setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
   }, []);
 
-  useEffect(() => {
-    scrollY.onChange((v) => {
-      if (!target.current) return;
-
-      if (
-        v >=
-        target.current?.offsetTop -
-          target.current?.getBoundingClientRect()?.height
-      )
-        setShow(true);
-    });
-  }, [scrollY]);
-
   return (
     <motion.section
       id="stack"
       ref={target}
-      onViewportEnter={() => setBgIcon(BgIcon.Code)}
-      className="relative h-full md:mt-[80%] md:h-[200%] w-full snap-center mb-96"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      onViewportEnter={() => {
+        setBgIcon(BgIcon.Code);
+        setActiveSection(Section.Stack);
+      }}
+      className="relative w-screen h-screen md:h-[200vh] mb-[100vh]"
     >
-      {show && (
-        <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
-          <div className="flex flex-col justify-center items-center mb-4 w-full max-w-2xl">
-            <div className="w-full flex justify-center items-center flex-wrap mb-4">
-              {BASE_STACK.map((skill, index) => {
-                return (
-                  <Skill
-                    key={"skill-" + index}
-                    skill={skill}
-                    scrollY={scrollY}
-                    containerHeight={containerHeight}
-                    fullOpacityScrollTop={fullOpacityScrollTop}
-                    className="text-xl md:text-2xl"
-                  />
-                );
-              })}
-            </div>
-            <div className="w-full flex justify-center items-center flex-wrap ">
-              {MAIN_STACK.map((skill, index) => {
-                return (
-                  <Skill
-                    key={"skill-" + index}
-                    skill={skill}
-                    scrollY={scrollY}
-                    containerHeight={containerHeight}
-                    fullOpacityScrollTop={fullOpacityScrollTop}
-                    className="text-2xl md:text-4xl"
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="w-full flex justify-center items-center flex-wrap  max-w-xs md:max-w-xl">
-            {ADDITIONAL_STACK.map((skill, index) => {
+      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
+        <div className="flex flex-col justify-center items-center mb-4 w-full max-w-2xl">
+          <div className="w-full flex justify-center items-center flex-wrap mb-4">
+            {BASE_STACK.map((skill, index) => {
               return (
                 <Skill
                   key={"skill-" + index}
@@ -125,13 +87,41 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
                   scrollY={scrollY}
                   containerHeight={containerHeight}
                   fullOpacityScrollTop={fullOpacityScrollTop}
-                  className="text-base md:text-xl"
+                  className="text-xl md:text-2xl"
+                />
+              );
+            })}
+          </div>
+          <div className="w-full flex justify-center items-center flex-wrap ">
+            {MAIN_STACK.map((skill, index) => {
+              return (
+                <Skill
+                  key={"skill-" + index}
+                  skill={skill}
+                  scrollY={scrollY}
+                  containerHeight={containerHeight}
+                  fullOpacityScrollTop={fullOpacityScrollTop}
+                  className="text-2xl md:text-4xl"
                 />
               );
             })}
           </div>
         </div>
-      )}
+        <div className="w-full flex justify-center items-center flex-wrap  max-w-xs md:max-w-xl">
+          {ADDITIONAL_STACK.map((skill, index) => {
+            return (
+              <Skill
+                key={"skill-" + index}
+                skill={skill}
+                scrollY={scrollY}
+                containerHeight={containerHeight}
+                fullOpacityScrollTop={fullOpacityScrollTop}
+                className="text-base md:text-xl"
+              />
+            );
+          })}
+        </div>
+      </div>
     </motion.section>
   );
 };
@@ -160,13 +150,13 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   );
 
   const scrollSpring = useSpring(scrollY, {
-    damping: 240,
+    damping: 340,
     mass: 40,
     stiffness: 1000,
   });
 
   const opacity = useTransform(
-    scrollY,
+    scrollSpring,
     // Map from these values:
     [
       fullOpacityScrollTop - difference,

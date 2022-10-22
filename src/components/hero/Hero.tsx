@@ -1,11 +1,23 @@
-import React, { FC, useState, useEffect } from "react";
+import React, {
+  FC,
+  Dispatch,
+  SetStateAction,
+  useState,
+  useEffect,
+} from "react";
 import { motion, useAnimationControls } from "framer-motion";
 
 import { PERFORATED_BG } from "../../styles/constants";
 
 import photo from "../../assets/images/atanas.jpg";
 
-const Hero: FC = () => {
+import { Section } from "../../pages";
+
+type Props = {
+  setActiveSection: Dispatch<SetStateAction<Section>>;
+};
+
+const Hero: FC<Props> = ({ setActiveSection }) => {
   const [isInView, setIsInView] = useState(true);
   const controls = useAnimationControls();
 
@@ -43,7 +55,11 @@ const Hero: FC = () => {
   }, [isInView]);
 
   return (
-    <div className="w-full h-[calc(100%_-_64px)] relative flex justify-center items-center flex-col z-50 snap-start ">
+    <motion.div
+      id="hero"
+      onViewportEnter={() => setActiveSection(Section.Hero)}
+      className="w-full h-[calc(100%_-_64px)] relative flex justify-center items-center flex-col z-50"
+    >
       <div className="w-full absolute top-0 left-0 -z-20 h-full overflow-hidden hero-mask flex justify-center items-center">
         <motion.div
           initial={{ opacity: 0 }}
@@ -79,9 +95,11 @@ const Hero: FC = () => {
           }}
           src={photo}
           alt="Atanas' photo"
-          className="w-40 h-40 border-2 border-solid border-white rounded-full mb-4"
+          width={160}
+          height={160}
+          className="border-2 border-solid border-white rounded-full mb-4"
         />
-        <motion.h2
+        <motion.h1
           variants={{
             hidden: { opacity: 0 },
             show: { opacity: 1 },
@@ -89,8 +107,8 @@ const Hero: FC = () => {
           className="text-4xl md:text-6xl font-bold"
         >
           Hi, <span className="text-blue-400">I'm Atanas</span>
-        </motion.h2>
-        <motion.h3
+        </motion.h1>
+        <motion.h2
           variants={{
             hidden: { opacity: 0 },
             show: { opacity: 1 },
@@ -98,9 +116,9 @@ const Hero: FC = () => {
           className="text-3xl md:text-5xl font-bold"
         >
           <span className="text-cyan-400">React</span> Developer
-        </motion.h3>
+        </motion.h2>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

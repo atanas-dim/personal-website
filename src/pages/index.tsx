@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState, FC } from "react";
+import React, { useRef, useState, FC } from "react";
 import type { HeadFC } from "gatsby";
+
+import { Helmet } from "react-helmet";
 
 import Background, { BgIcon } from "../components/background/Background";
 import Header from "../components/header/Header";
@@ -10,14 +12,18 @@ import Experience from "../components/experience/Experience";
 
 import { useScroll } from "framer-motion";
 
-enum Section {
+export enum Section {
+  Hero,
   Projects,
   Stack,
   Experience,
   Contact,
 }
 
-const SECTIONS = {
+export const SECTIONS = {
+  [Section.Hero]: {
+    title: "Portfolio",
+  },
   [Section.Projects]: {
     title: "Projects",
   },
@@ -36,44 +42,25 @@ type Props = {
   //
 };
 const IndexPage: FC<Props> = ({}) => {
-  const scrollContainer = useRef(null);
-  const [activeSection, setActiveSection] = useState<Section>();
+  const scrollContainer = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState<Section>(Section.Hero);
   const [bgIcon, setBgIcon] = useState<BgIcon>(BgIcon.ArmFlex);
 
   const { scrollY } = useScroll({
     container: scrollContainer,
   });
 
-  useEffect(() => {
-    scrollY.onChange((v) => {
-      //TODO Refactor. Set value from onViewportEnter on motion els
-      if (v < 100) setActiveSection(undefined);
-      if (
-        (document.getElementById("projects")?.getBoundingClientRect().y ?? 0) <=
-          300 &&
-        activeSection !== Section.Projects
-      )
-        setActiveSection(Section.Projects);
-      if (
-        (document.getElementById("stack")?.getBoundingClientRect().y ?? 0) <=
-          300 &&
-        activeSection !== Section.Stack
-      )
-        setActiveSection(Section.Stack);
-      if (
-        (document.getElementById("experience")?.getBoundingClientRect().y ??
-          0) <= 300 &&
-        activeSection !== Section.Experience
-      )
-        setActiveSection(Section.Experience);
-    });
-  }, [scrollY]);
-
   return (
     <>
+      <Helmet defer={false} htmlAttributes={{ lang: "en" }}>
+        <meta
+          name="description"
+          content="Personal website with projects and skills showcase."
+        />
+      </Helmet>
+      <Background pathIndex={bgIcon} />
       <div id="scroll-container" ref={scrollContainer}>
-        <Background pathIndex={bgIcon} />
-        <Hero />
+        <Hero setActiveSection={setActiveSection} />
         <Header
           sectionName={
             activeSection !== undefined
@@ -81,11 +68,24 @@ const IndexPage: FC<Props> = ({}) => {
               : undefined
           }
         />
-        <main className="w-full h-full ">
-          <Projects scrollY={scrollY} setBgIcon={setBgIcon} />
-          <Stack scrollY={scrollY} setBgIcon={setBgIcon} />
-          <Experience scrollY={scrollY} setBgIcon={setBgIcon} />
+        <main className="w-full">
+          <Projects
+            scrollY={scrollY}
+            setBgIcon={setBgIcon}
+            setActiveSection={setActiveSection}
+          />
+          <Stack
+            scrollY={scrollY}
+            setBgIcon={setBgIcon}
+            setActiveSection={setActiveSection}
+          />
+          <Experience
+            scrollY={scrollY}
+            setBgIcon={setBgIcon}
+            setActiveSection={setActiveSection}
+          />
         </main>
+        <footer>2022</footer>
       </div>
     </>
   );
