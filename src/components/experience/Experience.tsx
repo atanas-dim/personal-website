@@ -27,12 +27,9 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
     const updateValuesFromContainerRect = () => {
       setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
 
-      setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
+      setFullOpacityScrollTop(target.current?.offsetTop ?? 0);
     };
     updateValuesFromContainerRect();
-    window.addEventListener("resize", updateValuesFromContainerRect);
-    return () =>
-      window.removeEventListener("resize", updateValuesFromContainerRect);
   }, []);
 
   const scrollSpring = useSpring(scrollY, {

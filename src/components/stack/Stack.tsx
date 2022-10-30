@@ -62,13 +62,9 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
     // Need to set this on mount to fix blank sections
     const updateValuesFromContainerRect = () => {
       setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
-
-      setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
+      setFullOpacityScrollTop(target.current?.offsetTop ?? 0);
     };
     updateValuesFromContainerRect();
-    window.addEventListener("resize", updateValuesFromContainerRect);
-    return () =>
-      window.removeEventListener("resize", updateValuesFromContainerRect);
   }, []);
 
   return (

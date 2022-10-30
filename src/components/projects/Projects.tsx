@@ -66,15 +66,17 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
 
   useLayoutEffect(() => {
     // Need to set this on mount to fix blank sections
+    const scroller = document.getElementById("scroll-container");
+
     const updateValuesFromContainerRect = () => {
       setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
       setContainerWidth(target.current?.getBoundingClientRect()?.width ?? 0);
-      setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
+      setFullOpacityScrollTop(
+        (scroller?.scrollTop ?? 0) +
+          (target.current?.getBoundingClientRect()?.top ?? 0)
+      );
     };
     updateValuesFromContainerRect();
-    window.addEventListener("resize", updateValuesFromContainerRect);
-    return () =>
-      window.removeEventListener("resize", updateValuesFromContainerRect);
   }, []);
 
   const scrollSpring = useSpring(scrollY, {
@@ -186,7 +188,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
           opacity,
           scale,
         }}
-        className="origin-center w-full h-full fixed bottom-0 left-0 flex justify-center items-center -z-10"
+        className="origin-center w-full h-full fixed bottom-0 left-0 flex justify-center items-center -z-10 opacity-0"
       >
         <IPhone14
           width={containerWidth < 424 ? containerWidth * 0.5 : 300}
