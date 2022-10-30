@@ -43,10 +43,7 @@ export const SECTIONS = {
   // },
 };
 
-type Props = {
-  //
-};
-const IndexPage: FC<Props> = ({}) => {
+const IndexPage: FC = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);
   const [activeSection, setActiveSection] = useState<Section>(Section.Hero);
   const [bgIcon, setBgIcon] = useState<BgIcon>(BgIcon.ArmFlex);

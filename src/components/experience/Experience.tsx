@@ -4,7 +4,7 @@ import React, {
   SetStateAction,
   useRef,
   useState,
-  useEffect,
+  useLayoutEffect,
 } from "react";
 import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { BgIcon } from "../background/Background";
@@ -22,10 +22,17 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Need to set this on mount to fix blank sections
-    setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
-    setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
+    const updateValuesFromContainerRect = () => {
+      setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
+
+      setFullOpacityScrollTop(target.current?.getBoundingClientRect()?.y ?? 0);
+    };
+    updateValuesFromContainerRect();
+    window.addEventListener("resize", updateValuesFromContainerRect);
+    return () =>
+      window.removeEventListener("resize", updateValuesFromContainerRect);
   }, []);
 
   const scrollSpring = useSpring(scrollY, {

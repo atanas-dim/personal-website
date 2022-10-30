@@ -1,10 +1,10 @@
 import React, {
   FC,
   useRef,
-  useEffect,
   useState,
   Dispatch,
   SetStateAction,
+  useLayoutEffect,
 } from "react";
 import { motion, useTransform, useSpring, MotionValue } from "framer-motion";
 
@@ -64,7 +64,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
   const [containerHeight, setContainerHeight] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Need to set this on mount to fix blank sections
     const updateValuesFromContainerRect = () => {
       setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);

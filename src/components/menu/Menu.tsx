@@ -12,13 +12,6 @@ type Props = {
 };
 
 const Menu: FC<Props> = ({ show, hide }) => {
-  const onMenuItemClick = (id: string) => {
-    const section = document.getElementById(id);
-    document
-      .getElementById("scroll-container")
-      ?.scroll({ top: section?.offsetTop });
-    hide();
-  };
   return (
     <AnimatePresence>
       {show && (
@@ -50,13 +43,14 @@ const Menu: FC<Props> = ({ show, hide }) => {
             {Object.keys(SECTIONS).map((key, index) => {
               const { title, target } = SECTIONS[+key as Section];
               return (
-                <button
+                <a
                   key={"menu-button-" + index}
                   className="rounded-md bg-zinc-900 p-4 w-full mb-4 flex justify-center items-center font-bold"
-                  onClick={() => onMenuItemClick(target)}
+                  onClick={hide}
+                  href={`/#${target}`}
                 >
                   {title}
-                </button>
+                </a>
               );
             })}
           </motion.div>
