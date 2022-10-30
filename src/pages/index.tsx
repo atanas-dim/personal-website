@@ -18,25 +18,29 @@ export enum Section {
   Projects,
   Stack,
   Experience,
-  Contact,
+  // Contact,
 }
 
 export const SECTIONS = {
   [Section.Hero]: {
-    title: "Portfolio",
+    title: "Start",
+    target: "start",
   },
   [Section.Projects]: {
     title: "Projects",
+    target: "projects",
   },
   [Section.Stack]: {
     title: "Stack",
+    target: "stack",
   },
   [Section.Experience]: {
     title: "Experience",
+    target: "experience",
   },
-  [Section.Contact]: {
-    title: "Contact",
-  },
+  // [Section.Contact]: {
+  //   title: "Contact",
+  // },
 };
 
 type Props = {

@@ -209,7 +209,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
             transformStyle: "preserve-3d",
           }}
         >
-          <h3 className="mb-2 whitespace-nowrap">{data.title}</h3>
+          <h3 className="mb-2 whitespace-nowrap font-bold">{data.title}</h3>
           <div className="pointer-events-auto">
             <a
               target="_blank"

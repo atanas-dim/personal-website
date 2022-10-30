@@ -28,22 +28,22 @@ const MAIN_STACK: SkillDef[] = [
   { label: "React", style: "text-cyan-400" },
   { label: "TypeScript", style: "text-sky-300" },
   { label: "NextJS", style: "text-blue-400" },
-  { label: "TailwindCSS", style: "text-purple-400" },
   { label: "MUI", style: "text-blue-400" },
+  { label: "TailwindCSS", style: "text-purple-400" },
   { label: "SASS", style: "text-fuchsia-400" },
   { label: "Firebase", style: "text-orange-400" },
-  { label: "Supabase", style: "text-emerald-500" },
+  { label: "Supabase", style: "text-emerald-400" },
 ];
 
 const ADDITIONAL_STACK: SkillDef[] = [
-  { label: "styled-components", style: "" },
-  { label: "GSAP", style: "" },
-  { label: "Framer Motion", style: "" },
-  { label: "Gatsby", style: "" },
-  { label: "PostgreSQL", style: "" },
-  { label: "i18next", style: "" },
-  { label: "NodeJS", style: "" },
-  { label: "ExpressJS", style: "" },
+  { label: "styled-components", style: "text-fuchsia-400" },
+  { label: "GSAP", style: "text-lime-400" },
+  { label: "Framer Motion", style: "text-purple-400" },
+  { label: "Gatsby", style: "text-violet-400" },
+  { label: "PostgreSQL", style: "text-sky-400" },
+  { label: "i18next", style: "text-teal-400" },
+  { label: "NodeJS", style: "text-emerald-400" },
+  { label: "ExpressJS", style: "text-blue-400" },
 ];
 
 type Props = {
@@ -77,8 +77,8 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
       className="relative w-screen h-screen md:h-[200vh] mb-[100vh]"
     >
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
-        <div className="flex flex-col justify-center items-center mb-4 w-full max-w-2xl">
-          <div className="w-full flex justify-center items-center flex-wrap mb-4">
+        <div className="flex flex-col justify-center items-center mb-2 w-full max-w-3xl">
+          <div className="w-full flex justify-center items-center flex-wrap mb-2">
             {BASE_STACK.map((skill, index) => {
               return (
                 <Skill
@@ -87,7 +87,7 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
                   scrollY={scrollY}
                   containerHeight={containerHeight}
                   fullOpacityScrollTop={fullOpacityScrollTop}
-                  className="text-xl md:text-2xl"
+                  className="text-2xl md:text-4xl"
                 />
               );
             })}
@@ -101,13 +101,13 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
                   scrollY={scrollY}
                   containerHeight={containerHeight}
                   fullOpacityScrollTop={fullOpacityScrollTop}
-                  className="text-2xl md:text-4xl"
+                  className="text-4xl md:text-5xl mx-3"
                 />
               );
             })}
           </div>
         </div>
-        <div className="w-full flex justify-center items-center flex-wrap  max-w-xs md:max-w-xl">
+        <div className="w-full flex justify-center items-center flex-wrap max-w-md md:max-w-xl">
           {ADDITIONAL_STACK.map((skill, index) => {
             return (
               <Skill
@@ -116,7 +116,7 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
                 scrollY={scrollY}
                 containerHeight={containerHeight}
                 fullOpacityScrollTop={fullOpacityScrollTop}
-                className="text-base md:text-xl"
+                className="text-2xl md:text-3xl"
               />
             );
           })}
@@ -189,7 +189,7 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
         opacity,
         translateY,
       }}
-      className={`skill mx-2 align-center font-bold ${skill.style} ${className}`}
+      className={`skill mx-2 align-center font-bold leading-tight md:leading-tight ${skill.style} ${className}`}
     >
       {skill.label}
     </motion.h3>

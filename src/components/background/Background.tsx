@@ -29,7 +29,7 @@ const ICONS: { [key in BgIcon]: { path: string; colour: string } } = {
   [BgIcon.Comment]: { path: COMMENT, colour: "#063d51" },
   [BgIcon.Stack]: {
     path: STACK,
-    colour: "#393510",
+    colour: "#432335",
   },
   [BgIcon.Laptop]: { path: LAPTOP, colour: "#224a56" },
 };
