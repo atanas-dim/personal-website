@@ -6,12 +6,7 @@ import React, {
   useEffect,
   HTMLAttributes,
 } from "react";
-import {
-  ForwardRefComponent,
-  motion,
-  SVGMotionProps,
-  useAnimationControls,
-} from "framer-motion";
+import { motion, SVGMotionProps, useAnimationControls } from "framer-motion";
 
 import { PERFORATED_BG } from "../../styles/constants";
 
@@ -84,8 +79,8 @@ const Hero: FC<Props> = ({ setActiveSection }) => {
           show: {
             opacity: 1,
             transition: {
-              staggerChildren: 0.25,
-              delayChildren: 0.5,
+              staggerChildren: 0.2,
+              delayChildren: 0.25,
               ease: "backOut",
             },
           },
@@ -133,8 +128,8 @@ const Hero: FC<Props> = ({ setActiveSection }) => {
                 rel="noreferrer"
                 className="mr-2 last-of-type:mr-0"
                 variants={{
-                  hidden: { opacity: 0 },
-                  show: { opacity: 1 },
+                  hidden: { opacity: 0, y: 20, scale: 0.8 },
+                  show: { opacity: 1, y: 0, scale: 1 },
                 }}
               >
                 {icon}
@@ -143,7 +138,7 @@ const Hero: FC<Props> = ({ setActiveSection }) => {
           })}
         </div>
 
-        <ArrowDown className="fill-zinc-400 absolute bottom-0 left-1/2 translate-x-[-50%]" />
+        <ArrowDown className="fill-zinc-500 absolute bottom-0 left-1/2 translate-x-[-50%]" />
       </motion.div>
     </motion.div>
   );

@@ -24,17 +24,17 @@ const Menu: FC<Props> = ({ show, hide }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
           />
           <motion.div
-            className="relative rounded-xl w-full max-w-md bg-zinc-800 p-8 flex justify-center items-center flex-col"
+            className="relative rounded-2xl w-full max-w-md bg-zinc-900 p-8 flex justify-center items-center flex-col shadow-2xl shadow-black"
             initial={{ opacity: 0, y: "110%" }}
             animate={{ opacity: 1, y: "0" }}
             exit={{ opacity: 0, y: "110%" }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
           >
             <button
-              className="absolute top-1 right-1 w-12 h-12 flex justify-center items-center"
+              className="iconButton absolute top-1 right-1"
               onClick={hide}
             >
               <CloseIcon />
@@ -45,7 +45,7 @@ const Menu: FC<Props> = ({ show, hide }) => {
               return (
                 <a
                   key={"menu-button-" + index}
-                  className="rounded-md bg-zinc-900 p-4 w-full mb-4 flex justify-center items-center font-bold"
+                  className="rounded-xl bg-zinc-800 p-4 w-full mb-4 flex justify-center items-center font-bold hover:bg-zinc-50 hover:bg-opacity-10 active:bg-opacity-20"
                   onClick={hide}
                   href={`/#${target}`}
                 >

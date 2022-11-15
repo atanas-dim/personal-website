@@ -47,7 +47,7 @@ const Header: FC<Props> = ({ sectionName }) => {
             onClick={() => {
               setShowMenu((prev) => !prev);
             }}
-            className="w-12 h-12 flex justify-center items-center"
+            className="iconButton"
           >
             <Hamburger />
           </button>
