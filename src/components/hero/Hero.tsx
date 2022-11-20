@@ -79,7 +79,7 @@ const Hero: FC<Props> = ({ setActiveSection }) => {
           show: {
             opacity: 1,
             transition: {
-              staggerChildren: 0.2,
+              staggerChildren: 0.25,
             },
           },
         }}
@@ -92,23 +92,23 @@ const Hero: FC<Props> = ({ setActiveSection }) => {
             hidden: { opacity: 0, scale: 0.7 },
             show: { opacity: 1, scale: 1 },
           }}
-          transition={{ ease: "backOut" }}
+          transition={{ duration: 0.6, ease: "backOut" }}
           src={photo}
           alt="Atanas' photo"
-          width={160}
-          height={160}
+          width={140}
+          height={140}
           className="border-2 border-solid border-white rounded-full mb-4"
         />
         {/* Speech bubble */}
         <motion.div
           variants={{
-            hidden: { opacity: 0, scale: 0, y: -80 },
-            show: { opacity: 1, scale: 1, y: 0 },
+            hidden: { opacity: 0, scale: 0 },
+            show: { opacity: 1, scale: 1 },
           }}
           transition={{ duration: 0.6, ease: "backOut" }}
           className={`
-          origin-top
-          relative flex flex-col bg-white p-8 mb-6 rounded-3xl
+          origin-[50%_-80px]
+          relative flex flex-col bg-white px-6 py-4 mb-10 rounded-3xl
           before:absolute before:w-12 before:h-12 before:z-10 before:-top-10 before:left-1/4 before:border-white before:border-t-0 before:border-r-0 before:border-b-[48px] before:border-l-[48px] before:border-l-transparent
           `}
         >
