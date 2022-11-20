@@ -80,8 +80,6 @@ const Hero: FC<Props> = ({ setActiveSection }) => {
             opacity: 1,
             transition: {
               staggerChildren: 0.2,
-              delayChildren: 0.25,
-              ease: "backOut",
             },
           },
         }}
@@ -94,30 +92,46 @@ const Hero: FC<Props> = ({ setActiveSection }) => {
             hidden: { opacity: 0, scale: 0.7 },
             show: { opacity: 1, scale: 1 },
           }}
+          transition={{ ease: "backOut" }}
           src={photo}
           alt="Atanas' photo"
           width={160}
           height={160}
           className="border-2 border-solid border-white rounded-full mb-4"
         />
-        <motion.h1
+        {/* Speech bubble */}
+        <motion.div
           variants={{
-            hidden: { opacity: 0 },
-            show: { opacity: 1 },
+            hidden: { opacity: 0, scale: 0, y: -80 },
+            show: { opacity: 1, scale: 1, y: 0 },
           }}
-          className="text-4xl md:text-6xl font-bold"
+          transition={{ duration: 0.6, ease: "backOut" }}
+          className={`
+          origin-top
+          relative flex flex-col bg-white p-8 mb-6 rounded-3xl
+          before:absolute before:w-12 before:h-12 before:z-10 before:-top-10 before:left-1/4 before:border-white before:border-t-0 before:border-r-0 before:border-b-[48px] before:border-l-[48px] before:border-l-transparent
+          `}
         >
-          Hi, <span className="text-blue-400">I'm Atanas</span>
-        </motion.h1>
-        <motion.h2
-          variants={{
-            hidden: { opacity: 0 },
-            show: { opacity: 1 },
-          }}
-          className="text-3xl md:text-5xl font-bold mb-4"
-        >
-          <span className="text-cyan-400">React</span> Developer
-        </motion.h2>
+          <motion.h1
+            variants={{
+              hidden: { opacity: 0 },
+              show: { opacity: 1 },
+            }}
+            className="text-3xl md:text-4xl font-bold text-zinc-900"
+          >
+            Hi, <span className="text-blue-500">I'm Atanas</span>
+          </motion.h1>
+          <motion.h2
+            variants={{
+              hidden: { opacity: 0 },
+              show: { opacity: 1 },
+            }}
+            className="text-2xl md:text-3xl font-bold text-zinc-900"
+          >
+            <span className="text-cyan-500">React</span> Developer
+          </motion.h2>
+        </motion.div>
+
         <div className="flex">
           {SOCIAL_LINKS.map(({ icon, href }, index) => {
             return (
@@ -126,19 +140,24 @@ const Hero: FC<Props> = ({ setActiveSection }) => {
                 href={href}
                 target="_blank"
                 rel="noreferrer"
-                className="mr-2 last-of-type:mr-0"
+                className="mr-2 last-of-type:mr-0 iconButton"
                 variants={{
                   hidden: { opacity: 0, y: 20, scale: 0.8 },
                   show: { opacity: 1, y: 0, scale: 1 },
                 }}
+                transition={{ duration: 0.6, ease: "backOut" }}
               >
                 {icon}
               </motion.a>
             );
           })}
         </div>
-
-        <ArrowDown className="fill-zinc-500 absolute bottom-0 left-1/2 translate-x-[-50%]" />
+        <a
+          className="absolute bottom-0 left-1/2 translate-x-[-50%] iconButton"
+          href="/#projects"
+        >
+          <ArrowDown className="fill-zinc-500 " />
+        </a>
       </motion.div>
     </motion.div>
   );
@@ -207,6 +226,7 @@ const MailIcon: FC<HTMLAttributes<SVGSVGElement>> = (props) => {
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="scale-90"
       {...props}
     >
       <path
@@ -225,6 +245,7 @@ const GitHubIcon: FC<HTMLAttributes<SVGSVGElement>> = (props) => {
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="scale-90"
       {...props}
     >
       <path
@@ -243,6 +264,7 @@ const InstagramIcon: FC<HTMLAttributes<SVGSVGElement>> = (props) => {
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="scale-90"
       {...props}
     >
       <path
@@ -261,6 +283,7 @@ const LinkedIcon: FC<HTMLAttributes<SVGSVGElement>> = (props) => {
       viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="scale-90"
       {...props}
     >
       <path
