@@ -54,12 +54,6 @@ const IndexPage: FC = () => {
 
   return (
     <>
-      <Helmet defer={false} htmlAttributes={{ lang: "en" }}>
-        <meta
-          name="description"
-          content="Personal website with projects and skills showcase."
-        />
-      </Helmet>
       <Background pathIndex={bgIcon} />
       <div id="scroll-container" ref={scrollContainer}>
         <Hero setActiveSection={setActiveSection} />
@@ -97,7 +91,47 @@ export default IndexPage;
 
 export const Head: HeadFC = () => (
   <>
-    <meta name="theme-color" content="#18181b" />
-    <title>Atanas Dimitrov - Portfolio</title>
+    <Helmet defer={false} htmlAttributes={{ lang: "en" }}>
+      <meta name="theme-color" content="#18181b" />
+      <title>Atanas Dimitrov - Portfolio</title>
+      <link
+        rel="apple-touch-icon"
+        sizes="120x120"
+        href="/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+      />
+      <link rel="manifest" href="/site.webmanifest" />
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+      <meta name="msapplication-TileColor" content="#da532c" />
+
+      <meta name="description" content="Web developer based in UK." />
+      <meta
+        name="keywords"
+        content="JavaScript, ReactJS, React, Developer, Web, UK, Brighton & Hove, Portfolio, Web Apps"
+      ></meta>
+
+      <meta property="og:title" content="Atanas Dimitrov - Portfolio" />
+      <meta property="og:type" content="Personal website" />
+      <meta property="og:url" content="http://atanas.codes/" />
+      <meta property="og:image" content="/social-card.jpg" />
+      <meta property="og:description" content="Web developer based in UK." />
+      <meta property="og:site_name" content="Atanas Dimitrov" />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Atanas Dimitrov - Portfolio" />
+      <meta name="twitter:description" content="Web developer based in UK." />
+      <meta name="twitter:image" content="/social-card.jpg" />
+    </Helmet>
   </>
 );
