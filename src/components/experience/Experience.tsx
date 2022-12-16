@@ -23,13 +23,16 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
   const [containerHeight, setContainerHeight] = useState(0);
 
   useLayoutEffect(() => {
-    // Need to set this on mount to fix blank sections
     const updateValuesFromContainerRect = () => {
       setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
-
       setFullOpacityScrollTop(target.current?.offsetTop ?? 0);
     };
+    // Need to set this on mount to fix stuck sections
     updateValuesFromContainerRect();
+    window.addEventListener("resize", updateValuesFromContainerRect);
+    return () => {
+      window.removeEventListener("resize", updateValuesFromContainerRect);
+    };
   }, []);
 
   const scrollSpring = useSpring(scrollY, {
