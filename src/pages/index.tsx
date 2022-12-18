@@ -56,7 +56,7 @@ const IndexPage: FC = () => {
     <>
       <Background pathIndex={bgIcon} />
       <div id="scroll-container" ref={scrollContainer}>
-        <Hero setActiveSection={setActiveSection} />
+        <Hero setBgIcon={setBgIcon} setActiveSection={setActiveSection} />
         <Header
           sectionName={
             activeSection !== undefined
@@ -81,7 +81,7 @@ const IndexPage: FC = () => {
             setActiveSection={setActiveSection}
           />
         </main>
-        <Footer />
+        <Footer show={activeSection === Section.Experience} />
       </div>
     </>
   );

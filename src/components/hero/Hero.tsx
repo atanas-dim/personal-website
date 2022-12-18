@@ -14,11 +14,14 @@ import photo from "../../assets/images/atanas.jpg";
 
 import { Section } from "../../pages";
 
+import { BgIcon } from "../background/Background";
+
 type Props = {
   setActiveSection: Dispatch<SetStateAction<Section>>;
+  setBgIcon: Dispatch<SetStateAction<BgIcon>>;
 };
 
-const Hero: FC<Props> = ({ setActiveSection }) => {
+const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
   const [isInView, setIsInView] = useState(true);
   const controls = useAnimationControls();
 
@@ -58,7 +61,10 @@ const Hero: FC<Props> = ({ setActiveSection }) => {
   return (
     <motion.div
       id="start"
-      onViewportEnter={() => setActiveSection(Section.Hero)}
+      onViewportEnter={() => {
+        setActiveSection(Section.Hero);
+        setBgIcon(BgIcon.ArmFlex);
+      }}
       className="relative w-full h-[calc(100%_-_64px)] min-h-[490px] flex justify-center items-center flex-col z-50"
     >
       <div className="w-full absolute top-0 left-0 -z-20 h-full overflow-hidden hero-mask flex justify-center items-center">
