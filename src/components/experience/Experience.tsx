@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { BgIcon } from "../background/Background";
-import { Section } from "../../pages";
+import { Section, SECTION_LABEL, SECTION_LABEL_WRAPPER } from "../../pages";
 
 type Props = {
   scrollY: MotionValue<number>;
@@ -79,8 +79,11 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
         setBgIcon(BgIcon.Laptop);
         setActiveSection(Section.Experience);
       }}
-      className="h-screen w-full pointer-events-none flex justify-center items-center"
+      className="h-[180vh]  w-full pointer-events-none flex justify-center items-center"
     >
+      <div className={SECTION_LABEL_WRAPPER}>
+        <span className={SECTION_LABEL}>Experience</span>
+      </div>
       <div className="fixed top-0 left-1/2 translate-x-[-50%] h-full w-fit pt-16 flex justify-center items-center flex-col">
         <motion.span
           className="mb-3 text-sm md:text-md whitespace-nowrap"

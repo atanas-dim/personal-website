@@ -11,7 +11,7 @@ import React, {
 
 import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { BgIcon } from "../background/Background";
-import { Section } from "../../pages";
+import { Section, SECTION_LABEL, SECTION_LABEL_WRAPPER } from "../../pages";
 
 type SkillDef = {
   label: string;
@@ -83,6 +83,9 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
       }}
       className="relative w-screen h-screen md:h-[200vh] mb-[100vh]"
     >
+      <div className={SECTION_LABEL_WRAPPER}>
+        <span className={SECTION_LABEL}>Stack</span>
+      </div>
       <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
         <div className="flex flex-col justify-center items-center mb-2 w-full max-w-3xl">
           <div className="w-full flex justify-center items-center flex-wrap mb-2">

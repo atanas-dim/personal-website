@@ -8,10 +8,10 @@ import { PERFORATED_BG } from "../../styles/constants";
 import { Section, SECTIONS } from "../../pages";
 
 type Props = {
-  sectionName?: string;
+  activeSection?: Section;
 };
 
-const Header: FC<Props> = ({ sectionName }) => {
+const Header: FC<Props> = ({ activeSection }) => {
   const [showMenu, setShowMenu] = useState(false);
   return (
     <>
@@ -20,29 +20,23 @@ const Header: FC<Props> = ({ sectionName }) => {
       >
         <motion.div
           initial="hidden"
-          animate={
-            sectionName !== SECTIONS[Section.Hero].title ? "visible" : undefined
-          }
+          animate={activeSection !== Section.Hero ? "visible" : undefined}
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           className="w-full  max-w-5xl mx-auto flex justify-between items-center"
         >
-          <div className="relative h-full">
-            <AnimatePresence>
-              <motion.h2
-                key={sectionName}
-                initial={{ opacity: 0, y: "-100%" }}
-                animate={{ opacity: 1, y: "-50%" }}
-                exit={{ opacity: 0, y: "50%" }}
-                transition={{
-                  ease: "backInOut",
-                  duration: 0.6,
-                }}
-                className="absolute top-[50%] left-0 font-bold"
-              >
-                {sectionName ?? "Portfolio"}
-              </motion.h2>
-            </AnimatePresence>
-          </div>
+          <motion.h2
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: "0%" }}
+            exit={{ opacity: 0, y: "100%" }}
+            transition={{
+              ease: "backInOut",
+              duration: 0.6,
+            }}
+            className="font-bold"
+          >
+            Atanas Dimitrov
+          </motion.h2>
+
           <button
             onClick={() => {
               setShowMenu((prev) => !prev);

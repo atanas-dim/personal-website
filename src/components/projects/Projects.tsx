@@ -5,6 +5,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useLayoutEffect,
+  useEffect,
 } from "react";
 import { motion, useTransform, useSpring, MotionValue } from "framer-motion";
 
@@ -13,7 +14,9 @@ import IPhone14 from "../devices/IPhone14";
 import { ProjectData, PROJECTS } from "../../resources/projects";
 
 import { BgIcon } from "../background/Background";
-import { Section } from "../../pages";
+import { Section, SECTION_LABEL_WRAPPER } from "../../pages";
+
+import { SECTION_LABEL } from "../../pages";
 
 type Props = {
   scrollY: MotionValue<number>;
@@ -32,6 +35,10 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
         onViewportEnter={() => setActiveSection(Section.Projects)}
         className="relative w-full mt-[20vh] mb-[30vh] md:mb-[60vh] pt-12"
       >
+        <div className={SECTION_LABEL_WRAPPER}>
+          <span className={SECTION_LABEL}>Projects</span>
+        </div>
+
         {PROJECTS.map((project, index) => {
           return (
             <Project
@@ -131,6 +138,27 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     ["32px", "16px", "0px", "-16px", "-32px"]
   );
 
+  useEffect(() => {
+    if (index !== 0) return;
+    console.log(
+      index,
+      scrollY,
+      data,
+      setBgIcon,
+      fullOpacityScrollTop,
+      containerHeight,
+      target
+    );
+  }, [
+    index,
+    scrollY,
+    data,
+    setBgIcon,
+    fullOpacityScrollTop,
+    containerHeight,
+    target,
+  ]);
+
   return (
     <motion.div
       id={"project-" + index}
@@ -140,7 +168,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
       }}
       className={`w-full h-screen min-h-[600px] flex flex-col ${
         isEven ? "md:flex-row-reverse" : "md:flex-row"
-      } justify-center items-center p-8 md:p-16 pointer-events-none`}
+      } justify-center items-center p-4 md:p-16 pointer-events-none`}
     >
       <motion.div
         style={{
