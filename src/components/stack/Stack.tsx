@@ -11,7 +11,13 @@ import React, {
 
 import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { BgIcon } from "../background/Background";
-import { Section, SECTION_LABEL, SECTION_LABEL_WRAPPER } from "../../pages";
+import {
+  SECTION,
+  Section,
+  SECTION_CONTENT,
+  SECTION_LABEL,
+  SECTION_LABEL_WRAPPER,
+} from "../../pages";
 
 type SkillDef = {
   label: string;
@@ -81,14 +87,20 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
         setBgIcon(BgIcon.Stack);
         setActiveSection(Section.Stack);
       }}
-      className="relative w-screen h-screen md:h-[200vh] mb-[100vh]"
+      className={SECTION + " relative mb-[30vh] flex "}
     >
-      <div className={SECTION_LABEL_WRAPPER}>
+      <div className={SECTION_LABEL_WRAPPER + " self-start"}>
         <span className={SECTION_LABEL}>Stack</span>
       </div>
-      <div className="fixed top-0 left-0 w-full h-full flex flex-col justify-center items-center pt-16 px-4 md:px-8 pb-4 md:pb-8 pointer-events-none">
-        <div className="flex flex-col justify-center items-center mb-2 w-full max-w-3xl">
-          <div className="w-full flex justify-center items-center flex-wrap mb-2">
+
+      <div
+        className={
+          SECTION_CONTENT +
+          " grow flex flex-col justify-center items-center self-center px-8 md:px-0"
+        }
+      >
+        <div className="flex flex-col justify-center items-center mb-2 w-full ">
+          <div className="w-full flex items-center flex-wrap mb-2">
             {BASE_STACK.map((skill, index) => {
               return (
                 <Skill
@@ -102,7 +114,7 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
               );
             })}
           </div>
-          <div className="w-full flex justify-center items-center flex-wrap">
+          <div className="w-full flex items-center flex-wrap">
             {MAIN_STACK.map((skill, index) => {
               return (
                 <Skill
@@ -117,7 +129,7 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
             })}
           </div>
         </div>
-        <div className="w-full flex justify-center items-center flex-wrap max-w-md md:max-w-xl">
+        <div className="w-full flex items-center flex-wrap">
           {ADDITIONAL_STACK.map((skill, index) => {
             return (
               <Skill
@@ -160,19 +172,19 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   );
 
   const scrollSpring = useSpring(scrollY, {
-    damping: 340,
-    mass: 40,
-    stiffness: 1000,
+    damping: 20,
+    mass: 10,
+    stiffness: 20,
   });
 
   const opacity = useTransform(
-    scrollSpring,
+    scrollY,
     // Map from these values:
     [
       fullOpacityScrollTop - difference,
-      fullOpacityScrollTop - difference / 1.5,
+      fullOpacityScrollTop - difference / 3,
       fullOpacityScrollTop,
-      fullOpacityScrollTop + difference / 1.5,
+      fullOpacityScrollTop + difference / 3,
       fullOpacityScrollTop + difference,
     ],
     // Into these values:

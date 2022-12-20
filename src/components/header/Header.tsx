@@ -13,6 +13,9 @@ type Props = {
 
 const Header: FC<Props> = ({ activeSection }) => {
   const [showMenu, setShowMenu] = useState(false);
+
+  console.log(activeSection);
+
   return (
     <>
       <header
@@ -20,7 +23,7 @@ const Header: FC<Props> = ({ activeSection }) => {
       >
         <motion.div
           initial="hidden"
-          animate={activeSection !== Section.Hero ? "visible" : undefined}
+          animate={activeSection === Section.Hero ? undefined : "visible"}
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           className="w-full  max-w-5xl mx-auto flex justify-between items-center"
         >

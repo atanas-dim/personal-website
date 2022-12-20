@@ -14,7 +14,12 @@ import IPhone14 from "../devices/IPhone14";
 import { ProjectData, PROJECTS } from "../../resources/projects";
 
 import { BgIcon } from "../background/Background";
-import { Section, SECTION_LABEL_WRAPPER } from "../../pages";
+import {
+  SECTION,
+  Section,
+  SECTION_CONTENT,
+  SECTION_LABEL_WRAPPER,
+} from "../../pages";
 
 import { SECTION_LABEL } from "../../pages";
 
@@ -33,23 +38,28 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
         id="projects"
         ref={target}
         onViewportEnter={() => setActiveSection(Section.Projects)}
-        className="relative w-full mt-[20vh] mb-[30vh] md:mb-[60vh] pt-12"
+        className={
+          SECTION +
+          " mt-16 relative w-full mb-[30vh] border border-solid border-light-blue-500"
+        }
       >
         <div className={SECTION_LABEL_WRAPPER}>
           <span className={SECTION_LABEL}>Projects</span>
         </div>
 
-        {PROJECTS.map((project, index) => {
-          return (
-            <Project
-              key={"container-" + index}
-              index={index}
-              scrollY={scrollY}
-              data={project}
-              setBgIcon={setBgIcon}
-            />
-          );
-        })}
+        <div className={SECTION_CONTENT}>
+          {PROJECTS.map((project, index) => {
+            return (
+              <Project
+                key={"container-" + index}
+                index={index}
+                scrollY={scrollY}
+                data={project}
+                setBgIcon={setBgIcon}
+              />
+            );
+          })}
+        </div>
       </motion.section>
     </>
   );
@@ -92,7 +102,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
 
   const scrollSpring = useSpring(scrollY, {
     damping: 1000,
-    mass: 80,
+    mass: 10,
     stiffness: 1000,
   });
 
@@ -124,7 +134,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     [0, 0.8, 1, 0.8, 0]
   );
 
-  const translateY = useTransform(
+  const textTranslateY = useTransform(
     scrollSpring,
     // Map from these values:
     [
@@ -136,6 +146,20 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     ],
     // Into these values:
     ["32px", "16px", "0px", "-16px", "-32px"]
+  );
+
+  const translateY = useTransform(
+    scrollSpring,
+    // Map from these values:
+    [
+      // fullOpacityScrollTop - containerHeight,
+      fullOpacityScrollTop - containerHeight / 2,
+      fullOpacityScrollTop,
+      fullOpacityScrollTop + containerHeight / 2,
+      // fullOpacityScrollTop + containerHeight,
+    ],
+    // Into these values:
+    ["64px", "0px", "-64px"]
   );
 
   useEffect(() => {
@@ -163,12 +187,9 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     <motion.div
       id={"project-" + index}
       ref={target}
-      onViewportEnter={() => {
-        setBgIcon(data.bgIcon);
-      }}
       className={`w-full h-screen min-h-[600px] flex flex-col ${
         isEven ? "md:flex-row-reverse" : "md:flex-row"
-      } justify-center items-center p-4 md:p-16 pointer-events-none`}
+      } justify-center items-center pointer-events-none`}
     >
       <motion.div
         style={{
@@ -176,7 +197,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
           opacity,
           scale,
         }}
-        className={`max-w-sm mb-8 md:mb-0 md:mr-16 ${
+        className={`max-w-sm mb-16 md:mb-0 md:mr-16 ${
           isEven ? "md:mr-0" : "md:mr-16"
         } origin-center flex justify-center items-center opacity-0`}
       >
@@ -184,15 +205,21 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
       </motion.div>
       <motion.div
         style={{
-          translateY,
+          translateY: textTranslateY,
           opacity,
-          scale,
         }}
-        className={`origin-top w-full md:w-1/2 max-w-sm md:self-stretch flex flex-col justify-center ${
+        className={`origin-top w-full md:w-1/2 px-8 md:px-0 md:self-stretch flex flex-col justify-center ${
           isEven ? "md:mr-16" : "md:mr-0"
         }`}
       >
-        <h3 className="text-2xl md:text-4xl font-bold mb-2">{data.title}</h3>
+        <motion.h3
+          onViewportEnter={() => {
+            setBgIcon(data.bgIcon);
+          }}
+          className="text-2xl md:text-4xl font-bold mb-2"
+        >
+          {data.title}
+        </motion.h3>
         <span
           className={`text-${data.accentColour} text-md md:text-xl font-bold block mb-4 leading-tight`}
         >

@@ -1,24 +1,13 @@
-import React, { type FC, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { type FC } from "react";
 
-type Props = {
-  show: boolean;
-};
-
-const Footer: FC<Props> = ({ show }) => {
-  const ref = useRef(null);
-
+const Footer: FC = () => {
   return (
-    <footer ref={ref}>
-      <motion.div
-        animate={{ translateY: show ? 0 : 110 }}
-        transition={{ duration: 0.2 }}
-        className="fixed z-10 bottom-0 left-0 -z-10 w-full px-4 md:px-8 py-4 flex justify-center items-center bg-zinc-900 border-t border-zinc-800 border-solid"
-      >
+    <footer className="w-full px-4 md:px-8 bg-zinc-900 border-t border-zinc-800 border-solid">
+      <div className="max-w-5xl  mx-auto py-4 flex items-center ">
         <span className="text-sm text-zinc-400 text-center">
           Designed and developed 2022 © Atanas Dimitrov
         </span>
-      </motion.div>
+      </div>
     </footer>
   );
 };

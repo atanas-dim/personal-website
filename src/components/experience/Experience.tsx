@@ -8,7 +8,13 @@ import React, {
 } from "react";
 import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { BgIcon } from "../background/Background";
-import { Section, SECTION_LABEL, SECTION_LABEL_WRAPPER } from "../../pages";
+import {
+  SECTION,
+  Section,
+  SECTION_CONTENT,
+  SECTION_LABEL,
+  SECTION_LABEL_WRAPPER,
+} from "../../pages";
 
 type Props = {
   scrollY: MotionValue<number>;
@@ -79,14 +85,21 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
         setBgIcon(BgIcon.Laptop);
         setActiveSection(Section.Experience);
       }}
-      className="h-[180vh]  w-full pointer-events-none flex justify-center items-center"
+      className={
+        SECTION +
+        " w-full pointer-events-none flex justify-center items-center h-[calc(100vh_-_138px)] min-h-fit"
+      }
     >
       <div className={SECTION_LABEL_WRAPPER}>
         <span className={SECTION_LABEL}>Experience</span>
       </div>
-      <div className="fixed top-0 left-1/2 translate-x-[-50%] h-full w-fit pt-16 flex justify-center items-center flex-col">
+      <div
+        className={
+          SECTION_CONTENT + " grow flex justify-center flex-col px-8 md:px-0"
+        }
+      >
         <motion.span
-          className="mb-3 text-sm md:text-md whitespace-nowrap"
+          className="mb-3 text-md md:text-lg whitespace-nowrap"
           style={{
             opacity,
             translateY,
@@ -95,7 +108,7 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
           2021 - Present
         </motion.span>
         <motion.span
-          className="mb-3 text-2xl md:text-4xl font-bold text-pink-400 whitespace-nowrap"
+          className="mb-3 text-3xl md:text-4xl font-bold text-pink-400 whitespace-nowrap"
           style={{
             opacity,
             translateY,

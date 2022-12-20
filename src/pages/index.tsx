@@ -13,9 +13,14 @@ import Footer from "../components/footer/Footer";
 
 import { useScroll } from "framer-motion";
 
+export const SECTION =
+  "w-full min-h-screen h-full mx-auto max-w-5xl border border-none border-purple-400 flex flex-col md:flex-row";
 export const SECTION_LABEL_WRAPPER =
-  "w-full mx-auto sticky top-20 xl:top-1/2 px-4 md:px-8 ";
-export const SECTION_LABEL = "block mx-auto max-w-5xl md:text-2xl font-bold ";
+  "w-full md:max-w-[20%] mr-4 sticky top-20 md:top-1/2 border border-none border-red-400 self-start z-10";
+export const SECTION_LABEL =
+  "block mx-auto max-w-5xl text-lg md:text-2xl font-bold xl:-mt-8";
+export const SECTION_CONTENT =
+  "w-full h-full mx-auto border border-none border-green-400";
 
 export enum Section {
   Hero,
@@ -62,7 +67,7 @@ const IndexPage: FC = () => {
       <div id="scroll-container" ref={scrollContainer}>
         <Hero setBgIcon={setBgIcon} setActiveSection={setActiveSection} />
         <Header activeSection={activeSection} />
-        <main className="w-full">
+        <main className="w-full px-4 md:px-8">
           <Projects
             scrollY={scrollY}
             setBgIcon={setBgIcon}
@@ -81,7 +86,7 @@ const IndexPage: FC = () => {
             setActiveSection={setActiveSection}
           />
         </main>
-        <Footer show={activeSection === Section.Experience} />
+        <Footer />
       </div>
     </>
   );
