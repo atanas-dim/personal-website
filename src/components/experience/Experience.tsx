@@ -42,9 +42,10 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
   }, []);
 
   const scrollSpring = useSpring(scrollY, {
-    damping: 340,
-    mass: 40,
-    stiffness: 1000,
+    damping: 15,
+    mass: 2,
+    stiffness: 100,
+    bounce: 0.0015,
   });
 
   const opacity = useTransform(
@@ -87,7 +88,7 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
       }}
       className={
         SECTION +
-        " w-full pointer-events-none flex justify-center items-center h-[calc(100vh_-_138px)] min-h-fit"
+        " w-full pointer-events-none flex justify-center items-center h-[calc(100vh_-_138px)] min-h-fit mb-4"
       }
     >
       <div className={SECTION_LABEL_WRAPPER}>
@@ -124,6 +125,33 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
           }}
         >
           @ Loopspeed
+        </motion.span>
+        <motion.span
+          className="mt-16 mb-3 text-md md:text-lg whitespace-nowrap"
+          style={{
+            opacity,
+            translateY,
+          }}
+        >
+          2021 - 2022
+        </motion.span>
+        <motion.span
+          className="mb-3 text-3xl md:text-4xl font-bold text-yellow-400 whitespace-nowrap"
+          style={{
+            opacity,
+            translateY,
+          }}
+        >
+          Software Developer
+        </motion.span>
+        <motion.span
+          className="mb-3 text-xl md:text-2xl font-bold whitespace-nowrap"
+          style={{
+            opacity,
+            translateY,
+          }}
+        >
+          @ Wingcard.io
         </motion.span>
       </div>
     </motion.section>

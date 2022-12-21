@@ -7,6 +7,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useLayoutEffect,
+  useEffect,
 } from "react";
 
 import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
@@ -31,7 +32,7 @@ const BASE_STACK: SkillDef[] = [
 ];
 
 const MAIN_STACK: SkillDef[] = [
-  { label: "React", style: "text-cyan-400" },
+  { label: "React", style: "text-cyan-400 " },
   { label: "TypeScript", style: "text-sky-300" },
   { label: "NextJS", style: "text-blue-400" },
   { label: "MUI", style: "text-blue-400" },
@@ -51,6 +52,23 @@ const ADDITIONAL_STACK: SkillDef[] = [
   { label: "NodeJS", style: "text-emerald-400" },
   { label: "ExpressJS", style: "text-blue-400" },
 ];
+
+const createSkillsWithTextSizes = () => {
+  const skills: SkillDef[] = [];
+  BASE_STACK.forEach((skill) => {
+    skill.style = skill.style + " text-2xl md:text-4xl";
+    skills.push(skill);
+  });
+  MAIN_STACK.forEach((skill) => {
+    skill.style = skill.style + " text-4xl md:text-5xl mx-3";
+    skills.push(skill);
+  });
+  ADDITIONAL_STACK.forEach((skill) => {
+    skill.style = skill.style + " text-2xl md:text-4xl";
+    skills.push(skill);
+  });
+  return skills;
+};
 
 type Props = {
   scrollY: MotionValue<number>;
@@ -77,6 +95,12 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
     };
   }, []);
 
+  const [skills, setSkills] = useState<SkillDef[]>([]);
+
+  useEffect(() => {
+    setSkills(createSkillsWithTextSizes());
+  }, []);
+
   return (
     <motion.section
       id="stack"
@@ -99,9 +123,9 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
           " grow flex flex-col justify-center items-center self-center px-8 md:px-0"
         }
       >
-        <div className="flex flex-col justify-center items-center mb-2 w-full ">
-          <div className="w-full flex items-center flex-wrap mb-2">
-            {BASE_STACK.map((skill, index) => {
+        <div className="flex flex-col justify-center items-center  w-full ">
+          <div className="w-full flex items-center flex-wrap ">
+            {skills.map((skill, index) => {
               return (
                 <Skill
                   key={"skill-" + index}
@@ -114,34 +138,6 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
               );
             })}
           </div>
-          <div className="w-full flex items-center flex-wrap">
-            {MAIN_STACK.map((skill, index) => {
-              return (
-                <Skill
-                  key={"skill-" + index}
-                  skill={skill}
-                  scrollY={scrollY}
-                  containerHeight={containerHeight}
-                  fullOpacityScrollTop={fullOpacityScrollTop}
-                  className="text-4xl md:text-5xl mx-3"
-                />
-              );
-            })}
-          </div>
-        </div>
-        <div className="w-full flex items-center flex-wrap">
-          {ADDITIONAL_STACK.map((skill, index) => {
-            return (
-              <Skill
-                key={"skill-" + index}
-                skill={skill}
-                scrollY={scrollY}
-                containerHeight={containerHeight}
-                fullOpacityScrollTop={fullOpacityScrollTop}
-                className="text-2xl md:text-3xl"
-              />
-            );
-          })}
         </div>
       </div>
     </motion.section>
@@ -165,16 +161,17 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   className,
 }) => {
   const minDiff = containerHeight * 0.2;
-  const maxDiff = containerHeight * 0.6;
+  const maxDiff = containerHeight * 0.8;
   const difference = useMemo(
     () => Math.floor(Math.random() * (maxDiff - minDiff + 1) + minDiff),
     [maxDiff, minDiff]
   );
 
   const scrollSpring = useSpring(scrollY, {
-    damping: 20,
-    mass: 10,
-    stiffness: 20,
+    damping: 10,
+    mass: 2,
+    stiffness: 100,
+    bounce: 0.005,
   });
 
   const opacity = useTransform(
@@ -202,7 +199,7 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
       fullOpacityScrollTop + difference,
     ],
     // Into these values:
-    ["16px", "10px", "0px", "-10px", "-16px"]
+    ["32px", "24px", "0px", "-24px", "-32px"]
   );
 
   return (

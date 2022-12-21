@@ -100,12 +100,6 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     };
   }, []);
 
-  const scrollSpring = useSpring(scrollY, {
-    damping: 1000,
-    mass: 10,
-    stiffness: 1000,
-  });
-
   const scale = useTransform(
     scrollY,
     // Map from these values:
@@ -134,6 +128,27 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     [0, 0.8, 1, 0.8, 0]
   );
 
+  const scrollSpring = useSpring(scrollY, {
+    damping: 15,
+    mass: 2,
+    stiffness: 100,
+    bounce: 0.0015,
+  });
+
+  const imageTranslateY = useTransform(
+    scrollSpring,
+    // Map from these values:
+    [
+      // fullOpacityScrollTop - containerHeight,
+      fullOpacityScrollTop - containerHeight / 2,
+      fullOpacityScrollTop,
+      fullOpacityScrollTop + containerHeight / 2,
+      // fullOpacityScrollTop + containerHeight,
+    ],
+    // Into these values:
+    ["64px", "0px", "-64px"]
+  );
+
   const textTranslateY = useTransform(
     scrollSpring,
     // Map from these values:
@@ -148,41 +163,6 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     ["32px", "16px", "0px", "-16px", "-32px"]
   );
 
-  const translateY = useTransform(
-    scrollSpring,
-    // Map from these values:
-    [
-      // fullOpacityScrollTop - containerHeight,
-      fullOpacityScrollTop - containerHeight / 2,
-      fullOpacityScrollTop,
-      fullOpacityScrollTop + containerHeight / 2,
-      // fullOpacityScrollTop + containerHeight,
-    ],
-    // Into these values:
-    ["64px", "0px", "-64px"]
-  );
-
-  useEffect(() => {
-    if (index !== 0) return;
-    console.log(
-      index,
-      scrollY,
-      data,
-      setBgIcon,
-      fullOpacityScrollTop,
-      containerHeight,
-      target
-    );
-  }, [
-    index,
-    scrollY,
-    data,
-    setBgIcon,
-    fullOpacityScrollTop,
-    containerHeight,
-    target,
-  ]);
-
   return (
     <motion.div
       id={"project-" + index}
@@ -193,7 +173,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     >
       <motion.div
         style={{
-          translateY,
+          translateY: imageTranslateY,
           opacity,
           scale,
         }}
