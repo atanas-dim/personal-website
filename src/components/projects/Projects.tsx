@@ -37,7 +37,10 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
         id="projects"
         ref={target}
         onViewportEnter={() => setActiveSection(Section.Projects)}
-        className={SECTION + " mt-16 relative w-full mb-[30vh] scroll-mt-8"}
+        className={
+          SECTION +
+          " mt-16 relative w-full mb-[30vh] scroll-mt-16 md:scroll-mt-0"
+        }
       >
         <div className={SECTION_LABEL_WRAPPER}>
           <span className={SECTION_LABEL}>Projects</span>

@@ -42,9 +42,9 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
   }, []);
 
   const scrollSpring = useSpring(scrollY, {
-    damping: 5,
+    damping: 10,
     mass: 2,
-    // stiffness: 10,
+    stiffness: 40,
     bounce: 0.0025,
   });
 
@@ -88,7 +88,7 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
       }}
       className={
         SECTION +
-        " w-full pointer-events-none flex justify-center items-center h-[calc(100vh_-_138px)] min-h-fit mb-4"
+        " w-full h-[calc(100vh_-_190px)] pointer-events-none flex justify-center items-center min-h-fit mb-4"
       }
     >
       <div className={SECTION_LABEL_WRAPPER}>

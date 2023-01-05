@@ -102,15 +102,9 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
   }, []);
 
   return (
-    <motion.section
+    <section
       id="stack"
       ref={target}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      onViewportEnter={() => {
-        setBgIcon(BgIcon.Stack);
-        setActiveSection(Section.Stack);
-      }}
       className={SECTION + " relative mb-[30vh] flex "}
     >
       <div className={SECTION_LABEL_WRAPPER + " self-start"}>
@@ -124,7 +118,13 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
         }
       >
         <div className="flex flex-col justify-center items-center  w-full ">
-          <div className="w-full flex items-center flex-wrap ">
+          <motion.div
+            className="w-full flex items-center flex-wrap "
+            onViewportEnter={() => {
+              setBgIcon(BgIcon.Stack);
+              setActiveSection(Section.Stack);
+            }}
+          >
             {skills.map((skill, index) => {
               return (
                 <Skill
@@ -137,10 +137,10 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
                 />
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
