@@ -61,10 +61,6 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
   return (
     <motion.div
       id="start"
-      onViewportEnter={() => {
-        setActiveSection(Section.Hero);
-        setBgIcon(BgIcon.ArmFlex);
-      }}
       className="relative w-full h-[calc(100%_-_64px)] min-h-[490px] flex justify-center items-center flex-col z-50"
     >
       <div className="w-full absolute top-0 left-0 -z-20 h-full overflow-hidden hero-mask flex justify-center items-center">
@@ -104,6 +100,10 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
           width={140}
           height={140}
           className="border-2 border-solid border-white rounded-full mb-4"
+          onViewportEnter={() => {
+            setActiveSection(Section.Hero);
+            setBgIcon(BgIcon.ArmFlex);
+          }}
         />
         {/* Speech bubble */}
         <motion.div

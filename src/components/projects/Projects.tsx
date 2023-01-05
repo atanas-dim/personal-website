@@ -36,7 +36,6 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
       <motion.section
         id="projects"
         ref={target}
-        onViewportEnter={() => setActiveSection(Section.Projects)}
         className={
           SECTION +
           " mt-16 relative w-full mb-[30vh] scroll-mt-16 md:scroll-mt-0"
@@ -55,6 +54,7 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
                 scrollY={scrollY}
                 data={project}
                 setBgIcon={setBgIcon}
+                setActiveSection={setActiveSection}
               />
             );
           })}
@@ -71,9 +71,16 @@ type ProjectProps = {
   scrollY: MotionValue<number>;
   data: ProjectData;
   setBgIcon: Dispatch<SetStateAction<BgIcon>>;
+  setActiveSection: Dispatch<SetStateAction<Section>>;
 };
 
-const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
+const Project: FC<ProjectProps> = ({
+  index,
+  scrollY,
+  data,
+  setBgIcon,
+  setActiveSection,
+}) => {
   const target = useRef<HTMLDivElement>(null);
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -201,6 +208,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
         <motion.h3
           onViewportEnter={() => {
             setBgIcon(data.bgIcon);
+            index === 0 && setActiveSection(Section.Projects);
           }}
           className="text-2xl md:text-4xl font-bold mb-2"
         >

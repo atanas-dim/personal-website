@@ -1,11 +1,11 @@
 import React, { FC, useState } from "react";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 import Menu from "../menu/Menu";
 
 import { PERFORATED_BG } from "../../styles/constants";
-import { Section, SECTIONS } from "../../pages";
+import { Section } from "../../pages";
 
 type Props = {
   activeSection?: Section;
@@ -13,8 +13,6 @@ type Props = {
 
 const Header: FC<Props> = ({ activeSection }) => {
   const [showMenu, setShowMenu] = useState(false);
-
-  console.log(activeSection);
 
   return (
     <>
@@ -45,17 +43,19 @@ const Header: FC<Props> = ({ activeSection }) => {
             Atanas Dimitrov
           </motion.button>
 
-          <button
+          <motion.button
+            initial="hidden"
+            animate={activeSection === Section.Hero ? undefined : "visible"}
+            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
             onClick={() => {
               setShowMenu((prev) => !prev);
             }}
             className="iconButton"
           >
             <Hamburger />
-          </button>
+          </motion.button>
         </motion.div>
       </header>
-
       <Menu show={showMenu} hide={() => setShowMenu(false)} />
     </>
   );
