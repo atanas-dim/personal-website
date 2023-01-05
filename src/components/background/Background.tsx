@@ -1,6 +1,13 @@
 import React, { FC, useState, useEffect } from "react";
 
-import { motion, animate, useMotionValue, useTransform } from "framer-motion";
+import {
+  motion,
+  animate,
+  useMotionValue,
+  useTransform,
+  MotionValue,
+  useSpring,
+} from "framer-motion";
 
 import { useFlubber, getIndex } from "../../hooks/useFlubber";
 
@@ -36,8 +43,9 @@ const ICONS: { [key in BgIcon]: { path: string; colour: string } } = {
 
 type Props = {
   pathIndex: BgIcon;
+  scrollY: MotionValue;
 };
-const Background: FC<Props> = ({ pathIndex }) => {
+const Background: FC<Props> = ({ pathIndex, scrollY }) => {
   const progress = useMotionValue(pathIndex);
   const stroke = useTransform(
     progress,
@@ -75,17 +83,39 @@ const Background: FC<Props> = ({ pathIndex }) => {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
+  const scrollSpring = useSpring(scrollY, {
+    damping: 20,
+    mass: 2,
+    stiffness: 100,
+    bounce: 0.0015,
+  });
+
+  const pageHeight =
+    typeof window !== "undefined"
+      ? document?.getElementsByTagName("main")?.[0]?.getBoundingClientRect()
+          ?.height
+      : 0;
+
+  const translateY = useTransform(
+    scrollSpring,
+    // Map from these values:
+    [0, pageHeight / 2, pageHeight],
+    // Into these values:
+    ["48px", "0px", "-48px"]
+  );
+
   if (!svgWidth || !svgHeight) return null;
 
   return (
     <>
-      <div
-        className="w-screen h-screen bg-zinc-900 fixed -z-10 top-0 left-0"
+      <motion.div
+        className="w-screen h-[120vh] bg-zinc-900 fixed -z-10 -top-0 left-0 -mt-[5vh]"
         role="presentation"
+        style={{ translateY }}
       >
         <svg
           width={"100vw"}
-          height={"100vh"}
+          height={"120vh"}
           viewBox={`0 0 ${svgWidth} ${svgHeight}`}
         >
           <g>
@@ -115,10 +145,10 @@ const Background: FC<Props> = ({ pathIndex }) => {
               </pattern>
             </defs>
 
-            <rect width="100%" height="100%" fill="url(#transform-pattern)" />
+            <rect width="100%" height="100vh" fill="url(#transform-pattern)" />
           </g>
         </svg>
-      </div>
+      </motion.div>
     </>
   );
 };

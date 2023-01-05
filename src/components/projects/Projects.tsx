@@ -19,9 +19,8 @@ import {
   Section,
   SECTION_CONTENT,
   SECTION_LABEL_WRAPPER,
+  SECTION_LABEL,
 } from "../../pages";
-
-import { SECTION_LABEL } from "../../pages";
 
 type Props = {
   scrollY: MotionValue<number>;
@@ -38,10 +37,7 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
         id="projects"
         ref={target}
         onViewportEnter={() => setActiveSection(Section.Projects)}
-        className={
-          SECTION +
-          " mt-16 relative w-full mb-[30vh] border border-solid border-light-blue-500"
-        }
+        className={SECTION + " mt-16 relative w-full mb-[30vh] scroll-mt-8"}
       >
         <div className={SECTION_LABEL_WRAPPER}>
           <span className={SECTION_LABEL}>Projects</span>
@@ -135,8 +131,15 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     bounce: 0.0015,
   });
 
+  const imageScrollSpring = useSpring(scrollY, {
+    damping: 15,
+    mass: 2,
+    stiffness: 70,
+    bounce: 0.0015,
+  });
+
   const imageTranslateY = useTransform(
-    scrollSpring,
+    imageScrollSpring,
     // Map from these values:
     [
       // fullOpacityScrollTop - containerHeight,

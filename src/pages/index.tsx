@@ -14,13 +14,12 @@ import Footer from "../components/footer/Footer";
 import { useScroll } from "framer-motion";
 
 export const SECTION =
-  "w-full min-h-screen h-full mx-auto max-w-5xl border border-none border-purple-400 flex flex-col md:flex-row";
+  "w-full min-h-screen h-full mx-auto max-w-5xl flex flex-col md:flex-row";
 export const SECTION_LABEL_WRAPPER =
-  "w-full md:max-w-[20%] mr-4 sticky top-20 md:top-1/2 border border-none border-red-400 self-start z-10";
+  "w-full md:max-w-[20%] mr-4 sticky top-20 md:top-1/2 self-start z-10 xl:-mt-8";
 export const SECTION_LABEL =
-  "block mx-auto max-w-5xl text-lg md:text-2xl font-bold xl:-mt-8";
-export const SECTION_CONTENT =
-  "w-full h-full mx-auto border border-none border-green-400";
+  "block px-3 py-1 w-fit text-lg md:text-2xl font-bold rounded-xl bg-zinc-800";
+export const SECTION_CONTENT = "w-full h-full mx-auto";
 
 export enum Section {
   Hero,
@@ -63,7 +62,7 @@ const IndexPage: FC = () => {
 
   return (
     <>
-      <Background pathIndex={bgIcon} />
+      <Background pathIndex={bgIcon} scrollY={scrollY} />
       <div id="scroll-container" ref={scrollContainer}>
         <Hero setBgIcon={setBgIcon} setActiveSection={setActiveSection} />
         <Header activeSection={activeSection} />

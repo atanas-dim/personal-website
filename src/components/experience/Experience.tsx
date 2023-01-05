@@ -42,21 +42,21 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
   }, []);
 
   const scrollSpring = useSpring(scrollY, {
-    damping: 15,
+    damping: 5,
     mass: 2,
-    stiffness: 100,
-    bounce: 0.0015,
+    // stiffness: 10,
+    bounce: 0.0025,
   });
 
   const opacity = useTransform(
     scrollSpring,
     // Map from these values:
     [
-      fullOpacityScrollTop - containerHeight,
-      fullOpacityScrollTop - containerHeight / 2,
+      fullOpacityScrollTop - containerHeight * 1.5,
+      fullOpacityScrollTop - containerHeight / 4,
       fullOpacityScrollTop,
-      fullOpacityScrollTop + containerHeight / 2,
-      fullOpacityScrollTop + containerHeight,
+      fullOpacityScrollTop + containerHeight / 4,
+      fullOpacityScrollTop + containerHeight * 1.5,
     ],
     // Into these values:
     [0, 1, 1, 1, 0]
@@ -73,7 +73,7 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
       fullOpacityScrollTop + containerHeight,
     ],
     // Into these values:
-    ["16px", "10px", "0px", "-10px", "-16px"]
+    ["32px", "10px", "0px", "-10px", "-32px"]
   );
 
   return (

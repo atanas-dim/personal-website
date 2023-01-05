@@ -27,7 +27,7 @@ const Header: FC<Props> = ({ activeSection }) => {
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           className="w-full  max-w-5xl mx-auto flex justify-between items-center"
         >
-          <motion.h2
+          <motion.button
             initial={{ opacity: 0, y: "-100%" }}
             animate={{ opacity: 1, y: "0%" }}
             exit={{ opacity: 0, y: "100%" }}
@@ -36,9 +36,14 @@ const Header: FC<Props> = ({ activeSection }) => {
               duration: 0.6,
             }}
             className="font-bold"
+            onClick={() => {
+              document
+                .getElementById("scroll-container")
+                ?.scrollTo({ top: 0, behavior: "smooth" });
+            }}
           >
             Atanas Dimitrov
-          </motion.h2>
+          </motion.button>
 
           <button
             onClick={() => {
