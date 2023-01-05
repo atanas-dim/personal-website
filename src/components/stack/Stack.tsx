@@ -40,6 +40,7 @@ const MAIN_STACK: SkillDef[] = [
   { label: "SASS", style: "text-fuchsia-400" },
   { label: "Firebase", style: "text-orange-400" },
   { label: "Supabase", style: "text-emerald-400" },
+  { label: "React Native", style: "text-cyan-400" },
 ];
 
 const ADDITIONAL_STACK: SkillDef[] = [

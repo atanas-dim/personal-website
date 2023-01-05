@@ -43,9 +43,6 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
 
   const scrollSpring = useSpring(scrollY, {
     damping: 10,
-    mass: 2,
-    stiffness: 40,
-    bounce: 0.0025,
   });
 
   const opacity = useTransform(
@@ -73,7 +70,7 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
       fullOpacityScrollTop + containerHeight,
     ],
     // Into these values:
-    ["32px", "10px", "0px", "-10px", "-32px"]
+    ["32px", "24px", "0px", "-24px", "-32px"]
   );
 
   return (
