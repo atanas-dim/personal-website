@@ -44,28 +44,29 @@ const MAIN_STACK: SkillDef[] = [
 ];
 
 const ADDITIONAL_STACK: SkillDef[] = [
-  { label: "styled-components", style: "text-fuchsia-400" },
   { label: "GSAP", style: "text-lime-400" },
   { label: "Framer Motion", style: "text-purple-400" },
+  { label: "Git", style: "text-orange-500" },
+  { label: "styled-components", style: "text-fuchsia-400" },
   { label: "Gatsby", style: "text-violet-400" },
   { label: "PostgreSQL", style: "text-sky-400" },
   { label: "i18next", style: "text-teal-400" },
   { label: "NodeJS", style: "text-emerald-400" },
-  { label: "ExpressJS", style: "text-blue-400" },
+  // { label: "ExpressJS", style: "text-blue-400" },
 ];
 
 const createSkillsWithTextSizes = () => {
   const skills: SkillDef[] = [];
   BASE_STACK.forEach((skill) => {
-    skill.style = skill.style + " text-2xl md:text-4xl";
+    skill.style = "text-2xl md:text-4xl " + skill.style;
     skills.push(skill);
   });
   MAIN_STACK.forEach((skill) => {
-    skill.style = skill.style + " text-4xl md:text-5xl mx-3";
+    skill.style = "text-4xl md:text-5xl mx-3 " + skill.style;
     skills.push(skill);
   });
   ADDITIONAL_STACK.forEach((skill) => {
-    skill.style = skill.style + " text-2xl md:text-4xl";
+    skill.style = "text-2xl md:text-3xl " + skill.style;
     skills.push(skill);
   });
   return skills;
@@ -134,7 +135,6 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
                   scrollY={scrollY}
                   containerHeight={containerHeight}
                   fullOpacityScrollTop={fullOpacityScrollTop}
-                  className="text-2xl md:text-4xl"
                 />
               );
             })}
@@ -201,14 +201,14 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
   );
 
   return (
-    <motion.h3
+    <motion.span
       style={{
         opacity,
         translateY,
       }}
-      className={`skill mx-2 align-center font-bold leading-tight md:leading-tight ${skill.style} ${className}`}
+      className={`skill block mx-2 align-center font-bold leading-tight md:leading-tight ${className} ${skill.style}`}
     >
       {skill.label}
-    </motion.h3>
+    </motion.span>
   );
 };

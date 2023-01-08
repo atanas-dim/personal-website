@@ -15,6 +15,8 @@ const ARM_FLEX =
   "M11 7C8 11.09 7 22.34 7 22.34C9.9 24.31 13.08 25 15.87 25C18.86 25 21.39 24.21 22.64 23.36C25.64 21.32 25.94 16.71 22.64 15.18C22 14.89 21.26 14.75 20.47 14.75C18.17 14.75 15.5 15.96 14 18.25H13V11.09H15L16 8L11 7Z";
 const SHOPPING_BAG =
   "M23 10H21C21 7.2 18.8 5 16 5C13.2 5 11 7.2 11 10H9C7.9 10 7 10.9 7 12V24C7 25.1 7.9 26 9 26H23C24.1 26 25 25.1 25 24V12C25 10.9 24.1 10 23 10Z";
+const CALENDAR =
+  "M21 8V6H18V8H14V6H11V8H9C7.89 8 7 8.89 7 10V24C7 24.5304 7.21071 25.0391 7.58579 25.4142C7.96086 25.7893 8.46957 26 9 26H23C23.5304 26 24.0391 25.7893 24.4142 25.4142C24.7893 25.0391 25 24.5304 25 24V10C25 8.89 24.1 8 23 8H22";
 const COMMENT =
   "M16 7C10.5 7 6 10.58 6 15C6.05 17.15 7.06 19.17 8.75 20.5C8.75 21.1 8.33 22.67 6 25C8.37 24.89 10.64 24 12.47 22.5C13.61 22.83 14.81 23 16 23C21.5 23 26 19.42 26 15C26 10.58 21.5 7 16 7Z";
 const STACK =
@@ -24,16 +26,18 @@ const LAPTOP =
 
 export enum BgIcon {
   ArmFlex,
-  ShoppingBag,
+  // ShoppingBag,
   Comment,
+  Calendar,
   Stack,
   Laptop,
 }
 
 const ICONS: { [key in BgIcon]: { path: string; colour: string } } = {
   [BgIcon.ArmFlex]: { path: ARM_FLEX, colour: "#093d58" },
-  [BgIcon.ShoppingBag]: { path: SHOPPING_BAG, colour: "#004240" },
+  // [BgIcon.ShoppingBag]: { path: SHOPPING_BAG, colour: "#004240" },
   [BgIcon.Comment]: { path: COMMENT, colour: "#063d51" },
+  [BgIcon.Calendar]: { path: CALENDAR, colour: "#3d2a59" },
   [BgIcon.Stack]: {
     path: STACK,
     colour: "#432335",
