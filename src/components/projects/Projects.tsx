@@ -202,7 +202,7 @@ const Project: FC<ProjectProps> = ({
           <img
             src={data.image.src}
             alt=""
-            className="w-full h-fit rounded-2xl max-w-[90%] md:max-w-none"
+            className="w-full h-auto rounded-2xl max-w-[90%] md:max-w-none"
           />
         )}
       </motion.div>
