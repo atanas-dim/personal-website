@@ -22,7 +22,7 @@ export const PROJECTS: ProjectData[] = [
     title: "Workout Builder Demo",
     technologies: "PWA, NextJS, TypeScript, MUI, Firebase",
     description:
-      "This is a demo project for a workout builder app. It is a full-stack app with a NextJS frontend and a Firebase backend.",
+      "Mobile first web app. Using React Context API and hooks to create a tool to organise exercises, workouts and routines. Features drag to reorder lists, online status provider, simple web hook to notify about updates on repo.",
     links: [
       {
         label: "Code",
@@ -55,7 +55,7 @@ export const PROJECTS: ProjectData[] = [
     title: "Reddit Client",
     technologies: "React, Redux, Reddit JSON API",
     description:
-      "This is a demo project for a Reddit client. It is a client-side app that uses the Reddit JSON API.",
+      "Front-end web application using the unofficial JSON Reddit API to recreate a simplified read-only version of the platform, featuring popular subreddits, filters, posts and comments.",
     links: [
       {
         label: "Code",
@@ -76,7 +76,8 @@ export const PROJECTS: ProjectData[] = [
   {
     title: "React Calendar",
     technologies: "React, TypeScript, date-fns, GSAP, SCSS",
-    description: "A sandbox app using CSS grid to create a responsive calendar",
+    description:
+      "A sandbox app using date-fns and CSS grid to create a responsive calendar.",
     links: [
       {
         label: "CodeSandbox",
