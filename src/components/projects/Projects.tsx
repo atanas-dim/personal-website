@@ -237,10 +237,10 @@ const Project: FC<ProjectProps> = ({
                 href={link.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="mr-2 px-3 py-2 hover:bg-zinc-700 active:bg-zinc-600 w-fit font-bold rounded-xl bg-zinc-800 flex items-center justify-center"
+                className="mr-2 px-3 py-2 w-fit font-bold rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center"
               >
                 <span>{link.label} </span>
-                <ExternalLinkIcon className="inline-block scale-75" />
+                <ExternalLinkIcon className="inline-block scale-75 fill-zinc-900 dark:fill-white" />
               </a>
             );
           })}
@@ -260,10 +260,7 @@ const ExternalLinkIcon: FC<HTMLAttributes<SVGSVGElement>> = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path
-        d="M14.4615 3.15381V5.15381H18.0515L8.22155 14.9838L9.63155 16.3938L19.4615 6.56381V10.1538H21.4615V3.15381M19.4615 19.1538H5.46155V5.15381H12.4615V3.15381H5.46155C4.35155 3.15381 3.46155 4.05381 3.46155 5.15381V19.1538C3.46155 19.6842 3.67226 20.1929 4.04733 20.568C4.42241 20.9431 4.93111 21.1538 5.46155 21.1538H19.4615C19.992 21.1538 20.5007 20.9431 20.8758 20.568C21.2508 20.1929 21.4615 19.6842 21.4615 19.1538V12.1538H19.4615V19.1538Z"
-        fill="white"
-      />
+      <path d="M14.4615 3.15381V5.15381H18.0515L8.22155 14.9838L9.63155 16.3938L19.4615 6.56381V10.1538H21.4615V3.15381M19.4615 19.1538H5.46155V5.15381H12.4615V3.15381H5.46155C4.35155 3.15381 3.46155 4.05381 3.46155 5.15381V19.1538C3.46155 19.6842 3.67226 20.1929 4.04733 20.568C4.42241 20.9431 4.93111 21.1538 5.46155 21.1538H19.4615C19.992 21.1538 20.5007 20.9431 20.8758 20.568C21.2508 20.1929 21.4615 19.6842 21.4615 19.1538V12.1538H19.4615V19.1538Z" />
     </svg>
   );
 };

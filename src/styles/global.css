@@ -168,8 +168,7 @@ body,
 }
 
 body {
-  background-color: theme("colors.background");
-  color: white;
+  @apply text-zinc-900 dark:text-white bg-zinc-200 dark:bg-background;
 }
 
 #scroll-container {
@@ -186,12 +185,12 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background-color: theme("colors.zinc.800");
+  @apply bg-white dark:bg-zinc-800;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: theme("colors.zinc.600");
+  @apply bg-zinc-300 dark:bg-zinc-600;
   border-radius: 8px;
 }
 
@@ -224,9 +223,9 @@ body {
 
 button,
 a {
-  @apply transition-[background-color] ease-in-out duration-300;
+  @apply transition-[all] ease-in-out duration-300 hover:bg-zinc-50 active:bg-zinc-100 dark:hover:bg-zinc-700 dark:active:bg-zinc-600;
 }
 
 .iconButton {
-  @apply w-12 h-12 flex justify-center items-center rounded-xl hover:bg-zinc-50 hover:bg-opacity-5 active:bg-opacity-10;
+  @apply w-12 h-12 flex justify-center items-center rounded-xl hover:bg-zinc-400 hover:bg-opacity-20 active:bg-opacity-20 active:brightness-50 dark:hover:bg-zinc-400 dark:hover:bg-opacity-5 dark:active:bg-opacity-5 dark:active:brightness-150;
 }

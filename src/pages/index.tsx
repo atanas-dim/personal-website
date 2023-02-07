@@ -18,7 +18,7 @@ export const SECTION =
 export const SECTION_LABEL_WRAPPER =
   "w-full md:max-w-[20%] mr-4 sticky top-20 md:top-1/2 self-start z-10 xl:-mt-8";
 export const SECTION_LABEL =
-  "block px-3 py-1 w-fit text-lg md:text-2xl font-bold rounded-xl bg-zinc-800";
+  "block px-3 py-1 w-fit text-lg md:text-2xl font-bold rounded-xl bg-white dark:bg-zinc-800";
 export const SECTION_CONTENT = "w-full h-full mx-auto";
 
 export enum Section {

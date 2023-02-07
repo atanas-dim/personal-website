@@ -113,7 +113,7 @@ const Background: FC<Props> = ({ pathIndex, scrollY }) => {
   return (
     <>
       <motion.div
-        className="w-screen h-screen bg-zinc-900 fixed -z-10 -top-0 left-0"
+        className="w-screen h-screen bg-zinc-200 dark:bg-zinc-900 fixed -z-10 -top-0 left-0"
         role="presentation"
         style={{ translateY, scale: 1.15 }}
       >
