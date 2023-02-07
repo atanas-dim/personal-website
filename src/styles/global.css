@@ -223,7 +223,7 @@ body {
 
 button,
 a {
-  @apply transition-[all] ease-in-out duration-300 hover:bg-zinc-50 active:bg-zinc-100 dark:hover:bg-zinc-700 dark:active:bg-zinc-600;
+  @apply hover:transition-all hover:duration-500 ease-in-out hover:bg-zinc-50 active:bg-zinc-100 dark:hover:bg-zinc-700 dark:active:bg-zinc-600;
 }
 
 .iconButton {
