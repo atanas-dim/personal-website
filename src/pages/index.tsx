@@ -54,20 +54,16 @@ const IndexPage: FC = () => {
     Section.Hero
   );
   const [bgIcon, setBgIcon] = useState<BgIcon>(BgIcon.ArmFlex);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
 
   const { scrollY } = useScroll({
     container: scrollContainer,
   });
 
   useEffect(() => {
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      setIsDarkMode(true);
-    }
-
     const updateMode = (event: MediaQueryListEvent) => {
       const isDark = !!event.matches;
       setIsDarkMode(isDark);
