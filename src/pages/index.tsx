@@ -97,12 +97,12 @@ const IndexPage: FC = () => {
         isDarkMode={isDarkMode}
       />
       <div id="scroll-container" ref={scrollContainer}>
-        <Hero setBgIcon={setBgIcon} setActiveSection={setActiveSection} />
-        <Header activeSection={activeSection} setIsDarkMode={setIsDarkMode} />
+        <Hero {...{ setBgIcon, setActiveSection }} />
+        <Header {...{ activeSection, isDarkMode, setIsDarkMode }} />
         <main className="w-full px-4 md:px-8">
-          <Projects scrollY={scrollY} setBgIcon={setBgIcon} />
-          <Stack scrollY={scrollY} setBgIcon={setBgIcon} />
-          <Experience scrollY={scrollY} setBgIcon={setBgIcon} />
+          <Projects {...{ scrollY, setBgIcon }} />
+          <Stack {...{ scrollY, setBgIcon }} />
+          <Experience {...{ scrollY, setBgIcon }} />
         </main>
         <Footer />
       </div>

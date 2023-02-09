@@ -12,13 +12,16 @@ import Menu from "../menu/Menu";
 
 import { PERFORATED_BG } from "../../styles/constants";
 import { Section } from "../../pages";
+import DeskLampOn from "../icons/DeskLampOn";
+import DeskLamp from "../icons/DeskLamp";
 
 type Props = {
   activeSection?: Section;
+  isDarkMode: boolean;
   setIsDarkMode: Dispatch<SetStateAction<boolean>>;
 };
 
-const Header: FC<Props> = ({ activeSection, setIsDarkMode }) => {
+const Header: FC<Props> = ({ activeSection, isDarkMode, setIsDarkMode }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -56,7 +59,7 @@ const Header: FC<Props> = ({ activeSection, setIsDarkMode }) => {
               onClick={() => setIsDarkMode((prev) => !prev)}
               className="iconButton"
             >
-              ☀️
+              {isDarkMode ? <DeskLamp /> : <DeskLampOn />}
             </button>
 
             <button
