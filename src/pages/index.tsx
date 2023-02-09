@@ -13,13 +13,13 @@ import Footer from "../components/footer/Footer";
 
 import { useScroll } from "framer-motion";
 
-//TODO create class names in global.css and remove consts from here
+//TODO Create class names in global.css and remove consts from here
 export const SECTION =
   "w-full min-h-screen h-full mx-auto max-w-5xl flex flex-col md:flex-row";
 export const SECTION_LABEL_WRAPPER =
   "w-full md:max-w-[20%] mr-4 sticky top-20 md:top-1/2 self-start z-10 xl:-mt-8";
 export const SECTION_LABEL =
-  "block px-3 py-1 w-fit text-lg md:text-2xl font-bold rounded-xl bg-zinc-200 dark:bg-zinc-800";
+  "block px-3 py-1 w-fit text-lg md:text-2xl font-bold rounded-xl bg-white border border-solid border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800";
 export const SECTION_CONTENT = "w-full h-full mx-auto";
 
 export enum Section {
@@ -54,17 +54,19 @@ const IndexPage: FC = () => {
     Section.Hero
   );
   const [bgIcon, setBgIcon] = useState<BgIcon>(BgIcon.ArmFlex);
-  const [isDarkMode, setIsDarkMode] = useState(
-    typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const { scrollY } = useScroll({
     container: scrollContainer,
   });
 
   useEffect(() => {
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)")?.matches;
+
+    setIsDarkMode(prefersDark);
+
     const updateMode = (event: MediaQueryListEvent) => {
       const isDark = !!event.matches;
       setIsDarkMode(isDark);
@@ -80,10 +82,12 @@ const IndexPage: FC = () => {
         .removeEventListener("change", updateMode);
   }, []);
 
+  // Update theme colour (status bar colour)
   useEffect(() => {
     const meta = document.getElementsByName(
       "theme-color"
     )[0] as HTMLMetaElement;
+
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
       if (meta) meta.content = "#18181b";

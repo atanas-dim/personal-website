@@ -98,34 +98,6 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     };
   }, []);
 
-  const scale = useTransform(
-    scrollY,
-    // Map from these values:
-    [
-      fullOpacityScrollTop - containerHeight / 1.5,
-      fullOpacityScrollTop - containerHeight / 2,
-      fullOpacityScrollTop,
-      fullOpacityScrollTop + containerHeight / 3,
-      fullOpacityScrollTop + containerHeight / 2,
-    ],
-    // Into these values:
-    [0.7, 1, 1, 1, 0.7]
-  );
-
-  const opacity = useTransform(
-    scrollY,
-    // Map from these values:
-    [
-      fullOpacityScrollTop - containerHeight / 1.5,
-      fullOpacityScrollTop - containerHeight / 2,
-      fullOpacityScrollTop,
-      fullOpacityScrollTop + containerHeight / 3,
-      fullOpacityScrollTop + containerHeight / 2,
-    ],
-    // Into these values:
-    [0, 0.8, 1, 0.8, 0]
-  );
-
   const scrollSpring = useSpring(scrollY, {
     damping: 15,
     mass: 2,
@@ -172,19 +144,17 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     <motion.div
       id={"project-" + index}
       ref={target}
-      className={`w-full h-screen min-h-[600px] flex flex-col ${
+      className={`w-full h-[110vh] md:h-screen min-h-[600px] flex flex-col ${
         isEven ? "md:flex-row-reverse" : "md:flex-row"
       } justify-center items-center`}
     >
       <motion.div
         style={{
           translateY: imageTranslateY,
-          opacity,
-          scale,
         }}
         className={`max-w-sm mb-16 md:mb-0 md:mr-16 ${
           isEven ? "md:mr-0" : "md:mr-16"
-        } origin-center flex justify-center items-center opacity-0`}
+        } origin-center flex justify-center items-center`}
       >
         {/* TODO Add alt */}
         {data.image.isMobile ? (
@@ -200,7 +170,6 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
       <motion.div
         style={{
           translateY: textTranslateY,
-          opacity,
         }}
         className={`origin-top w-full md:w-1/2 px-8 md:px-0 md:self-stretch flex flex-col justify-center ${
           isEven ? "md:mr-16" : "md:mr-0"
@@ -228,7 +197,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
                 href={link.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="mr-2 px-3 py-2 w-fit font-bold rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center"
+                className={`mr-2 px-3 py-2 w-fit font-bold rounded-xl ${data.buttonStyle} flex items-center justify-center`}
               >
                 <span>{link.label} </span>
                 <ExternalLinkIcon className="inline-block scale-75 fill-zinc-900 dark:fill-white" />
