@@ -55,7 +55,8 @@ const IndexPage: FC = () => {
   );
   const [bgIcon, setBgIcon] = useState<BgIcon>(BgIcon.ArmFlex);
   const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia &&
+    typeof window !== "undefined" &&
+      window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
   );
 
