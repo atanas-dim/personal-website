@@ -10,7 +10,6 @@ import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
 import { BgIcon } from "../background/Background";
 import {
   SECTION,
-  Section,
   SECTION_CONTENT,
   SECTION_LABEL,
   SECTION_LABEL_WRAPPER,
@@ -19,10 +18,9 @@ import {
 type Props = {
   scrollY: MotionValue<number>;
   setBgIcon: Dispatch<SetStateAction<BgIcon>>;
-  setActiveSection: Dispatch<SetStateAction<Section>>;
 };
 
-const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
+const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
   const target = useRef<HTMLDivElement>(null);
 
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
@@ -81,7 +79,6 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
       whileInView={{ opacity: 1 }}
       onViewportEnter={() => {
         setBgIcon(BgIcon.Laptop);
-        setActiveSection(Section.Experience);
       }}
       className={
         SECTION +
@@ -106,7 +103,7 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
           2021 - Present
         </motion.span>
         <motion.span
-          className="mb-3 text-3xl md:text-4xl font-bold text-pink-400 whitespace-nowrap"
+          className="mb-3 text-3xl md:text-4xl font-bold text-pink-500 dark:text-pink-400 whitespace-nowrap"
           style={{
             opacity,
             translateY,
@@ -133,7 +130,7 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
           2021 - 2022
         </motion.span>
         <motion.span
-          className="mb-3 text-3xl md:text-4xl font-bold text-yellow-400 whitespace-nowrap"
+          className="mb-3 text-3xl md:text-4xl font-bold text-yellow-500 dark:text-yellow-400 whitespace-nowrap"
           style={{
             opacity,
             translateY,

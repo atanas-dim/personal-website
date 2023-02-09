@@ -1,4 +1,4 @@
-import React, { useRef, useState, FC } from "react";
+import React, { useRef, useState, FC, useEffect, ChangeEvent } from "react";
 import type { HeadFC } from "gatsby";
 
 import { Helmet } from "react-helmet";
@@ -13,12 +13,13 @@ import Footer from "../components/footer/Footer";
 
 import { useScroll } from "framer-motion";
 
+//TODO create class names in global.css and remove consts from here
 export const SECTION =
   "w-full min-h-screen h-full mx-auto max-w-5xl flex flex-col md:flex-row";
 export const SECTION_LABEL_WRAPPER =
   "w-full md:max-w-[20%] mr-4 sticky top-20 md:top-1/2 self-start z-10 xl:-mt-8";
 export const SECTION_LABEL =
-  "block px-3 py-1 w-fit text-lg md:text-2xl font-bold rounded-xl bg-white dark:bg-zinc-800";
+  "block px-3 py-1 w-fit text-lg md:text-2xl font-bold rounded-xl bg-zinc-200 dark:bg-zinc-800";
 export const SECTION_CONTENT = "w-full h-full mx-auto";
 
 export enum Section {
@@ -26,7 +27,6 @@ export enum Section {
   Projects,
   Stack,
   Experience,
-  // Contact,
 }
 
 export const SECTIONS = {
@@ -46,44 +46,66 @@ export const SECTIONS = {
     title: "Experience",
     target: "experience",
   },
-  // [Section.Contact]: {
-  //   title: "Contact",
-  // },
 };
 
 const IndexPage: FC = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);
-  const [activeSection, setActiveSection] = useState<Section>(Section.Hero);
+  const [activeSection, setActiveSection] = useState<Section | undefined>(
+    Section.Hero
+  );
   const [bgIcon, setBgIcon] = useState<BgIcon>(BgIcon.ArmFlex);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const { scrollY } = useScroll({
     container: scrollContainer,
   });
 
+  useEffect(() => {
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      setIsDarkMode(true);
+    }
+
+    const updateMode = (event: MediaQueryListEvent) => {
+      const isDark = !!event.matches;
+      setIsDarkMode(isDark);
+    };
+
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", updateMode);
+
+    return () =>
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", updateMode);
+  }, []);
+
+  useEffect(() => {
+    if (isDarkMode) document.documentElement.classList.add("dark");
+    else document.documentElement.classList.remove("dark");
+  }, [isDarkMode]);
+
+  scrollY.onChange((v) => {
+    if (v > window.innerHeight) setActiveSection(undefined);
+  });
+
   return (
     <>
-      <Background pathIndex={bgIcon} scrollY={scrollY} />
+      <Background
+        pathIndex={bgIcon}
+        scrollY={scrollY}
+        isDarkMode={isDarkMode}
+      />
       <div id="scroll-container" ref={scrollContainer}>
         <Hero setBgIcon={setBgIcon} setActiveSection={setActiveSection} />
-        <Header activeSection={activeSection} />
+        <Header activeSection={activeSection} setIsDarkMode={setIsDarkMode} />
         <main className="w-full px-4 md:px-8">
-          <Projects
-            scrollY={scrollY}
-            setBgIcon={setBgIcon}
-            setActiveSection={setActiveSection}
-          />
-
-          <Stack
-            scrollY={scrollY}
-            setBgIcon={setBgIcon}
-            setActiveSection={setActiveSection}
-          />
-
-          <Experience
-            scrollY={scrollY}
-            setBgIcon={setBgIcon}
-            setActiveSection={setActiveSection}
-          />
+          <Projects scrollY={scrollY} setBgIcon={setBgIcon} />
+          <Stack scrollY={scrollY} setBgIcon={setBgIcon} />
+          <Experience scrollY={scrollY} setBgIcon={setBgIcon} />
         </main>
         <Footer />
       </div>

@@ -14,7 +14,8 @@ export type ProjectData = {
     src: string;
   };
   bgIcon: BgIcon;
-  accentColour: string;
+  accentColour: { lightMode: string; darkMode: string };
+  textStyle: string;
 };
 
 export const PROJECTS: ProjectData[] = [
@@ -38,7 +39,8 @@ export const PROJECTS: ProjectData[] = [
       src: workoutBuilderImg,
     },
     bgIcon: BgIcon.ArmFlex,
-    accentColour: "sky-400",
+    accentColour: { darkMode: "sky-400", lightMode: "sky-500" },
+    textStyle: "text-sky-500 dark:text-sky-400",
   },
   // {
   //   title: "BeachShop",
@@ -71,7 +73,8 @@ export const PROJECTS: ProjectData[] = [
       src: redditClientImg,
     },
     bgIcon: BgIcon.Comment,
-    accentColour: "sky-300",
+    accentColour: { darkMode: "sky-300", lightMode: "sky-400" },
+    textStyle: "text-sky-400 dark:text-sky-300",
   },
   {
     title: "React Calendar",
@@ -89,6 +92,7 @@ export const PROJECTS: ProjectData[] = [
       src: reactCalendarImg,
     },
     bgIcon: BgIcon.Calendar,
-    accentColour: "purple-400",
+    accentColour: { darkMode: "purple-400", lightMode: "purple-500" },
+    textStyle: "text-purple-500 dark:text-purple-400",
   },
 ];

@@ -168,7 +168,7 @@ body,
 }
 
 body {
-  @apply text-zinc-900 dark:text-white bg-zinc-200 dark:bg-background;
+  @apply text-zinc-900 dark:text-white bg-zinc-100 dark:bg-background;
 }
 
 #scroll-container {
@@ -223,7 +223,7 @@ body {
 
 button,
 a {
-  @apply hover:transition-all hover:duration-500 ease-in-out hover:bg-zinc-50 active:bg-zinc-100 dark:hover:bg-zinc-700 dark:active:bg-zinc-600;
+  @apply hover:transition-all hover:duration-500 ease-in-out hover:bg-zinc-300 active:bg-zinc-400 dark:hover:bg-zinc-700 dark:active:bg-zinc-600;
 }
 
 .iconButton {

@@ -26,10 +26,9 @@ import {
 type Props = {
   scrollY: MotionValue<number>;
   setBgIcon: Dispatch<SetStateAction<BgIcon>>;
-  setActiveSection: Dispatch<SetStateAction<Section>>;
 };
 
-const Projects: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
+const Projects: FC<Props> = ({ scrollY, setBgIcon }) => {
   const target = useRef<HTMLDivElement>(null);
 
   return (
@@ -55,7 +54,6 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
                 scrollY={scrollY}
                 data={project}
                 setBgIcon={setBgIcon}
-                setActiveSection={setActiveSection}
               />
             );
           })}
@@ -72,16 +70,9 @@ type ProjectProps = {
   scrollY: MotionValue<number>;
   data: ProjectData;
   setBgIcon: Dispatch<SetStateAction<BgIcon>>;
-  setActiveSection: Dispatch<SetStateAction<Section>>;
 };
 
-const Project: FC<ProjectProps> = ({
-  index,
-  scrollY,
-  data,
-  setBgIcon,
-  setActiveSection,
-}) => {
+const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
   const target = useRef<HTMLDivElement>(null);
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -218,26 +209,26 @@ const Project: FC<ProjectProps> = ({
         <motion.h3
           onViewportEnter={() => {
             setBgIcon(data.bgIcon);
-            index === 0 && setActiveSection(Section.Projects);
           }}
           className="text-2xl md:text-4xl font-bold mb-2"
         >
           {data.title}
         </motion.h3>
         <span
-          className={`text-${data.accentColour} text-md md:text-xl font-bold block mb-4 leading-tight`}
+          className={`${data.textStyle} text-md md:text-xl font-bold block mb-4 leading-tight`}
         >
           {data.technologies}
         </span>
         <p className="mb-4 leading-tight">{data.description}</p>
         <div className="flex">
-          {data.links.map((link, index) => {
+          {data.links.map((link, linkIndex) => {
             return (
               <a
+                key={"project-" + index + "-link-" + linkIndex}
                 href={link.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="mr-2 px-3 py-2 w-fit font-bold rounded-xl bg-white dark:bg-zinc-800 flex items-center justify-center"
+                className="mr-2 px-3 py-2 w-fit font-bold rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center"
               >
                 <span>{link.label} </span>
                 <ExternalLinkIcon className="inline-block scale-75 fill-zinc-900 dark:fill-white" />

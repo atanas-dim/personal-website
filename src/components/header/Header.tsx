@@ -1,4 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 
 import { motion } from "framer-motion";
 
@@ -9,16 +15,11 @@ import { Section } from "../../pages";
 
 type Props = {
   activeSection?: Section;
+  setIsDarkMode: Dispatch<SetStateAction<boolean>>;
 };
 
-const Header: FC<Props> = ({ activeSection }) => {
+const Header: FC<Props> = ({ activeSection, setIsDarkMode }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (isDarkMode) document.documentElement.classList.add("dark");
-    else document.documentElement.classList.remove("dark");
-  }, [isDarkMode]);
 
   return (
     <>
@@ -28,7 +29,7 @@ const Header: FC<Props> = ({ activeSection }) => {
       >
         <motion.div
           initial="hidden"
-          animate={activeSection === Section.Hero ? undefined : "visible"}
+          animate={activeSection !== Section.Hero ? "visible" : undefined}
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           className="w-full  max-w-5xl mx-auto flex justify-between items-center"
         >
@@ -50,21 +51,23 @@ const Header: FC<Props> = ({ activeSection }) => {
             Atanas Dimitrov
           </motion.button>
 
-          <button onClick={() => setIsDarkMode((prev) => !prev)}>
-            Dark mode: {isDarkMode.toString()}
-          </button>
+          <div className="flex">
+            <button
+              onClick={() => setIsDarkMode((prev) => !prev)}
+              className="iconButton"
+            >
+              ☀️
+            </button>
 
-          <motion.button
-            initial="hidden"
-            animate={activeSection === Section.Hero ? undefined : "visible"}
-            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
-            onClick={() => {
-              setShowMenu((prev) => !prev);
-            }}
-            className="iconButton"
-          >
-            <Hamburger />
-          </motion.button>
+            <button
+              onClick={() => {
+                setShowMenu((prev) => !prev);
+              }}
+              className="iconButton"
+            >
+              <Hamburger />
+            </button>
+          </div>
         </motion.div>
       </header>
       <Menu show={showMenu} hide={() => setShowMenu(false)} />

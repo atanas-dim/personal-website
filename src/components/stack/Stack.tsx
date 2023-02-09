@@ -75,10 +75,9 @@ const createSkillsWithTextSizes = () => {
 type Props = {
   scrollY: MotionValue<number>;
   setBgIcon: Dispatch<SetStateAction<BgIcon>>;
-  setActiveSection: Dispatch<SetStateAction<Section>>;
 };
 
-const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
+const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
   const target = useRef<HTMLDivElement>(null);
 
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
@@ -124,7 +123,6 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon, setActiveSection }) => {
             className="w-full flex items-center flex-wrap "
             onViewportEnter={() => {
               setBgIcon(BgIcon.Stack);
-              setActiveSection(Section.Stack);
             }}
           >
             {skills.map((skill, index) => {

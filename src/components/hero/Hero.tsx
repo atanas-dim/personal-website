@@ -17,7 +17,7 @@ import { Section } from "../../pages";
 import { BgIcon } from "../background/Background";
 
 type Props = {
-  setActiveSection: Dispatch<SetStateAction<Section>>;
+  setActiveSection: Dispatch<SetStateAction<Section | undefined>>;
   setBgIcon: Dispatch<SetStateAction<BgIcon>>;
 };
 
@@ -104,6 +104,7 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
             setActiveSection(Section.Hero);
             setBgIcon(BgIcon.ArmFlex);
           }}
+          onViewportLeave={() => setActiveSection(undefined)}
         />
         {/* Speech bubble */}
         <motion.div
@@ -114,8 +115,8 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
           transition={{ duration: 0.6, ease: "backOut" }}
           className={`
           origin-[50%_-80px]
-          relative flex flex-col bg-zinc-900 dark:bg-white px-6 py-4 mb-10 rounded-3xl
-          before:absolute before:w-12 before:h-12 before:z-10 before:-top-10 before:left-1/4 before:border-zinc-900 dark:before:border-white before:border-t-0 before:border-r-0 before:border-b-[48px] before:border-l-[48px] before:border-l-transparent dark:before:border-l-transparent
+          relative flex flex-col bg-zinc-800 dark:bg-white px-6 py-4 mb-10 rounded-3xl
+          before:absolute before:w-12 before:h-12 before:z-10 before:-top-10 before:left-1/4 before:border-zinc-800 dark:before:border-white before:border-t-0 before:border-r-0 before:border-b-[48px] before:border-l-[48px] before:border-l-transparent dark:before:border-l-transparent
           `}
         >
           <motion.h1
@@ -125,7 +126,8 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
             }}
             className="text-3xl md:text-4xl font-bold text-white dark:text-zinc-900"
           >
-            Hi, <span className="text-blue-500">I'm Atanas</span>
+            Hi,{" "}
+            <span className="text-blue-300 dark:text-blue-500">I'm Atanas</span>
           </motion.h1>
           <motion.h2
             variants={{
@@ -134,7 +136,8 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
             }}
             className="text-2xl md:text-3xl font-bold text-white dark:text-zinc-900"
           >
-            <span className="text-cyan-500">React</span> Developer
+            <span className="text-cyan-300 dark:text-cyan-500">React</span>{" "}
+            Developer
           </motion.h2>
         </motion.div>
 
@@ -162,7 +165,7 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
           className="absolute bottom-0 left-1/2 translate-x-[-50%] iconButton"
           href="/#projects"
         >
-          <ArrowDown className="fill-zinc-900 dark:fill-fill-zinc-500" />
+          <ArrowDown className="fill-zinc-900 dark:fill-zinc-500" />
         </a>
       </motion.div>
     </motion.div>

@@ -27,7 +27,7 @@ const Menu: FC<Props> = ({ show, hide }) => {
             transition={{ duration: 0.3 }}
           />
           <motion.div
-            className="relative rounded-2xl w-full max-w-md bg-zinc-900 p-8 flex justify-center items-center flex-col shadow-2xl shadow-black"
+            className="relative rounded-2xl w-full max-w-md bg-white dark:bg-zinc-900 p-8 flex justify-center items-center flex-col shadow-2xl shadow-black"
             initial={{ opacity: 0, y: "110%" }}
             animate={{ opacity: 1, y: "0" }}
             exit={{ opacity: 0, y: "110%" }}
@@ -45,7 +45,7 @@ const Menu: FC<Props> = ({ show, hide }) => {
               return (
                 <a
                   key={"menu-button-" + index}
-                  className="rounded-xl bg-zinc-800 p-4 w-full mb-4 flex justify-center items-center font-bold hover:bg-zinc-50 hover:bg-opacity-10 active:bg-opacity-20"
+                  className="rounded-xl bg-zinc-100 dark:bg-zinc-800 p-4 w-full mb-4 flex justify-center items-center font-bold hover:bg-zinc-900 hover:bg-opacity-20 active:bg-opacity-30 dark:hover:bg-zinc-50 dark:hover:bg-opacity-20 dark:active:bg-opacity-30"
                   onClick={hide}
                   href={`/#${target}`}
                 >
@@ -69,12 +69,10 @@ const CloseIcon: FC = () => {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
+      className="fill-zinc-900 dark:fill-white"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
-        fill="white"
-      />
+      <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" />
     </svg>
   );
 };

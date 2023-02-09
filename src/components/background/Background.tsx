@@ -33,34 +33,55 @@ export enum BgIcon {
   Laptop,
 }
 
-const ICONS: { [key in BgIcon]: { path: string; colour: string } } = {
-  [BgIcon.ArmFlex]: { path: ARM_FLEX, colour: "#093d58" },
+const ICONS: {
+  [key in BgIcon]: {
+    path: string;
+    colour: { lightMode: string; darkMode: string };
+  };
+} = {
+  [BgIcon.ArmFlex]: {
+    path: ARM_FLEX,
+    colour: { darkMode: "#093d58", lightMode: "#caecff" },
+  },
   // [BgIcon.ShoppingBag]: { path: SHOPPING_BAG, colour: "#004240" },
-  [BgIcon.Comment]: { path: COMMENT, colour: "#063d51" },
-  [BgIcon.Calendar]: { path: CALENDAR, colour: "#3d2a59" },
+  [BgIcon.Comment]: {
+    path: COMMENT,
+    colour: { darkMode: "#063d51", lightMode: "#c1e8f6" },
+  },
+  [BgIcon.Calendar]: {
+    path: CALENDAR,
+    colour: { darkMode: "#3d2a59", lightMode: "#e0d1f5" },
+  },
   [BgIcon.Stack]: {
     path: STACK,
-    colour: "#432335",
+    colour: { darkMode: "#432335", lightMode: "#e9d4e0" },
   },
-  [BgIcon.Laptop]: { path: LAPTOP, colour: "#224a56" },
+  [BgIcon.Laptop]: {
+    path: LAPTOP,
+    colour: { darkMode: "#224a56", lightMode: "#c3e2ea" },
+  },
 };
 
 type Props = {
   pathIndex: BgIcon;
   scrollY: MotionValue;
+  isDarkMode: boolean;
 };
-const Background: FC<Props> = ({ pathIndex, scrollY }) => {
+const Background: FC<Props> = ({ pathIndex, scrollY, isDarkMode }) => {
   const progress = useMotionValue(pathIndex);
-  const stroke = useTransform(
-    progress,
-    Object.keys(ICONS).map(getIndex),
-    Object.keys(ICONS).map((key) => ICONS[+key as BgIcon].colour)
+
+  const iconsIndexArray = Object.keys(ICONS).map(getIndex);
+  const iconsColourArray = Object.keys(ICONS).map(
+    (key) => ICONS[+key as BgIcon].colour[isDarkMode ? "darkMode" : "lightMode"]
   );
-  const fill = useTransform(
-    progress,
-    Object.keys(ICONS).map(getIndex),
-    Object.keys(ICONS).map((key) => ICONS[+key as BgIcon].colour + "40")
+  const iconsStrokeColourArray = Object.keys(ICONS).map(
+    (key) =>
+      ICONS[+key as BgIcon].colour[isDarkMode ? "darkMode" : "lightMode"] + "40"
   );
+
+  const stroke = useTransform(progress, iconsIndexArray, iconsColourArray);
+  const fill = useTransform(progress, iconsIndexArray, iconsStrokeColourArray);
+
   const path = useFlubber(
     progress,
     Object.keys(ICONS).map((key) => ICONS[+key as BgIcon].path)
@@ -113,7 +134,7 @@ const Background: FC<Props> = ({ pathIndex, scrollY }) => {
   return (
     <>
       <motion.div
-        className="w-screen h-screen bg-zinc-200 dark:bg-zinc-900 fixed -z-10 -top-0 left-0"
+        className="w-screen h-screen bg-zinc-50 dark:bg-zinc-900 fixed -z-10 -top-0 left-0"
         role="presentation"
         style={{ translateY, scale: 1.15 }}
       >
