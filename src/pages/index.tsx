@@ -1,4 +1,4 @@
-import React, { useRef, useState, FC, useEffect, ChangeEvent } from "react";
+import React, { useRef, useState, FC, useEffect } from "react";
 import type { HeadFC } from "gatsby";
 
 import { Helmet } from "react-helmet";
@@ -81,13 +81,26 @@ const IndexPage: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isDarkMode) document.documentElement.classList.add("dark");
-    else document.documentElement.classList.remove("dark");
+    const meta = document.getElementsByName(
+      "theme-color"
+    )[0] as HTMLMetaElement;
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+      if (meta) meta.content = "#18181b";
+    } else {
+      document.documentElement.classList.remove("dark");
+      if (meta) meta.content = "#fff";
+    }
   }, [isDarkMode]);
 
-  scrollY.onChange((v) => {
-    if (v > window.innerHeight) setActiveSection(undefined);
-  });
+  useEffect(() => {
+    scrollY.onChange((v) => {
+      if (v > window.innerHeight - 80)
+        setActiveSection(() => {
+          return undefined;
+        });
+    });
+  }, [scrollY]);
 
   return (
     <>
@@ -115,7 +128,7 @@ export default IndexPage;
 export const Head: HeadFC = () => (
   <>
     <Helmet defer={false} htmlAttributes={{ lang: "en" }}>
-      <meta name="theme-color" content="#18181b" />
+      <meta name="theme-color" content="#fff" />
       <title>Atanas Dimitrov - Portfolio</title>
       <link
         rel="apple-touch-icon"

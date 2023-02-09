@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import Menu from "../menu/Menu";
 
@@ -24,15 +24,16 @@ type Props = {
 const Header: FC<Props> = ({ activeSection, isDarkMode, setIsDarkMode }) => {
   const [showMenu, setShowMenu] = useState(false);
 
+  const showHeaderContent = activeSection !== Section.Hero;
+
   return (
     <>
-      {/* TODO Add AnimatePresense */}
       <header
         className={`sticky top-0 z-50 h-16 w-full flex justify-between items-center ${PERFORATED_BG} bg-left-top px-4 md:px-8 border-solid border-b border-zinc-200 dark:border-zinc-800`}
       >
         <motion.div
           initial="hidden"
-          animate={activeSection !== Section.Hero ? "visible" : undefined}
+          animate={showHeaderContent ? "visible" : undefined}
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           className="w-full  max-w-5xl mx-auto flex justify-between items-center"
         >
@@ -54,23 +55,27 @@ const Header: FC<Props> = ({ activeSection, isDarkMode, setIsDarkMode }) => {
             Atanas Dimitrov
           </motion.button>
 
-          <div className="flex">
-            <button
-              onClick={() => setIsDarkMode((prev) => !prev)}
-              className="iconButton"
-            >
-              {isDarkMode ? <DeskLamp /> : <DeskLampOn />}
-            </button>
+          <AnimatePresence>
+            {showHeaderContent && (
+              <div className="flex">
+                <button
+                  onClick={() => setIsDarkMode((prev) => !prev)}
+                  className="iconButton"
+                >
+                  {isDarkMode ? <DeskLamp /> : <DeskLampOn />}
+                </button>
 
-            <button
-              onClick={() => {
-                setShowMenu((prev) => !prev);
-              }}
-              className="iconButton"
-            >
-              <Hamburger />
-            </button>
-          </div>
+                <button
+                  onClick={() => {
+                    setShowMenu((prev) => !prev);
+                  }}
+                  className="iconButton"
+                >
+                  <Hamburger />
+                </button>
+              </div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </header>
       <Menu show={showMenu} hide={() => setShowMenu(false)} />

@@ -26,7 +26,7 @@ const Menu: FC<Props> = ({ show, hide }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           />
-          <motion.div
+          <motion.nav
             className="relative rounded-2xl w-full max-w-md bg-white dark:bg-zinc-900 p-8 flex justify-center items-center flex-col shadow-2xl shadow-black"
             initial={{ opacity: 0, y: "110%" }}
             animate={{ opacity: 1, y: "0" }}
@@ -53,7 +53,7 @@ const Menu: FC<Props> = ({ show, hide }) => {
                 </a>
               );
             })}
-          </motion.div>
+          </motion.nav>
         </div>
       )}
     </AnimatePresence>
