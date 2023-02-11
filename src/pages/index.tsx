@@ -54,7 +54,7 @@ const IndexPage: FC = () => {
     Section.Hero
   );
   const [bgIcon, setBgIcon] = useState<BgIcon>(BgIcon.ArmFlex);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const { scrollY } = useScroll({
     container: scrollContainer,
@@ -132,7 +132,7 @@ export default IndexPage;
 export const Head: HeadFC = () => (
   <>
     <Helmet defer={false} htmlAttributes={{ lang: "en" }}>
-      <meta name="theme-color" content="#18181b" />
+      <meta name="theme-color" content="#fff" />
       <title>Atanas Dimitrov - Portfolio</title>
       <link
         rel="apple-touch-icon"

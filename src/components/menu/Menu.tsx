@@ -16,7 +16,7 @@ const Menu: FC<Props> = ({ show, hide }) => {
         <div className="z-50 fixed top-0 left-0 w-full h-full p-8 flex justify-center items-center">
           <motion.div
             onClick={hide}
-            className="-z-10 absolute top-0 left-0 w-full h-full bg-opacity-75 perforated colour-transition"
+            className="-z-10 absolute top-0 left-0 w-full h-full bg-opacity-75 perforated  "
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

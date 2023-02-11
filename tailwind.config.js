@@ -11,8 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--bg-colour)",
-        foreground: "var(--foreground-colour)",
+        background: "#111111",
       },
       backgroundImage: {
         "radial-gradient-pink-light": `radial-gradient(circle, ${colors.pink["600"]} 0%, transparent 60% )`,
