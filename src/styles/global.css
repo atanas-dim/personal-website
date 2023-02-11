@@ -154,6 +154,24 @@ select {
 
 /* ---------------------------------- */
 
+@property --transparent {
+  syntax: "<color>";
+  initial-value: #ffffff00;
+  inherits: false;
+}
+
+@property --bg-colour {
+  syntax: "<color>";
+  initial-value: #fff;
+  inherits: false;
+}
+
+@property --foreground-colour {
+  syntax: "<color>";
+  initial-value: #000;
+  inherits: false;
+}
+
 html,
 body,
 #___gatsby,
@@ -166,9 +184,21 @@ body,
   overflow: hidden;
   scroll-behavior: smooth;
 }
+::root {
+  --bg-colour: theme("colors.white");
+  --foreground-colour: theme("colors.zinc.900");
+}
 
 body {
-  @apply text-zinc-900 dark:text-white bg-zinc-100 dark:bg-background;
+  transition: --transparent 0.6s, --bg-colour 0.6s, --foreground-colour 0.6s,
+    background-color 0.6s;
+  color: var(--foreground-colour);
+  background-color: var(--bg-colour);
+}
+
+html.dark body {
+  --bg-colour: theme("colors.zinc.900");
+  --foreground-colour: theme("colors.white");
 }
 
 #scroll-container {
@@ -234,4 +264,30 @@ a {
 
 .iconButton {
   @apply w-12 h-12 flex justify-center items-center rounded-xl hover:bg-zinc-400 hover:bg-opacity-20 active:bg-opacity-20 active:brightness-50 dark:hover:bg-zinc-400 dark:hover:bg-opacity-5 dark:active:bg-opacity-5 dark:active:brightness-150;
+}
+
+/* Perforated background */
+.perforated {
+  --bg-colour: theme("colors.white");
+
+  background-image: radial-gradient(
+    var(--transparent) 1px,
+    var(--bg-colour) 1px
+  );
+  background-size: 4px 4px;
+  @apply backdrop-blur-sm backdrop-brightness-100 dark:backdrop-brightness-50 backdrop-saturate-[1.25];
+}
+
+html.dark .perforated {
+  --bg-colour: theme("colors.zinc.900");
+}
+
+.colour-transition {
+  transition: --transparent 0.6s, --bg-colour 0.6s, --foreground-colour 0.6s,
+    border-color 0.6s, background-color 0.6s;
+}
+
+svg,
+path {
+  transition: fill 0.6s, stroke 0.6s;
 }

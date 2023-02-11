@@ -134,7 +134,7 @@ const Background: FC<Props> = ({ pathIndex, scrollY, isDarkMode }) => {
   return (
     <>
       <motion.div
-        className="w-screen h-screen bg-zinc-50 dark:bg-zinc-900 fixed -z-10 -top-0 left-0"
+        className="w-screen h-screen bg-zinc-50 dark:bg-zinc-900 fixed -z-10 -top-0 left-0 colour-transition"
         role="presentation"
         style={{ translateY, scale: 1.15 }}
       >
@@ -150,7 +150,6 @@ const Background: FC<Props> = ({ pathIndex, scrollY, isDarkMode }) => {
                 viewBox="0,0,80,80"
                 width={(8 / svgWidth) * 10}
                 height={(8 / svgHeight) * 10}
-                style={{ border: "1px solid red" }}
               >
                 <motion.path
                   stroke={stroke}

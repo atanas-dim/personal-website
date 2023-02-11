@@ -10,7 +10,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import Menu from "../menu/Menu";
 
-import { PERFORATED_BG } from "../../styles/constants";
 import { Section } from "../../pages";
 import DeskLampOn from "../icons/DeskLampOn";
 import DeskLamp from "../icons/DeskLamp";
@@ -29,7 +28,7 @@ const Header: FC<Props> = ({ activeSection, isDarkMode, setIsDarkMode }) => {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 h-16 w-full flex justify-between items-center ${PERFORATED_BG} bg-left-top px-4 md:px-8 border-solid border-b border-zinc-200 dark:border-zinc-800`}
+        className={`sticky top-0 z-50 h-16 w-full flex justify-between items-center perforated colour-transition bg-left-top px-4 md:px-8 border-solid border-b border-zinc-200 dark:border-zinc-800`}
       >
         <motion.div
           initial="hidden"

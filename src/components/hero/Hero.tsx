@@ -8,8 +8,6 @@ import React, {
 } from "react";
 import { motion, SVGMotionProps, useAnimationControls } from "framer-motion";
 
-import { PERFORATED_BG } from "../../styles/constants";
-
 import photo from "../../assets/images/atanas.jpg";
 
 import { Section } from "../../pages";
@@ -73,7 +71,7 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
         />
       </div>
       <div
-        className={`absolute -z-10 top-0 left-0 w-full h-full ${PERFORATED_BG} bg-left-bottom`}
+        className={`absolute -z-10 top-0 left-0 w-full h-full perforated colour-transition bg-left-bottom`}
       />
       <motion.div
         variants={{

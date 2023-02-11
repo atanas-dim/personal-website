@@ -2,8 +2,6 @@ import React, { type FC } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-import { PERFORATED_BG } from "../../styles/constants";
-
 import { Section, SECTIONS } from "../../pages";
 
 type Props = {
@@ -15,12 +13,10 @@ const Menu: FC<Props> = ({ show, hide }) => {
   return (
     <AnimatePresence>
       {show && (
-        <div
-          className={`z-50 fixed top-0 left-0 w-full h-full p-8 flex justify-center items-center`}
-        >
+        <div className="z-50 fixed top-0 left-0 w-full h-full p-8 flex justify-center items-center">
           <motion.div
             onClick={hide}
-            className={`-z-10 absolute top-0 left-0 w-full h-full bg-opacity-75 ${PERFORATED_BG}`}
+            className="-z-10 absolute top-0 left-0 w-full h-full bg-opacity-75 perforated colour-transition"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
