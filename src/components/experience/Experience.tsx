@@ -72,14 +72,9 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
   );
 
   return (
-    <motion.section
+    <section
       id="experience"
       ref={target}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      onViewportEnter={() => {
-        setBgIcon(BgIcon.Laptop);
-      }}
       className={
         SECTION +
         " w-full h-[calc(100vh_-_190px)] pointer-events-none flex justify-center items-center min-h-fit mb-4"
@@ -98,6 +93,9 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
           style={{
             opacity,
             translateY,
+          }}
+          onViewportEnter={() => {
+            setBgIcon(BgIcon.Laptop);
           }}
         >
           2021 - Present
@@ -148,7 +146,7 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
           @ Wingcard.io
         </motion.span>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
