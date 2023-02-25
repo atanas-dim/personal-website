@@ -5,7 +5,7 @@ import { SOCIAL_LINKS } from "../../resources/social-links";
 
 const Footer: FC = () => {
   return (
-    <footer className="w-full px-4 md:px-8 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 border-solid colour-transition">
+    <footer className="w-full max-w-[min(64rem,_calc(100%_-_2rem))] mx-auto mb-4 md:mb-8 px-4 md:px-8 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 border-solid colour-transition">
       <div className="max-w-5xl mx-auto pt-8 pb-4 flex items-center justify-center flex-col">
         <motion.img
           variants={{
