@@ -73,8 +73,8 @@ export const PROJECTS: ProjectData[] = [
       src: redditClientImg,
     },
     bgIcon: BgIcon.Comment,
-    textStyle: "text-cyan-400 dark:text-cyan-300",
-    buttonStyle: "bg-cyan-300 dark:bg-cyan-600",
+    textStyle: "text-cyan-500 dark:text-cyan-300",
+    buttonStyle: "bg-cyan-300 dark:bg-cyan-500",
   },
   {
     title: "React Calendar",

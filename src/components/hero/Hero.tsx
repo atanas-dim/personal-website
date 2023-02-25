@@ -70,7 +70,7 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
           className=" origin-center w-[100vmin] h-[100vmin] bg-radial-gradient-pink-light dark:bg-radial-gradient-pink-dark bg-no-repeat bg-center bg-100vmin "
         />
       </div>
-      <div className={`absolute -z-10 top-0 left-0 w-full h-full perforated`} />
+      <div className="absolute -z-10 top-0 left-0 w-full h-full perforated" />
       <motion.div
         variants={{
           hidden: { opacity: 0 },

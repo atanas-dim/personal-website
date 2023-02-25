@@ -167,8 +167,12 @@ body,
   scroll-behavior: smooth;
 }
 
+html {
+  --color-transition-duration: 1s;
+}
+
 body {
-  transition: color 0.6s;
+  transition: background-color var(--color-transition-duration);
   @apply text-zinc-900 dark:text-white bg-zinc-100 dark:bg-background;
 }
 
@@ -186,12 +190,12 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  @apply bg-white dark:bg-zinc-800;
+  @apply bg-zinc-200 dark:bg-zinc-800;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  @apply bg-zinc-300 dark:bg-zinc-600;
+  @apply bg-zinc-400 dark:bg-zinc-600;
   border-radius: 8px;
 }
 
@@ -250,26 +254,30 @@ a {
   left: 0;
   top: 0;
   background-color: theme("colors.white");
-  transition: background-color 0.6s;
+  transition: background-color var(--color-transition-duration);
+
   mask-image: radial-gradient(transparent 1px, black 1px);
   mask-size: 4px 4px;
   mask-position: left bottom;
   z-index: -1;
 }
 
-header::before {
-  mask-position: left top !important;
-}
-
 html.dark .perforated::before {
   background-color: theme("colors.zinc.900");
 }
 
+header::before {
+  mask-position: left top !important;
+}
+
 svg,
 path {
-  transition: fill 0.6s, stroke 0.6s;
+  transition: fill var(--color-transition-duration),
+    stroke var(--color-transition-duration);
 }
 
 .colour-transition {
-  transition: color 0.6s, border-color 0.6s, background-color 0.6s;
+  transition: color var(--color-transition-duration),
+    border-color var(--color-transition-duration),
+    background-color var(--color-transition-duration);
 }

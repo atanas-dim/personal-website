@@ -119,16 +119,13 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
         }
       >
         <div className="flex flex-col justify-center items-center  w-full ">
-          <motion.div
-            className="w-full flex items-center flex-wrap "
-            onViewportEnter={() => {
-              setBgIcon(BgIcon.Stack);
-            }}
-          >
+          <motion.div className="w-full flex items-center flex-wrap ">
             {skills.map((skill, index) => {
               return (
                 <Skill
                   key={"skill-" + index}
+                  index={index}
+                  setBgIcon={setBgIcon}
                   skill={skill}
                   scrollY={scrollY}
                   containerHeight={containerHeight}
@@ -146,6 +143,8 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
 export default Stack;
 
 type SkillProps = {
+  index: number;
+  setBgIcon: (icon: BgIcon) => void;
   skill: SkillDef;
   scrollY: MotionValue<number>;
   containerHeight: number;
@@ -153,6 +152,8 @@ type SkillProps = {
 };
 
 const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
+  index,
+  setBgIcon,
   skill,
   scrollY,
   containerHeight,
@@ -205,6 +206,9 @@ const Skill: FC<HTMLAttributes<HTMLHeadingElement> & SkillProps> = ({
         translateY,
       }}
       className={`skill block mx-2 align-center font-bold leading-tight md:leading-tight ${className} ${skill.style}`}
+      onViewportEnter={() => {
+        if (index === 0) setBgIcon(BgIcon.Stack);
+      }}
     >
       {skill.label}
     </motion.span>

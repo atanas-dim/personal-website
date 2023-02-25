@@ -5,7 +5,6 @@ import React, {
   Dispatch,
   SetStateAction,
   useLayoutEffect,
-  useEffect,
   HTMLAttributes,
 } from "react";
 import { motion, useTransform, useSpring, MotionValue } from "framer-motion";
@@ -17,7 +16,6 @@ import { ProjectData, PROJECTS } from "../../resources/projects";
 import { BgIcon } from "../background/Background";
 import {
   SECTION,
-  Section,
   SECTION_CONTENT,
   SECTION_LABEL_WRAPPER,
   SECTION_LABEL,

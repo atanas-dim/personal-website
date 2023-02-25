@@ -60,29 +60,7 @@ const IndexPage: FC = () => {
     container: scrollContainer,
   });
 
-  useEffect(() => {
-    const prefersDark =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)")?.matches;
-
-    setIsDarkMode(prefersDark);
-
-    const updateMode = (event: MediaQueryListEvent) => {
-      const isDark = !!event.matches;
-      setIsDarkMode(isDark);
-    };
-
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", updateMode);
-
-    return () =>
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .removeEventListener("change", updateMode);
-  }, []);
-
-  // Update theme colour (status bar colour)
+  // Update theme and status bar colour
   useEffect(() => {
     const meta = document.getElementsByName(
       "theme-color"
@@ -129,49 +107,51 @@ const IndexPage: FC = () => {
 
 export default IndexPage;
 
-export const Head: HeadFC = () => (
-  <>
-    <Helmet defer={false} htmlAttributes={{ lang: "en" }}>
-      <meta name="theme-color" content="#fff" />
-      <title>Atanas Dimitrov - Portfolio</title>
-      <link
-        rel="apple-touch-icon"
-        sizes="120x120"
-        href="/apple-touch-icon.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/favicon-32x32.png"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/favicon-16x16.png"
-      />
-      <link rel="manifest" href="/site.webmanifest" />
-      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-      <meta name="msapplication-TileColor" content="#5bbad5" />
+export const Head: HeadFC = () => {
+  return (
+    <>
+      <Helmet defer={false} htmlAttributes={{ lang: "en" }}>
+        <meta name="theme-color" content="#fff" />
+        <title>Atanas Dimitrov - Portfolio</title>
+        <link
+          rel="apple-touch-icon"
+          sizes="120x120"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#5bbad5" />
 
-      <meta name="description" content="Web developer based in UK." />
-      <meta
-        name="keywords"
-        content="JavaScript, ReactJS, React, Developer, Web, UK, Brighton & Hove, Portfolio, Web Apps"
-      ></meta>
+        <meta name="description" content="Web developer based in UK." />
+        <meta
+          name="keywords"
+          content="JavaScript, ReactJS, React, Developer, Web, UK, Brighton & Hove, Portfolio, Web Apps"
+        ></meta>
 
-      <meta property="og:title" content="Atanas Dimitrov - Portfolio" />
-      <meta property="og:type" content="Personal website" />
-      <meta property="og:url" content="http://atanas.codes/" />
-      <meta property="og:image" content="/social-card.jpg" />
-      <meta property="og:description" content="Web developer based in UK." />
-      <meta property="og:site_name" content="Atanas Dimitrov" />
+        <meta property="og:title" content="Atanas Dimitrov - Portfolio" />
+        <meta property="og:type" content="Personal website" />
+        <meta property="og:url" content="http://atanas.codes/" />
+        <meta property="og:image" content="/social-card.jpg" />
+        <meta property="og:description" content="Web developer based in UK." />
+        <meta property="og:site_name" content="Atanas Dimitrov" />
 
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Atanas Dimitrov - Portfolio" />
-      <meta name="twitter:description" content="Web developer based in UK." />
-      <meta name="twitter:image" content="/social-card.jpg" />
-    </Helmet>
-  </>
-);
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Atanas Dimitrov - Portfolio" />
+        <meta name="twitter:description" content="Web developer based in UK." />
+        <meta name="twitter:image" content="/social-card.jpg" />
+      </Helmet>
+    </>
+  );
+};
