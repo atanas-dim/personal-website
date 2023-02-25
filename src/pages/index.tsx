@@ -15,7 +15,7 @@ import { useScroll } from "framer-motion";
 
 //TODO Create class names in global.css and remove consts from here
 export const SECTION =
-  "w-full min-h-screen h-full mx-auto max-w-5xl flex flex-col md:flex-row";
+  "w-full h-screen mx-auto max-w-5xl flex flex-col md:flex-row";
 export const SECTION_LABEL_WRAPPER =
   "w-full md:max-w-[20%] mr-4 sticky top-20 md:top-1/2 self-start z-10 xl:-mt-8";
 export const SECTION_LABEL =

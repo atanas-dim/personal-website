@@ -60,7 +60,7 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
   return (
     <motion.div
       id="start"
-      className="relative w-full h-[calc(100%_-_64px)] min-h-[490px] flex justify-center items-center flex-col z-50"
+      className="relative w-full h-[calc(100%_-_64px)] min-h-[490px] max-h-[1600px] flex justify-center items-center flex-col z-50"
     >
       <div className="w-full absolute top-0 left-0 -z-20 h-full overflow-hidden hero-mask flex justify-center items-center">
         <motion.div
@@ -93,7 +93,7 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
           }}
           transition={{ duration: 0.6, ease: "backOut" }}
           className={
-            "origin-[50%_-80px] relative flex flex-col bg-zinc-800 dark:bg-white px-6 py-4 mb-10 rounded-3xl"
+            "relative flex flex-col bg-zinc-800 dark:bg-white px-6 py-4 mb-10 rounded-3xl"
           }
         >
           <motion.h1

@@ -134,7 +134,7 @@ const Background: FC<Props> = ({ pathIndex, scrollY, isDarkMode }) => {
   return (
     <>
       <motion.div
-        className="w-screen h-screen bg-zinc-50 dark:bg-zinc-900 fixed -z-10 -top-0 left-0 colour-transition"
+        className="w-screen h-screen fixed -z-10 -top-0 left-0 colour-transition"
         role="presentation"
         style={{ translateY, scale: 1.15 }}
       >

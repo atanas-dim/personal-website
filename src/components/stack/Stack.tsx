@@ -106,7 +106,9 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
     <section
       id="stack"
       ref={target}
-      className={SECTION + " relative mb-[30vh] flex "}
+      className={
+        SECTION + " min-h-[600px] max-h-[800px] relative flex md:mb-60"
+      }
     >
       <div className={SECTION_LABEL_WRAPPER + " self-start"}>
         <span className={SECTION_LABEL}>Stack</span>

@@ -36,7 +36,7 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon }) => {
         ref={target}
         className={
           SECTION +
-          " mt-16 relative w-full mb-[30vh] scroll-mt-16 md:scroll-mt-0"
+          " h-auto md:mb-60 mt-16 relative w-full scroll-mt-16 md:scroll-mt-0"
         }
       >
         <div className={SECTION_LABEL_WRAPPER}>
@@ -142,7 +142,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     <motion.div
       id={"project-" + index}
       ref={target}
-      className={`w-full h-[110vh] md:h-screen min-h-[600px] flex flex-col ${
+      className={`w-full h-[110vh] md:h-screen min-h-[900px] max-h-[1000px] flex flex-col ${
         isEven ? "md:flex-row-reverse" : "md:flex-row"
       } justify-center items-center`}
     >
@@ -169,15 +169,19 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
         style={{
           translateY: textTranslateY,
         }}
-        className={`origin-top w-full md:w-1/2 px-8 md:px-0 md:self-stretch flex flex-col justify-center ${
+        className={`origin-top h-fit w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center ${
           isEven ? "md:mr-16" : "md:mr-0"
-        }`}
+        }
+        bg-white dark:bg-zinc-900
+        border border-solid border-zinc-200 rounded-2xl dark:border-zinc-800
+        colour-transition
+        `}
       >
         <motion.h3
           onViewportEnter={() => {
             setBgIcon(data.bgIcon);
           }}
-          className="text-2xl md:text-4xl font-bold mb-2"
+          className="text-2xl md:text-3xl font-bold mb-2"
         >
           {data.title}
         </motion.h3>

@@ -173,7 +173,7 @@ html {
 
 body {
   transition: background-color var(--color-transition-duration);
-  @apply text-zinc-900 dark:text-white bg-zinc-100 dark:bg-background;
+  @apply text-zinc-900 dark:text-white bg-zinc-50 dark:bg-background;
 }
 
 #scroll-container {

@@ -15,6 +15,28 @@ import {
   SECTION_LABEL_WRAPPER,
 } from "../../pages";
 
+type Job = {
+  period: string;
+  title: string;
+  titleColour: string;
+  company: string;
+};
+
+const JOBS: Job[] = [
+  {
+    period: "2021 - present",
+    title: "Software Developer",
+    titleColour: "text-pink-500 dark:text-pink-400",
+    company: "@Loopspeed",
+  },
+  {
+    period: "2021 - 2022",
+    title: "Software Developer",
+    titleColour: "text-yellow-500 dark:text-yellow-400",
+    company: "@Wingcard.io",
+  },
+];
+
 type Props = {
   scrollY: MotionValue<number>;
   setBgIcon: Dispatch<SetStateAction<BgIcon>>;
@@ -78,10 +100,10 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
         ref={target}
         className={
           SECTION +
-          " w-full h-[calc(100vh_-_190px)] pointer-events-none flex justify-center items-center min-h-fit mb-4"
+          " w-full h-[50vh] md:h-[calc(100vh_-_190px)] min-h-[500px] max-h-[800px] pointer-events-none flex justify-center items-center mb-4"
         }
       >
-        <div className={SECTION_LABEL_WRAPPER + " mb-[38vh]"}>
+        <div className={SECTION_LABEL_WRAPPER + " md:mb-[28vh]"}>
           <span className={SECTION_LABEL}>Experience</span>
         </div>
         <div
@@ -89,74 +111,35 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
             SECTION_CONTENT + " grow flex justify-center flex-col px-8 md:px-0"
           }
         >
-          <motion.span
-            className="mb-3 text-md md:text-lg whitespace-nowrap"
-            style={{
-              opacity,
-              translateY,
-            }}
-            onViewportEnter={() => {
-              setBgIcon(BgIcon.Laptop);
-            }}
-          >
-            2021 - Present
-          </motion.span>
-          <motion.span
-            className="mb-3 text-3xl md:text-4xl font-bold text-pink-500 dark:text-pink-400 whitespace-nowrap"
-            style={{
-              opacity,
-              translateY,
-            }}
-          >
-            Software Developer
-          </motion.span>
-          <motion.span
-            className="mb-3 text-xl md:text-2xl font-bold whitespace-nowrap"
-            style={{
-              opacity,
-              translateY,
-            }}
-          >
-            @ Loopspeed
-          </motion.span>
-          <motion.span
-            className="mt-16 mb-3 text-md md:text-lg whitespace-nowrap"
-            style={{
-              opacity,
-              translateY,
-            }}
-          >
-            2021 - 2022
-          </motion.span>
-          <motion.span
-            className="mb-3 text-3xl md:text-4xl font-bold text-yellow-500 dark:text-yellow-400 whitespace-nowrap"
-            style={{
-              opacity,
-              translateY,
-            }}
-          >
-            Software Developer
-          </motion.span>
-          <motion.span
-            className="mb-3 text-xl md:text-2xl font-bold whitespace-nowrap"
-            style={{
-              opacity,
-              translateY,
-            }}
-          >
-            @ Wingcard.io
-          </motion.span>
+          {JOBS.map((job, index) => {
+            return (
+              <motion.div
+                key={"job-" + index}
+                style={{
+                  opacity,
+                  translateY,
+                }}
+                onViewportEnter={() => {
+                  setBgIcon(BgIcon.Laptop);
+                }}
+                className="w-fit flex flex-col py-6 px-8 mb-8 bg-white dark:bg-zinc-900 border border-solid border-zinc-200 rounded-2xl dark:border-zinc-800 colour-transition"
+              >
+                <span className="mb-3 text-md md:text-lg whitespace-nowrap">
+                  {job.period}
+                </span>
+                <span
+                  className={`mb-3 text-2xl sm:text-3xl md:text-4xl font-bold ${job.titleColour} whitespace-nowrap`}
+                >
+                  {job.title}
+                </span>
+                <span className="mb-3 text-xl md:text-2xl font-bold whitespace-nowrap">
+                  {job.company}
+                </span>
+              </motion.div>
+            );
+          })}
         </div>
-
-        {/* Needed to make the last sticky label move up when the footer appears*/}
       </section>
-      {/* <div
-        role="presentation"
-        className={
-          SECTION_LABEL_WRAPPER +
-          " w-10 h-10 border border-solid border-red-500"
-        }
-      /> */}
     </>
   );
 };
