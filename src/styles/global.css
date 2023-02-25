@@ -276,7 +276,9 @@ path {
     stroke var(--color-transition-duration);
 }
 
-.colour-transition {
+.colour-transition,
+.colour-transition::before,
+.colour-transition::after {
   transition: color var(--color-transition-duration),
     border-color var(--color-transition-duration),
     background-color var(--color-transition-duration);

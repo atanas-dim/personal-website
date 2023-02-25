@@ -14,7 +14,7 @@ module.exports = {
         background: "#111111",
       },
       backgroundImage: {
-        "radial-gradient-pink-light": `radial-gradient(circle, ${colors.pink["600"]} 0%, transparent 60% )`,
+        "radial-gradient-pink-light": `radial-gradient(circle, ${colors.pink["300"]} 0%, transparent 60% )`,
         "radial-gradient-pink-dark": `radial-gradient(circle, ${colors.pink["400"]} 0%, transparent 60% )`,
       },
       backgroundSize: {
