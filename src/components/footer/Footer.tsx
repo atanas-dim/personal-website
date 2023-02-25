@@ -64,7 +64,7 @@ const Footer: FC = () => {
             );
           })}
         </div>
-        <span className="text-sm text-zinc-500 dark:text-zinc-400 text-center border-t border-solid border-zinc-100 pt-4 w-full">
+        <span className="text-sm text-zinc-500 dark:text-zinc-400 text-center border-t border-solid border-zinc-100 dark:border-zinc-800 pt-4 w-full">
           Designed and developed 2023 © Atanas Dimitrov
         </span>
       </div>
