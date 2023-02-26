@@ -108,7 +108,7 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
         </div>
         <div
           className={
-            SECTION_CONTENT + " grow flex justify-center flex-col px-8 md:px-0"
+            SECTION_CONTENT + " grow flex justify-center flex-col px-6 md:px-0"
           }
         >
           {JOBS.map((job, index) => {
@@ -122,17 +122,17 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
                 onViewportEnter={() => {
                   setBgIcon(BgIcon.Laptop);
                 }}
-                className="w-fit flex flex-col py-6 px-8 mb-8 bg-white dark:bg-zinc-900 border border-solid border-zinc-200 rounded-2xl dark:border-zinc-800 colour-transition"
+                className="w-fit flex flex-col py-4 px-6 md:py-6 md:px-8 mb-8 bg-white dark:bg-zinc-900 border border-solid border-zinc-200 rounded-2xl dark:border-zinc-800 colour-transition"
               >
-                <span className="mb-3 text-md md:text-lg whitespace-nowrap">
+                <span className="mb-1 md:mb-3 text-md md:text-lg whitespace-nowrap">
                   {job.period}
                 </span>
                 <span
-                  className={`mb-3 text-2xl sm:text-3xl md:text-4xl font-bold ${job.titleColour} whitespace-nowrap`}
+                  className={`mb-1 md:mb-3 text-2xl sm:text-3xl md:text-4xl font-bold ${job.titleColour} whitespace-nowrap`}
                 >
                   {job.title}
                 </span>
-                <span className="mb-3 text-xl md:text-2xl font-bold whitespace-nowrap">
+                <span className="text-xl md:text-2xl font-bold whitespace-nowrap">
                   {job.company}
                 </span>
               </motion.div>

@@ -17,7 +17,7 @@ import { useScroll } from "framer-motion";
 export const SECTION =
   "w-full h-screen mx-auto max-w-5xl flex flex-col md:flex-row";
 export const SECTION_LABEL_WRAPPER =
-  "w-full md:max-w-[20%] mr-4 sticky top-20 md:top-1/2 self-start z-10 xl:-mt-8";
+  "w-full md:max-w-[20%] mr-4 mb-2 sticky top-20 md:top-1/2 self-start z-10 xl:-mt-8";
 export const SECTION_LABEL =
   "block px-3 py-1 w-fit text-lg md:text-2xl font-bold rounded-xl bg-white border border-solid border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800";
 export const SECTION_CONTENT = "w-full h-full mx-auto";
@@ -50,6 +50,7 @@ export const SECTIONS = {
 
 const IndexPage: FC = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);
+  // TODO Add zustand store and move state to it
   const [activeSection, setActiveSection] = useState<Section | undefined>(
     Section.Hero
   );

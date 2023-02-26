@@ -117,7 +117,7 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
       <div
         className={
           SECTION_CONTENT +
-          " grow flex flex-col justify-center items-center self-center px-8 md:px-0"
+          " grow flex flex-col justify-center items-center self-center px-6 md:px-0"
         }
       >
         <div className="flex flex-col justify-center items-center  w-full ">

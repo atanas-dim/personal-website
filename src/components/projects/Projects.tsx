@@ -142,7 +142,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     <motion.div
       id={"project-" + index}
       ref={target}
-      className={`w-full h-[110vh] md:h-screen min-h-[900px] max-h-[1000px] flex flex-col ${
+      className={`w-full h-[110vh] md:h-screen min-h-[900px] max-h-[1000px] px-6 flex flex-col ${
         isEven ? "md:flex-row-reverse" : "md:flex-row"
       } justify-center items-center`}
     >
@@ -169,9 +169,9 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
         style={{
           translateY: textTranslateY,
         }}
-        className={`origin-top h-fit w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center ${
-          isEven ? "md:mr-16" : "md:mr-0"
-        }
+        className={`
+        origin-top h-fit w-full md:w-1/2 p-4 md:p-8 flex flex-col justify-center 
+        ${isEven ? "md:mr-16" : "md:mr-0"}
         bg-white dark:bg-zinc-900
         border border-solid border-zinc-200 rounded-2xl dark:border-zinc-800
         colour-transition
