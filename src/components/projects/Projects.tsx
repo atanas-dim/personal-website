@@ -142,7 +142,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     <motion.div
       id={"project-" + index}
       ref={target}
-      className={`w-full h-[110vh] md:h-screen min-h-[900px] max-h-[1000px] px-6 flex flex-col ${
+      className={`w-full h-[110vh] md:h-screen min-h-[900px] max-h-[1000px] px-6 md:px-0 flex flex-col ${
         isEven ? "md:flex-row-reverse" : "md:flex-row"
       } justify-center items-center`}
     >
@@ -150,8 +150,8 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
         style={{
           translateY: imageTranslateY,
         }}
-        className={`max-w-sm mb-16 md:mb-0 md:mr-16 ${
-          isEven ? "md:mr-0" : "md:mr-16"
+        className={`max-w-md mb-16 md:mb-0 ${
+          isEven ? "md:mr-0" : "md:mr-8"
         } origin-center flex justify-center items-center`}
       >
         {/* TODO Add alt */}
@@ -161,7 +161,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
           <img
             src={data.image.src}
             alt=""
-            className="w-full h-auto rounded-2xl max-w-[90%] md:max-w-none"
+            className="w-full h-auto rounded-2xl min-w-[60%] max-w-[90%] md:max-w-none"
           />
         )}
       </motion.div>
@@ -170,8 +170,8 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
           translateY: textTranslateY,
         }}
         className={`
-        origin-top h-fit w-full md:w-1/2 p-4 md:p-8 flex flex-col justify-center 
-        ${isEven ? "md:mr-16" : "md:mr-0"}
+        h-fit w-full md:w-1/2 p-4 md:p-6 flex flex-col justify-center 
+        ${isEven ? "md:mr-8" : "md:mr-0"}
         bg-white dark:bg-zinc-900
         border border-solid border-zinc-200 rounded-2xl dark:border-zinc-800
         colour-transition

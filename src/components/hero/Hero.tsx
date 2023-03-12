@@ -104,7 +104,7 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
             className="text-3xl md:text-4xl font-bold text-white dark:text-zinc-900 text-center"
             onViewportEnter={() => {
               setActiveSection(Section.Hero);
-              setBgIcon(BgIcon.ArmFlex);
+              setBgIcon(BgIcon.Map);
             }}
             onViewportLeave={() => setActiveSection(undefined)}
           >
