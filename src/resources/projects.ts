@@ -1,7 +1,9 @@
-import workoutBuilderImg from "../assets/images/project-thumb-workouts-mobile.jpg";
-// import beachShopImg from "../assets/images/project-thumb-beachshop-mobile.jpg";
-import redditClientImg from "../assets/images/project-thumb-reddit-mobile.jpg";
-import reactCalendarImg from "../assets/images/project-thumb-react-calendar.jpg";
+// import workoutBuilderImg from "../assets/images/workouts-mobile.jpg";
+// import beachShopImg from "../assets/images/beachshop-mobile.jpg";
+import redditClientImg from "../assets/images/reddit-mobile.jpg";
+import reactCalendarImg from "../assets/images/react-calendar.jpg";
+import mapImg from "../assets/images/mapbox.jpg";
+
 import { BgIcon } from "../components/background/Background";
 
 export type ProjectData = {
@@ -10,7 +12,7 @@ export type ProjectData = {
   description?: string;
   links: { href: string; label: string }[];
   image: {
-    isMobile: boolean;
+    isMobile?: boolean;
     src: string;
   };
   bgIcon: BgIcon;
@@ -20,25 +22,24 @@ export type ProjectData = {
 
 export const PROJECTS: ProjectData[] = [
   {
-    title: "Workout Builder Demo",
-    technologies: "PWA, NextJS, TypeScript, MUI, Firebase",
+    title: "Searching Mapbox",
+    technologies: "ReactJS, SASS, MapboxGL",
     description:
-      "Mobile first web app. Using React Context API and hooks to create a tool to organise exercises, workouts and routines. Features drag to reorder lists, online status provider, simple web hook to notify about updates on repo.",
+      "Using Mapbox GL API to search for nearby places. Custom features include search bar, theme toggler, collapsible list of nearby places.",
     links: [
       {
         label: "Code",
-        href: "https://github.com/atanas-dim/workout-builder",
+        href: "https://github.com/atanas-dim/searching-mapbox",
       },
       {
         label: "Live",
-        href: "https://workout-builder.vercel.app/",
+        href: "https://searching-mapbox.netlify.app/",
       },
     ],
     image: {
-      isMobile: true,
-      src: workoutBuilderImg,
+      src: mapImg,
     },
-    bgIcon: BgIcon.ArmFlex,
+    bgIcon: BgIcon.Map,
     textStyle: "text-sky-500 dark:text-sky-400",
     buttonStyle: "bg-sky-300 dark:bg-sky-600",
   },
@@ -88,7 +89,6 @@ export const PROJECTS: ProjectData[] = [
       },
     ],
     image: {
-      isMobile: false,
       src: reactCalendarImg,
     },
     bgIcon: BgIcon.Calendar,
