@@ -2,7 +2,7 @@
 // import beachShopImg from "../assets/images/beachshop-mobile.jpg";
 import redditClientImg from "../assets/images/reddit-mobile.jpg";
 import reactCalendarImg from "../assets/images/react-calendar.jpg";
-import mapImg from "../assets/images/mapbox.jpg";
+import mapImg from "../assets/images/mapbox-mobile.jpg";
 
 import { BgIcon } from "../components/background/Background";
 
@@ -23,7 +23,7 @@ export type ProjectData = {
 export const PROJECTS: ProjectData[] = [
   {
     title: "Searching Mapbox",
-    technologies: "ReactJS, SASS, MapboxGL",
+    technologies: "ReactJS, SASS, Mapbox GL",
     description:
       "Using Mapbox GL API to search for nearby places. Custom features include search bar, theme toggler, collapsible list of nearby places.",
     links: [
@@ -37,6 +37,7 @@ export const PROJECTS: ProjectData[] = [
       },
     ],
     image: {
+      isMobile: true,
       src: mapImg,
     },
     bgIcon: BgIcon.Map,
