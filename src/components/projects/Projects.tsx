@@ -114,11 +114,9 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     imageScrollSpring,
     // Map from these values:
     [
-      // fullOpacityScrollTop - containerHeight,
       fullOpacityScrollTop - containerHeight / 2,
       fullOpacityScrollTop,
       fullOpacityScrollTop + containerHeight / 2,
-      // fullOpacityScrollTop + containerHeight,
     ],
     // Into these values:
     ["64px", "0px", "-64px"]
@@ -144,24 +142,21 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
       ref={target}
       className={`w-full h-[110vh] md:h-screen min-h-[900px] max-h-[1000px] px-6 md:px-0 flex flex-col ${
         isEven ? "md:flex-row-reverse" : "md:flex-row"
-      } justify-center items-center`}
+      } justify-center items-center gap-8`}
     >
       <motion.div
         style={{
           translateY: imageTranslateY,
         }}
-        className={`max-w-md mb-16 md:mb-0 ${
-          isEven ? "md:mr-0" : "md:mr-8"
-        } origin-center flex justify-center items-center`}
+        className="mb-16 md:mb-0 origin-center flex justify-center items-center"
       >
-        {/* TODO Add alt */}
         {data.image.isMobile ? (
           <IPhone14 imageSrc={data.image.src} />
         ) : (
           <img
             src={data.image.src}
             alt=""
-            className="w-full h-auto rounded-2xl min-w-[60%]"
+            className="w-full h-auto rounded-2xl min-w-[50%] md:w-[30vw] lg:w-full max-w-[400px]"
           />
         )}
       </motion.div>
@@ -170,8 +165,7 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
           translateY: textTranslateY,
         }}
         className={`
-        h-fit w-full md:w-1/2 p-4 md:p-6 flex flex-col justify-center 
-        ${isEven ? "md:mr-8" : "md:mr-0"}
+        h-fit w-full md:w-1/2 p-4 md:p-6 flex flex-col justify-center
         bg-white dark:bg-zinc-900
         border border-solid border-zinc-200 rounded-2xl dark:border-zinc-800
         colour-transition

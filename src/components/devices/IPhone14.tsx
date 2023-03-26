@@ -8,7 +8,7 @@ type Props = {
 const IPhone14: FC<Props> = ({ imageSrc }) => {
   return (
     // TODO Add alt
-    <div className="w-[55vw] md:w-[30vw] max-w-[300px] object-contain relative aspect-[390/788]">
+    <div className="w-[50vw] md:w-[25vw] max-w-[300px] object-contain relative aspect-[390/788]">
       <img
         src={imageSrc}
         alt=""
