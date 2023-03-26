@@ -4,21 +4,28 @@ import React, {
   HTMLAttributes,
   useState,
   useMemo,
-  Dispatch,
-  SetStateAction,
   useLayoutEffect,
   useEffect,
 } from "react";
 
-import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
-import { BgIcon } from "../background/Background";
+import {
+  motion,
+  MotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+
+import { BgIcon } from "../../resources/background";
+
 import {
   SECTION,
-  Section,
   SECTION_CONTENT,
   SECTION_LABEL,
   SECTION_LABEL_WRAPPER,
 } from "../../pages";
+import useStore from "../../hooks/useStore";
+import useScrollContainer from "../../hooks/useScrollContainer";
 
 type SkillDef = {
   label: string;
@@ -52,7 +59,6 @@ const ADDITIONAL_STACK: SkillDef[] = [
   { label: "PostgreSQL", style: "text-sky-400" },
   { label: "i18next", style: "text-teal-400" },
   { label: "NodeJS", style: "text-emerald-400" },
-  // { label: "ExpressJS", style: "text-blue-400" },
 ];
 
 const createSkillsWithTextSizes = () => {
@@ -72,13 +78,10 @@ const createSkillsWithTextSizes = () => {
   return skills;
 };
 
-type Props = {
-  scrollY: MotionValue<number>;
-  setBgIcon: Dispatch<SetStateAction<BgIcon>>;
-};
-
-const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
+const Stack: FC = () => {
   const target = useRef<HTMLDivElement>(null);
+  const { setBgIcon } = useStore();
+  const { scrollerRef } = useScrollContainer();
 
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -95,6 +98,10 @@ const Stack: FC<Props> = ({ scrollY, setBgIcon }) => {
       window.removeEventListener("resize", updateValuesFromContainerRect);
     };
   }, []);
+
+  const { scrollY } = useScroll({
+    container: scrollerRef,
+  });
 
   const [skills, setSkills] = useState<SkillDef[]>([]);
 

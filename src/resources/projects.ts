@@ -4,7 +4,7 @@ import redditClientImg from "../assets/images/reddit-mobile.jpg";
 import reactCalendarImg from "../assets/images/react-calendar.jpg";
 import mapImg from "../assets/images/mapbox-mobile.jpg";
 
-import { BgIcon } from "../components/background/Background";
+import { BgIcon } from "./background";
 
 export type ProjectData = {
   title: string;

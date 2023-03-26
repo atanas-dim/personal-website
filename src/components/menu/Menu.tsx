@@ -2,7 +2,7 @@ import React, { type FC } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Section, SECTIONS } from "../../pages";
+import { SECTIONS, Section } from "../../resources/sections";
 
 type Props = {
   show: boolean;
@@ -37,13 +37,13 @@ const Menu: FC<Props> = ({ show, hide }) => {
             </button>
             <span className="block mb-8">Jump to</span>
             {Object.keys(SECTIONS).map((key, index) => {
-              const { title, target } = SECTIONS[+key as Section];
+              const { title, id } = SECTIONS[+key as Section];
               return (
                 <a
                   key={"menu-button-" + index}
                   className="rounded-xl bg-zinc-100 dark:bg-zinc-800 p-4 w-full mb-4 flex justify-center items-center font-bold hover:bg-zinc-900 hover:bg-opacity-20 active:bg-opacity-30 dark:hover:bg-zinc-50 dark:hover:bg-opacity-20 dark:active:bg-opacity-30"
                   onClick={hide}
-                  href={`/#${target}`}
+                  href={`/#${id}`}
                 >
                   {title}
                 </a>

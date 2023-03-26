@@ -1,79 +1,27 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useRef } from "react";
 
 import {
   motion,
   animate,
   useMotionValue,
   useTransform,
-  MotionValue,
   useSpring,
+  useScroll,
 } from "framer-motion";
 
 import { useFlubber, getIndex } from "../../hooks/useFlubber";
+import useStore from "../../hooks/useStore";
 
-const ARM_FLEX =
-  "M11 7C8 11.09 7 22.34 7 22.34C9.9 24.31 13.08 25 15.87 25C18.86 25 21.39 24.21 22.64 23.36C25.64 21.32 25.94 16.71 22.64 15.18C22 14.89 21.26 14.75 20.47 14.75C18.17 14.75 15.5 15.96 14 18.25H13V11.09H15L16 8L11 7Z";
-// const SHOPPING_BAG =
-//   "M23 10H21C21 7.2 18.8 5 16 5C13.2 5 11 7.2 11 10H9C7.9 10 7 10.9 7 12V24C7 25.1 7.9 26 9 26H23C24.1 26 25 25.1 25 24V12C25 10.9 24.1 10 23 10Z";
-const CALENDAR =
-  "M21 8V6H18V8H14V6H11V8H9C7.89 8 7 8.89 7 10V24C7 24.5304 7.21071 25.0391 7.58579 25.4142C7.96086 25.7893 8.46957 26 9 26H23C23.5304 26 24.0391 25.7893 24.4142 25.4142C24.7893 25.0391 25 24.5304 25 24V10C25 8.89 24.1 8 23 8H22";
-const COMMENT =
-  "M16 7C10.5 7 6 10.58 6 15C6.05 17.15 7.06 19.17 8.75 20.5C8.75 21.1 8.33 22.67 6 25C8.37 24.89 10.64 24 12.47 22.5C13.61 22.83 14.81 23 16 23C21.5 23 26 19.42 26 15C26 10.58 21.5 7 16 7Z";
-const STACK =
-  "M14.8729 1L23.9939 10.9973C24.7144 11.787 24.6865 13.0036 23.9306 13.7595L16.2871 21.403C15.5061 22.184 14.2397 22.184 13.4587 21.403L7.41421 15.3585C6.63317 14.5775 6.63317 13.3111 7.41421 12.5301L13.3924 6.55191C14.1989 5.74544 15.5154 5.77559 16.2841 6.61814L23.9939 15.0687C24.7144 15.8584 24.6865 17.075 23.9306 17.8309L16.2871 25.4744C15.5061 26.2554 14.2397 26.2554 13.4587 25.4744L7.41421 19.4299C6.63317 18.6489 6.63317 17.3825 7.41421 16.6015L13.3957 10.62C14.2009 9.81476 15.515 9.84338 16.2844 10.6829L23.991 19.0919C24.7131 19.8798 24.6882 21.0963 23.9343 21.8539L16.2871 29.5388C15.5066 30.3231 14.2376 30.3247 13.4552 29.5423L7.41421 23.5013C6.63317 22.7202 6.63317 21.4539 7.41421 20.6729L14.8729 13.2142";
-const LAPTOP =
-  "M24 22C24.5304 22 25.0391 21.7893 25.4142 21.4142C25.7893 21.0391 26 20.5304 26 20V10C26 8.89 25.1 8 24 8H8C6.89 8 6 8.89 6 10V20C6 20.5304 6.21071 21.0391 6.58579 21.4142C6.96086 21.7893 7.46957 22 8 22H4V24H28V22H24Z";
-const MAP =
-  "M18.8348 9.57193L19.0088 9.63283L19.1807 9.5662L24.4776 7.51291L24.5 7.50871V22.6169C24.4968 22.6192 24.4911 22.6226 24.4819 22.6257L24.4804 22.6262L19.0031 24.4713L13.1652 22.4281L12.9912 22.3672L12.8193 22.4338L7.52241 24.4871L7.5 24.4913V9.38313C7.50316 9.38082 7.50886 9.37743 7.51811 9.37434L7.51811 9.37434L7.51963 9.37384L12.9969 7.52865L18.8348 9.57193Z";
+import { BgIcon, ICONS } from "../../resources/background";
+import useScrollContainer from "../../hooks/useScrollContainer";
 
-export enum BgIcon {
-  Map,
-  // ShoppingBag,
-  Comment,
-  Calendar,
-  Stack,
-  Laptop,
-}
-
-const ICONS: {
-  [key in BgIcon]: {
-    path: string;
-    colour: { lightMode: string; darkMode: string };
-  };
-} = {
-  [BgIcon.Map]: {
-    path: MAP,
-    colour: { darkMode: "#093d58", lightMode: "#caecff" },
-  },
-  // [BgIcon.ShoppingBag]: { path: SHOPPING_BAG, colour: "#004240" },
-  [BgIcon.Comment]: {
-    path: COMMENT,
-    colour: { darkMode: "#063d51", lightMode: "#c1e8f6" },
-  },
-  [BgIcon.Calendar]: {
-    path: CALENDAR,
-    colour: { darkMode: "#3d2a59", lightMode: "#e0d1f5" },
-  },
-  [BgIcon.Stack]: {
-    path: STACK,
-    colour: { darkMode: "#432335", lightMode: "#e9d4e0" },
-  },
-  [BgIcon.Laptop]: {
-    path: LAPTOP,
-    colour: { darkMode: "#224a56", lightMode: "#c3e2ea" },
-  },
-};
-
-type Props = {
-  pathIndex: BgIcon;
-  scrollY: MotionValue;
-  isDarkMode: boolean;
-};
-const Background: FC<Props> = ({ pathIndex, scrollY, isDarkMode }) => {
+const Background: FC = () => {
+  const { isDarkMode, bgIcon: pathIndex } = useStore();
+  const { scrollerRef } = useScrollContainer();
   const progress = useMotionValue(pathIndex);
 
-  const iconsIndexArray = Object.keys(ICONS).map(getIndex);
-  const iconsColourArray = Object.keys(ICONS).map(
+  const iconIndexes = Object.keys(ICONS).map(getIndex);
+  const iconColours = Object.keys(ICONS).map(
     (key) => ICONS[+key as BgIcon].colour[isDarkMode ? "darkMode" : "lightMode"]
   );
   const iconsStrokeColourArray = Object.keys(ICONS).map(
@@ -81,8 +29,8 @@ const Background: FC<Props> = ({ pathIndex, scrollY, isDarkMode }) => {
       ICONS[+key as BgIcon].colour[isDarkMode ? "darkMode" : "lightMode"] + "40"
   );
 
-  const stroke = useTransform(progress, iconsIndexArray, iconsColourArray);
-  const fill = useTransform(progress, iconsIndexArray, iconsStrokeColourArray);
+  const stroke = useTransform(progress, iconIndexes, iconColours);
+  const fill = useTransform(progress, iconIndexes, iconsStrokeColourArray);
 
   const path = useFlubber(
     progress,
@@ -109,6 +57,10 @@ const Background: FC<Props> = ({ pathIndex, scrollY, isDarkMode }) => {
     window.addEventListener("resize", updateSize);
     return () => window.removeEventListener("resize", updateSize);
   }, []);
+
+  const { scrollY } = useScroll({
+    container: scrollerRef,
+  });
 
   const scrollSpring = useSpring(scrollY, {
     damping: 20,
