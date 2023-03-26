@@ -1,19 +1,14 @@
-import React, {
-  FC,
-  Dispatch,
-  SetStateAction,
-  useRef,
-  useState,
-  useLayoutEffect,
-} from "react";
-import { motion, MotionValue, useSpring, useTransform } from "framer-motion";
-import { BgIcon } from "../background/Background";
+import React, { FC, useRef, useState, useLayoutEffect } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { BgIcon } from "../../resources/background";
 import {
   SECTION,
   SECTION_CONTENT,
   SECTION_LABEL,
   SECTION_LABEL_WRAPPER,
 } from "../../pages";
+import useStore from "../../hooks/useStore";
+import useScrollContainer from "../../hooks/useScrollContainer";
 
 type Job = {
   period: string;
@@ -37,13 +32,10 @@ const JOBS: Job[] = [
   },
 ];
 
-type Props = {
-  scrollY: MotionValue<number>;
-  setBgIcon: Dispatch<SetStateAction<BgIcon>>;
-};
-
-const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
+const Experience: FC = () => {
   const target = useRef<HTMLDivElement>(null);
+  const { setBgIcon } = useStore();
+  const { scrollerRef } = useScrollContainer();
 
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -60,6 +52,10 @@ const Experience: FC<Props> = ({ scrollY, setBgIcon }) => {
       window.removeEventListener("resize", updateValuesFromContainerRect);
     };
   }, []);
+
+  const { scrollY } = useScroll({
+    container: scrollerRef,
+  });
 
   const scrollSpring = useSpring(scrollY, {
     damping: 10,

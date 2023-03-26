@@ -1,28 +1,19 @@
-import React, {
-  type FC,
-  Dispatch,
-  SetStateAction,
-  useState,
-  useEffect,
-} from "react";
+import React, { type FC, useState, useEffect } from "react";
 import { motion, useAnimationControls } from "framer-motion";
 
-import photo from "../../assets/images/atanas.jpg";
-
-import { Section } from "../../pages";
-
-import { BgIcon } from "../background/Background";
+import { Section } from "../../resources/sections";
+import { BgIcon } from "../../resources/background";
 import { SOCIAL_LINKS } from "../../resources/social-links";
+
 import ArrowDown from "../icons/ArrowDown";
 
-type Props = {
-  setActiveSection: Dispatch<SetStateAction<Section | undefined>>;
-  setBgIcon: Dispatch<SetStateAction<BgIcon>>;
-};
+import useStore from "../../hooks/useStore";
 
-const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
+const Hero: FC = () => {
   const [isInView, setIsInView] = useState(true);
   const controls = useAnimationControls();
+
+  const { setActiveSection, setBgIcon } = useStore();
 
   useEffect(() => {
     if (isInView) {
@@ -106,7 +97,6 @@ const Hero: FC<Props> = ({ setActiveSection, setBgIcon }) => {
               setActiveSection(Section.Hero);
               setBgIcon(BgIcon.Map);
             }}
-            onViewportLeave={() => setActiveSection(undefined)}
           >
             <span className="text-blue-300 dark:text-blue-500">
               Atanas Dimitrov

@@ -1,9 +1,9 @@
-import React, { useRef, useState, FC, useEffect } from "react";
+import React, { useRef, FC, useEffect } from "react";
 import type { HeadFC } from "gatsby";
 
 import { Helmet } from "react-helmet";
 
-import Background, { BgIcon } from "../components/background/Background";
+import Background from "../components/background/Background";
 import Header from "../components/header/Header";
 import Hero from "../components/hero/Hero";
 import Projects from "../components/projects/Projects";
@@ -11,7 +11,7 @@ import Stack from "../components/stack/Stack";
 import Experience from "../components/experience/Experience";
 import Footer from "../components/footer/Footer";
 
-import { useScroll } from "framer-motion";
+import useStore from "../hooks/useStore";
 
 //TODO Create class names in global.css and remove consts from here
 export const SECTION =
@@ -22,44 +22,8 @@ export const SECTION_LABEL =
   "block px-3 py-1 w-fit text-lg md:text-xl font-bold rounded-xl bg-white border border-solid border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800";
 export const SECTION_CONTENT = "w-full h-full mx-auto";
 
-export enum Section {
-  Hero,
-  Projects,
-  Stack,
-  Experience,
-}
-
-export const SECTIONS = {
-  [Section.Hero]: {
-    title: "Start",
-    target: "start",
-  },
-  [Section.Projects]: {
-    title: "Projects",
-    target: "projects",
-  },
-  [Section.Stack]: {
-    title: "Stack",
-    target: "stack",
-  },
-  [Section.Experience]: {
-    title: "Experience",
-    target: "experience",
-  },
-};
-
 const IndexPage: FC = () => {
-  const scrollContainer = useRef<HTMLDivElement>(null);
-  // TODO Add zustand store and move state to it
-  const [activeSection, setActiveSection] = useState<Section | undefined>(
-    Section.Hero
-  );
-  const [bgIcon, setBgIcon] = useState<BgIcon>(BgIcon.Map);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const { scrollY } = useScroll({
-    container: scrollContainer,
-  });
+  const { isDarkMode } = useStore();
 
   // Update theme and status bar colour
   useEffect(() => {
@@ -76,29 +40,16 @@ const IndexPage: FC = () => {
     }
   }, [isDarkMode]);
 
-  useEffect(() => {
-    scrollY.onChange((v) => {
-      if (v > window.innerHeight - 80)
-        setActiveSection(() => {
-          return undefined;
-        });
-    });
-  }, [scrollY]);
-
   return (
     <>
-      <Background
-        pathIndex={bgIcon}
-        scrollY={scrollY}
-        isDarkMode={isDarkMode}
-      />
-      <div id="scroll-container" ref={scrollContainer}>
-        <Hero {...{ setBgIcon, setActiveSection }} />
-        <Header {...{ activeSection, isDarkMode, setIsDarkMode }} />
+      <Background />
+      <div id="scroll-container">
+        <Hero />
+        <Header />
         <main className="w-full px-4 md:px-8">
-          <Projects {...{ scrollY, setBgIcon }} />
-          <Stack {...{ scrollY, setBgIcon }} />
-          <Experience {...{ scrollY, setBgIcon }} />
+          <Projects />
+          <Stack />
+          <Experience />
         </main>
         <Footer />
       </div>

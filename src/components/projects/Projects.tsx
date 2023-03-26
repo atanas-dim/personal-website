@@ -2,18 +2,15 @@ import React, {
   FC,
   useRef,
   useState,
-  Dispatch,
-  SetStateAction,
   useLayoutEffect,
   HTMLAttributes,
 } from "react";
-import { motion, useTransform, useSpring, MotionValue } from "framer-motion";
+import { motion, useTransform, useSpring, useScroll } from "framer-motion";
 
 import IPhone14 from "../devices/IPhone14";
 
 import { ProjectData, PROJECTS } from "../../resources/projects";
 
-import { BgIcon } from "../background/Background";
 import {
   SECTION,
   SECTION_CONTENT,
@@ -21,12 +18,10 @@ import {
   SECTION_LABEL,
 } from "../../pages";
 
-type Props = {
-  scrollY: MotionValue<number>;
-  setBgIcon: Dispatch<SetStateAction<BgIcon>>;
-};
+import useStore from "../../hooks/useStore";
+import useScrollContainer from "../../hooks/useScrollContainer";
 
-const Projects: FC<Props> = ({ scrollY, setBgIcon }) => {
+const Projects: FC = () => {
   const target = useRef<HTMLDivElement>(null);
 
   return (
@@ -49,9 +44,7 @@ const Projects: FC<Props> = ({ scrollY, setBgIcon }) => {
               <Project
                 key={"container-" + index}
                 index={index}
-                scrollY={scrollY}
                 data={project}
-                setBgIcon={setBgIcon}
               />
             );
           })}
@@ -65,26 +58,24 @@ export default Projects;
 
 type ProjectProps = {
   index: number;
-  scrollY: MotionValue<number>;
   data: ProjectData;
-  setBgIcon: Dispatch<SetStateAction<BgIcon>>;
 };
 
-const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
+const Project: FC<ProjectProps> = ({ index, data }) => {
   const target = useRef<HTMLDivElement>(null);
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
+  const { setBgIcon } = useStore();
+  const { scrollerRef } = useScrollContainer();
+
   const isEven = index % 2 === 0;
 
   useLayoutEffect(() => {
-    // Need to set this on mount to fix blank sections
-    const scroller = document.getElementById("scroll-container");
-
     const updateValuesFromContainerRect = () => {
       setContainerHeight(target.current?.getBoundingClientRect()?.height ?? 0);
       setFullOpacityScrollTop(
-        (scroller?.scrollTop ?? 0) +
+        (scrollerRef?.current?.scrollTop ?? 0) +
           (target.current?.getBoundingClientRect()?.top ?? 0)
       );
     };
@@ -94,7 +85,11 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     return () => {
       window.removeEventListener("resize", updateValuesFromContainerRect);
     };
-  }, []);
+  }, [scrollerRef]);
+
+  const { scrollY } = useScroll({
+    container: scrollerRef,
+  });
 
   const scrollSpring = useSpring(scrollY, {
     damping: 15,
@@ -135,6 +130,8 @@ const Project: FC<ProjectProps> = ({ index, scrollY, data, setBgIcon }) => {
     // Into these values:
     ["32px", "16px", "0px", "-16px", "-32px"]
   );
+
+  if (!scrollerRef) return null;
 
   return (
     <motion.div

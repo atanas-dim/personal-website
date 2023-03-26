@@ -10,18 +10,16 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import Menu from "../menu/Menu";
 
-import { Section } from "../../pages";
+import { Section } from "../../resources/sections";
+
 import DeskLampOn from "../icons/DeskLampOn";
 import DeskLamp from "../icons/DeskLamp";
 
-type Props = {
-  activeSection?: Section;
-  isDarkMode: boolean;
-  setIsDarkMode: Dispatch<SetStateAction<boolean>>;
-};
+import useStore from "../../hooks/useStore";
 
-const Header: FC<Props> = ({ activeSection, isDarkMode, setIsDarkMode }) => {
+const Header: FC = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const { activeSection, isDarkMode, toggleDarkMode } = useStore();
 
   const showHeaderContent = activeSection !== Section.Hero;
 
@@ -57,10 +55,7 @@ const Header: FC<Props> = ({ activeSection, isDarkMode, setIsDarkMode }) => {
           <AnimatePresence>
             {showHeaderContent && (
               <div className="flex">
-                <button
-                  onClick={() => setIsDarkMode((prev) => !prev)}
-                  className="iconButton"
-                >
+                <button onClick={() => toggleDarkMode()} className="iconButton">
                   {isDarkMode ? <DeskLamp /> : <DeskLampOn />}
                 </button>
 
