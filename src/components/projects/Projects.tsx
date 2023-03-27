@@ -20,6 +20,7 @@ import {
 
 import useStore from "../../hooks/useStore";
 import useScrollContainer from "../../hooks/useScrollContainer";
+import { Section } from "../../resources/sections";
 
 const Projects: FC = () => {
   const target = useRef<HTMLDivElement>(null);
@@ -66,7 +67,7 @@ const Project: FC<ProjectProps> = ({ index, data }) => {
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
-  const { setBgIcon } = useStore();
+  const { setBgIcon, setActiveSection } = useStore();
   const { scrollerRef } = useScrollContainer();
 
   const isEven = index % 2 === 0;
@@ -171,6 +172,7 @@ const Project: FC<ProjectProps> = ({ index, data }) => {
         <motion.h3
           onViewportEnter={() => {
             setBgIcon(data.bgIcon);
+            if (index === 0) setActiveSection(Section.Projects);
           }}
           className="text-2xl md:text-3xl font-bold mb-2"
         >

@@ -9,6 +9,7 @@ import {
 } from "../../pages";
 import useStore from "../../hooks/useStore";
 import useScrollContainer from "../../hooks/useScrollContainer";
+import { Section } from "../../resources/sections";
 
 type Job = {
   period: string;
@@ -34,7 +35,7 @@ const JOBS: Job[] = [
 
 const Experience: FC = () => {
   const target = useRef<HTMLDivElement>(null);
-  const { setBgIcon } = useStore();
+  const { setBgIcon, setActiveSection } = useStore();
   const { scrollerRef } = useScrollContainer();
 
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
@@ -116,7 +117,9 @@ const Experience: FC = () => {
                   translateY,
                 }}
                 onViewportEnter={() => {
+                  if (index !== 0) return;
                   setBgIcon(BgIcon.Laptop);
+                  setActiveSection(Section.Experience);
                 }}
                 className="w-fit flex flex-col py-4 px-6 md:py-6 md:px-8 mb-8 bg-white dark:bg-zinc-900 border border-solid border-zinc-200 rounded-2xl dark:border-zinc-800 colour-transition"
               >

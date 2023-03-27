@@ -26,6 +26,7 @@ import {
 } from "../../pages";
 import useStore from "../../hooks/useStore";
 import useScrollContainer from "../../hooks/useScrollContainer";
+import { Section } from "../../resources/sections";
 
 type SkillDef = {
   label: string;
@@ -80,7 +81,7 @@ const createSkillsWithTextSizes = () => {
 
 const Stack: FC = () => {
   const target = useRef<HTMLDivElement>(null);
-  const { setBgIcon } = useStore();
+  const { setBgIcon, setActiveSection } = useStore();
   const { scrollerRef } = useScrollContainer();
 
   const [fullOpacityScrollTop, setFullOpacityScrollTop] = useState(0);
@@ -128,7 +129,10 @@ const Stack: FC = () => {
         }
       >
         <div className="flex flex-col justify-center items-center  w-full ">
-          <motion.div className="w-full flex items-center flex-wrap ">
+          <motion.div
+            className="w-full flex items-center flex-wrap "
+            onViewportEnter={() => setActiveSection(Section.Stack)}
+          >
             {skills.map((skill, index) => {
               return (
                 <Skill
