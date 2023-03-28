@@ -138,7 +138,7 @@ const Project: FC<ProjectProps> = ({ index, data }) => {
     <motion.div
       id={"project-" + index}
       ref={target}
-      className={`w-full h-[110vh] md:h-screen min-h-[900px] max-h-[1000px] px-6 md:px-0 flex flex-col ${
+      className={`w-full h-screen min-h-[900px] px-6 md:px-0 flex flex-col ${
         isEven ? "md:flex-row-reverse" : "md:flex-row"
       } justify-center items-center gap-8`}
     >

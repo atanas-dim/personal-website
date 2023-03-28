@@ -33,6 +33,7 @@ type SkillDef = {
   style?: string;
 };
 
+//TODO Move to resources
 const BASE_STACK: SkillDef[] = [
   { label: "HTML", style: "text-red-400" },
   { label: "CSS", style: "text-blue-400" },
@@ -62,6 +63,7 @@ const ADDITIONAL_STACK: SkillDef[] = [
   { label: "NodeJS", style: "text-emerald-400" },
 ];
 
+//TODO Move to utils
 const createSkillsWithTextSizes = () => {
   const skills: SkillDef[] = [];
   BASE_STACK.forEach((skill) => {
@@ -114,9 +116,7 @@ const Stack: FC = () => {
     <section
       id="stack"
       ref={target}
-      className={
-        SECTION + " min-h-[600px] max-h-[800px] relative flex md:mb-60"
-      }
+      className={SECTION + " min-h-[600px] relative flex md:mb-60"}
     >
       <div className={SECTION_LABEL_WRAPPER + " self-start"}>
         <span className={SECTION_LABEL}>Stack</span>

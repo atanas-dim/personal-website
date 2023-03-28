@@ -97,7 +97,7 @@ const Experience: FC = () => {
         ref={target}
         className={
           SECTION +
-          " w-full h-[50vh] md:h-[calc(100vh_-_190px)] min-h-[500px] max-h-[800px] pointer-events-none flex justify-center items-center mb-4"
+          " w-full h-screen min-h-[600px] pointer-events-none flex justify-center items-center mb-4 pt-16"
         }
       >
         <div className={SECTION_LABEL_WRAPPER + " md:mb-[28vh]"}>
