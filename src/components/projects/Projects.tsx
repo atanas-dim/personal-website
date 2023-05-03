@@ -149,7 +149,10 @@ const Project: FC<ProjectProps> = ({ index, data }) => {
         className="mb-16 md:mb-0 origin-center flex justify-center items-center"
       >
         {data.image.isMobile ? (
-          <IPhone14 imageSrc={data.image.src} />
+          <IPhone14
+            imageSrc={data.image.src}
+            imageAlt={data.title + " screenshot"}
+          />
         ) : (
           <img
             src={data.image.src}
